@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacto STEL Bolivia">
+    <title>Contacto | STEL Bolivia</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066FF;
+            --primary-dark: #0052CC;
+            --secondary: #00C4FF;
+            --accent: #7B2CBF;
+            --dark: #0A0E27;
+            --darker: #060914;
+            --gray-100: #F8F9FC;
+            --gray-200: #E9ECF5;
+            --gray-300: #D1D6E6;
+            --gray-600: #6B7280;
+            --gray-800: #1F2937;
+            --white: #FFFFFF;
+            --success: #00E5A0;
+            --warning: #FFB300;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A0E27 0%, #060914 100%);
+            color: var(--gray-200);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px),
+                repeating-linear-gradient(0deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 50%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-300);
+            margin-bottom: 32px;
+        }
+
+        /* Contact Container */
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 80px;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-container h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-300);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--gray-600);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-select {
+            cursor: pointer;
+            background: var(--glass);
+        }
+
+        .form-select option {
+            background: var(--dark);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Info Section */
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-container h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2) 0%, rgba(0, 196, 255, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .info-content {
+            color: var(--gray-300);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-content a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-content a:hover {
+            color: var(--primary);
+        }
+
+        .info-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 16px 0;
+        }
+
+        /* Departments Section */
+        .departments-section {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.03) 0%, transparent 100%);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .department-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .department-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .department-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .department-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .department-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .department-info {
+            color: var(--gray-300);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .department-contact {
+            display: inline-block;
+            color: var(--secondary);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .department-contact:hover {
+            color: var(--primary);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 80px 0;
+        }
+
+        .map-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            height: 400px;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 196, 255, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            color: var(--gray-300);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, rgba(0, 229, 160, 0.1) 0%, rgba(0, 184, 148, 0.05) 100%);
+            border: 1px solid var(--success);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            color: var(--success);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .contact-container {
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .contact-section {
+                padding: 60px 0;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .form-container {
+                padding: 32px 24px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .departments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">COMUNICACIÓN DIRECTA</div>
+                    <h1>Contáctanos</h1>
+                    <p>Nuestro equipo está disponible para atender tus consultas y brindarte el soporte que necesitas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-container">
+                    <!-- Form -->
+                    <div class="form-container">
+                        <h2>Envíanos un Mensaje</h2>
+                        <form id="contactForm" method="POST">
+                            <div class="form-group">
+                                <label class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-input" name="nombre" placeholder="Ingresa tu nombre completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-input" name="email" placeholder="tucorreo@ejemplo.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" class="form-input" name="telefono" placeholder="+591 XXX XXX XXX">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Asunto</label>
+                                <select class="form-select" name="asunto" required>
+                                    <option value="">Selecciona un asunto</option>
+                                    <option value="soporte">Soporte Técnico</option>
+                                    <option value="facturacion">Facturación</option>
+                                    <option value="consulta">Consulta General</option>
+                                    <option value="reclamo">Reclamo</option>
+                                    <option value="ventas">Ventas</option>
+                                    <option value="empresas">Servicios Empresariales</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Mensaje</label>
+                                <textarea class="form-textarea" name="mensaje" placeholder="Describe tu consulta o requerimiento..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Enviar Mensaje →</button>
+                        </form>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="info-container">
+                        <h2>Información de Contacto</h2>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                    </svg>
+                                </div>
+                                <div class="info-title">Línea de Atención</div>
+                                <div class="info-content">
+                                    <p><strong>+591 2 123 4567</strong></p>
+                                    <p>Disponible 24 horas, 7 días a la semana</p>
+                                    <div class="info-divider"></div>
+                                    <p>WhatsApp: <strong>+591 76 123 4567</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                        <path d="m22 7-10 7L2 7"/>
+                                    </svg>
+                                </div>
+                                <div class="info-title">Correo Electrónico</div>
+                                <div class="info-content">
+                                    <p><a href="mailto:soporte@stelbolivia.com">soporte@stelbolivia.com</a></p>
+                                    <p><a href="mailto:ventas@stelbolivia.com">ventas@stelbolivia.com</a></p>
+                                    <p><a href="mailto:empresas@stelbolivia.com">empresas@stelbolivia.com</a></p>
+                                    <div class="info-divider"></div>
+                                    <p>Tiempo de respuesta: ≤ 2 horas</p>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12 6 12 12 16 14"/>
+                                    </svg>
+                                </div>
+                                <div class="info-title">Horario de Atención</div>
+                                <div class="info-content">
+                                    <p><strong>Lunes a Viernes:</strong> 8:00 - 20:00</p>
+                                    <p><strong>Sábados:</strong> 9:00 - 18:00</p>
+                                    <p><strong>Domingos:</strong> 10:00 - 16:00</p>
+                                    <div class="info-divider"></div>
+                                    <p>Soporte técnico: 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Departments Section -->
+        <section class="departments-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Departamentos Especializados</h2>
+                    <p>Contamos con equipos dedicados para atender cada una de tus necesidades</p>
+                </div>
+                <div class="departments-grid">
+                    <div class="department-card">
+                        <div class="department-name">Soporte Técnico</div>
+                        <div class="department-info">Asistencia especializada para problemas con servicios de internet, televisión y redes.</div>
+                        <a href="mailto:soporte@stelbolivia.com" class="department-contact">soporte@stelbolivia.com →</a>
+                    </div>
+                    <div class="department-card">
+                        <div class="department-name">Facturación</div>
+                        <div class="department-info">Consultas sobre estados de cuenta, pagos, métodos de cancelación y planes de pago.</div>
+                        <a href="mailto:facturacion@stelbolivia.com" class="department-contact">facturacion@stelbolivia.com →</a>
+                    </div>
+                    <div class="department-card">
+                        <div class="department-name">Ventas</div>
+                        <div class="department-info">Información sobre nuevos servicios, promociones y contrataciones.</div>
+                        <a href="mailto:ventas@stelbolivia.com" class="department-contact">ventas@stelbolivia.com →</a>
+                    </div>
+                    <div class="department-card">
+                        <div class="department-name">Servicios Empresariales</div>
+                        <div class="department-info">Soluciones corporativas, infraestructura dedicada y contratos empresariales.</div>
+                        <a href="mailto:empresas@stelbolivia.com" class="department-contact">empresas@stelbolivia.com →</a>
+                    </div>
+                    <div class="department-card">
+                        <div class="department-name">Atención al Cliente</div>
+                        <div class="department-info">Consulta general, sugerencias y seguimiento de requerimientos.</div>
+                        <a href="mailto:atencion@stelbolivia.com" class="department-contact">atencion@stelbolivia.com →</a>
+                    </div>
+                    <div class="department-card">
+                        <div class="department-name">Reclamos</div>
+                        <div class="department-info">Tramitación formal de reclamos y seguimiento de casos especiales.</div>
+                        <a href="mailto:reclamos@stelbolivia.com" class="department-contact">reclamos@stelbolivia.com →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nuestra Ubicación</h2>
+                    <p>Oficinas centrales y centros de atención al cliente</p>
+                </div>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <p>Av. Principal #123, Edificio STEL</p>
+                        <p>La Paz - Bolivia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../assets/script.js"></script>
+    
+    <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message (simulated)
+            const formContainer = document.querySelector('.form-container');
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.innerHTML = '✓ Mensaje enviado correctamente. Te contactaremos a la brevedad.';
+            
+            formContainer.insertBefore(successDiv, formContainer.firstChild);
+            
+            // Reset form
+            this.reset();
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successDiv.remove();
+            }, 5000);
+        });
+    </script>
+
+  <script src="../layouts/header.js"></script>
+  <script src="../layouts/footer.js"></script>
+</body>
+</html>

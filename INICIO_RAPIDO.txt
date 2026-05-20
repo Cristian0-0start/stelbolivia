@@ -1,0 +1,166 @@
+# 🎯 INICIO RÁPIDO - STEL BOLIVIA WEB
+
+## 🚀 Para Empezar Ahora Mismo
+
+### 1️⃣ Ver el Sitio
+```
+Opción A: Abre en navegador → frontend/index.html
+Opción B: Si tienes PHP habilitado → http://localhost/stelcompany/frontend/index.html
+```
+
+### 2️⃣ Ver Página de Comunicados
+```
+frontend/resources/comunicados.php
+→ Haz click en cualquier comunicado
+→ Se abre MODAL
+→ Haz click en X para cerrar
+```
+
+### 3️⃣ Crear Nueva Página
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <?php include '../layouts/header.php'; ?>
+    
+    <main>
+        <section class="section">
+            <div class="container">
+                <!-- Tu contenido -->
+            </div>
+        </section>
+    </main>
+    
+    <?php include '../layouts/footer.php'; ?>
+    <script src="../assets/script.js"></script>
+</body>
+</html>
+```
+
+---
+
+## 📚 Documentación Disponible
+
+| Archivo | Leer si... |
+|---------|-----------|
+| `DOCUMENTACION.md` | Quieres entender toda la arquitectura |
+| `RESUMEN_FASE1.txt` | Necesitas un resumen ejecutivo rápido |
+| `COMPONENTES_RAPIDA.md` | Vas a crear nuevas páginas/componentes |
+| `CHECKLIST_ENTREGA.md` | Quieres verificar qué se completó |
+| **Este archivo** | Necesitas inicio rápido |
+
+---
+
+## 🎨 Componentes Listos para Usar
+
+### Botones
+```html
+<button class="btn btn-primary">Primario</button>
+<button class="btn btn-secondary">Secundario</button>
+<button class="btn btn-ghost">Ghost</button>
+```
+
+### Tarjetas
+```html
+<div class="card">
+    <h3>Título</h3>
+    <p>Contenido</p>
+</div>
+```
+
+### Modales
+```html
+<div class="modal" id="miModal">
+    <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        Contenido
+    </div>
+</div>
+```
+
+### Grid Responsivo
+```html
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+    <div class="card">Item</div>
+</div>
+```
+
+---
+
+## 🔐 Variables CSS Principales
+
+```css
+/* Colores */
+--color-blanco: #f8f9fa;
+--color-negro: #1a1a1a;
+--gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+/* Espaciado */
+--spacing-md: 1rem;
+--spacing-lg: 1.5rem;
+--spacing-xl: 2rem;
+
+/* Tipografía */
+--font-family-heading: 'Poppins', sans-serif;
+--font-size-lg: 1.125rem;
+--font-size-2xl: 1.5rem;
+```
+
+---
+
+## ✅ Lo Que Ya Está Hecho
+
+✅ Header reutilizable (con logo)  
+✅ Footer reutilizable (con redes sociales)  
+✅ CSS global (colores, degradés, responsive)  
+✅ Página inicio (hero + servicios)  
+✅ Página comunicados (con modal funcional)  
+✅ Script global (API ready + utilities)  
+✅ Documentación completa  
+
+---
+
+## ⏳ Próximo Paso
+
+**Opción A:** Crear más páginas (Empresa, Planes, Ofertas, etc.)  
+**Opción B:** Configurar Supabase y conectar API  
+**Opción C:** Personalizar colores/logotipo  
+
+---
+
+## 📞 Preguntas Frecuentes
+
+**P: ¿Cómo cambio colores?**  
+R: Edita variables en `frontend/assets/styles.css` (líneas 7-13)
+
+**P: ¿Cómo cambio el logo?**  
+R: Edita SVG en `frontend/layouts/header.php` (líneas 10-30)
+
+**P: ¿Cómo agrego una página nueva?**  
+R: Copia el template de arriba a `frontend/resources/mi-pagina.php`
+
+**P: ¿Dónde agrego Supabase?**  
+R: Backend config + actualizar `frontend/assets/script.js` con fetch real
+
+**P: ¿Es responsive?**  
+R: Sí, probado en mobile, tablet, desktop
+
+---
+
+## 🎯 Tu Checklist
+
+- [ ] He visto el sitio en navegador (index.html)
+- [ ] He abierto un comunicado en modal (comunicados.php)
+- [ ] He leído DOCUMENTACION.md
+- [ ] Entiendo la estructura de carpetas
+- [ ] Sé cómo crear una nueva página
+- [ ] Conozco qué componentes CSS usar
+
+---
+
+**¿Preguntas? Revisa COMPONENTES_RAPIDA.md o DOCUMENTACION.md**
+
+**¿Listo para la siguiente fase? Avísame.** 🚀

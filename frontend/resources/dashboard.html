@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de Control - STEL Bolivia">
+    <title>Dashboard | STEL Bolivia</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <style>
+        .dashboard-header {
+            background: linear-gradient(to right, #0d6efd, #0a1428);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-header h1 {
+            color: white;
+            margin-bottom: var(--spacing-1);
+        }
+
+        .dashboard-header p {
+            color: #e7f1ff;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-6);
+            margin-bottom: var(--spacing-12);
+        }
+
+        .metric-card {
+            background: white;
+            padding: var(--spacing-8);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: var(--size-sm);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .metric-value {
+            font-size: var(--size-3xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .metric-unit {
+            font-size: var(--size-base);
+            color: var(--text-secondary);
+        }
+
+        .section-title {
+            font-size: var(--size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-8);
+            margin-top: var(--spacing-12);
+            padding-bottom: var(--spacing-4);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .profile-section {
+            background: white;
+            padding: var(--spacing-8);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-12);
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-8);
+            margin-top: var(--spacing-6);
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: var(--size-sm);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .field-value {
+            color: var(--text-primary);
+            font-size: var(--size-base);
+        }
+
+        .services-table {
+            width: 100%;
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-12);
+        }
+
+        .services-table thead {
+            background: var(--background-alt);
+        }
+
+        .services-table th {
+            padding: var(--spacing-4);
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .services-table td {
+            padding: var(--spacing-4);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .services-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: var(--radius-full);
+            font-size: var(--size-sm);
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-3);
+        }
+
+        .btn-small {
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: var(--radius-lg);
+            border: none;
+            cursor: pointer;
+            font-size: var(--size-sm);
+            font-weight: 600;
+            transition: all var(--transition-base);
+            font-family: var(--font-primary);
+        }
+
+        .btn-primary-small {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary-small:hover {
+            background: #0b5ed7;
+        }
+
+        .btn-secondary-small {
+            background: var(--background-alt);
+            color: var(--primary-blue);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary-small:hover {
+            background: #f9f9f9;
+        }
+
+        .activity-timeline {
+            background: white;
+            padding: var(--spacing-8);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-12);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+            padding-bottom: var(--spacing-6);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .activity-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .activity-description {
+            color: var(--text-secondary);
+            font-size: var(--size-sm);
+        }
+
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: var(--size-xs);
+            margin-top: var(--spacing-1);
+        }
+
+        @media (max-width: 768px) {
+            .profile-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-table {
+                overflow-x: auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section class="dashboard-header">
+            <div class="container">
+                <h1>Panel de Control</h1>
+                <p>Administra tu cuenta y servicios STEL Bolivia</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Servicios Activos</div>
+                        <div class="metric-value">2</div>
+                        <div class="metric-unit">servicios contratados</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Velocidad Internet</div>
+                        <div class="metric-value">50</div>
+                        <div class="metric-unit">Mbps</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Estado de Cuenta</div>
+                        <div class="metric-value" style="color: #28a745;">Al Dia</div>
+                        <div class="metric-unit">proxima factura en 15 dias</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Proxima Renovacion</div>
+                        <div class="metric-value">45</div>
+                        <div class="metric-unit">dias restantes</div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h2 class="section-title">Informacion de la Cuenta</h2>
+                    <div class="profile-info-grid">
+                        <div class="info-field">
+                            <span class="field-label">Nombre del Cliente</span>
+                            <span class="field-value">Juan Perez Garcia</span>
+                        </div>
+                        <div class="info-field">
+                            <span class="field-label">Numero de Cuenta</span>
+                            <span class="field-value">STL-2024-001234</span>
+                        </div>
+                        <div class="info-field">
+                            <span class="field-label">Email</span>
+                            <span class="field-value">juan.perez@email.com</span>
+                        </div>
+                        <div class="info-field">
+                            <span class="field-label">Telefono</span>
+                            <span class="field-value">+591 76 XXXXXX</span>
+                        </div>
+                        <div class="info-field">
+                            <span class="field-label">Ciudad</span>
+                            <span class="field-value">La Paz</span>
+                        </div>
+                        <div class="info-field">
+                            <span class="field-label">Plan Actual</span>
+                            <span class="field-value">Profesional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Servicios Contratados</h2>
+                <table class="services-table">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Plan</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Internet</td>
+                            <td>Profesional 50 Mbps</td>
+                            <td>35 Bs</td>
+                            <td><span class="status-badge status-active">Activo</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-small btn-secondary-small">Ver Detalles</button>
+                                    <button class="btn-small btn-primary-small">Modificar</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Television</td>
+                            <td>Premium 150 Canales</td>
+                            <td>45 Bs</td>
+                            <td><span class="status-badge status-active">Activo</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-small btn-secondary-small">Ver Detalles</button>
+                                    <button class="btn-small btn-primary-small">Modificar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 class="section-title">Actividad Reciente</h2>
+                <div class="activity-timeline">
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-content">
+                            <div class="activity-title">Pago Procesado</div>
+                            <div class="activity-description">Pago de 80 Bs procesado exitosamente</div>
+                            <div class="activity-time">Hace 5 dias</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-content">
+                            <div class="activity-title">Factura Emitida</div>
+                            <div class="activity-description">Factura de servicios disponible para descargar</div>
+                            <div class="activity-time">Hace 10 dias</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-content">
+                            <div class="activity-title">Cambio de Plan</div>
+                            <div class="activity-description">Plan actualizado a Profesional 50 Mbps</div>
+                            <div class="activity-time">Hace 30 dias</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <div class="activity-content">
+                            <div class="activity-title">Cuenta Activada</div>
+                            <div class="activity-description">Tu servicio ha sido activado exitosamente</div>
+                            <div class="activity-time">Hace 90 dias</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../assets/script.js"></script>
+
+  <script src="../layouts/header.js"></script>
+  <script src="../layouts/footer.js"></script>
+</body>
+</html>

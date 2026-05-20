@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ofertas y promociones vigentes de STEL Bolivia">
+    <title>Ofertas | STEL Bolivia</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066FF;
+            --primary-dark: #0052CC;
+            --secondary: #00C4FF;
+            --accent: #7B2CBF;
+            --dark: #0A0E27;
+            --darker: #060914;
+            --gray-100: #F8F9FC;
+            --gray-200: #E9ECF5;
+            --gray-300: #D1D6E6;
+            --gray-600: #6B7280;
+            --gray-800: #1F2937;
+            --white: #FFFFFF;
+            --success: #00E5A0;
+            --warning: #FFB300;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A0E27 0%, #060914 100%);
+            color: var(--gray-200);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 120px 0;
+            overflow: hidden;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px),
+                repeating-linear-gradient(0deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 50%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray-300);
+            margin-bottom: 32px;
+        }
+
+        /* Featured Offer */
+        .featured-offer {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 196, 255, 0.05) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 64px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .featured-offer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .featured-tag {
+            position: absolute;
+            top: -12px;
+            right: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .featured-offer h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .featured-offer p {
+            font-size: 16px;
+            color: var(--gray-300);
+            margin-bottom: 24px;
+            max-width: 80%;
+        }
+
+        .featured-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray-300);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--gray-300);
+        }
+
+        /* Offers Grid */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+
+        .offer-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+        }
+
+        .offer-header {
+            padding: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.08) 0%, transparent 100%);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, var(--warning) 0%, #FF6B00 100%);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .discount-badge small {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .offer-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+
+        .offer-subtitle {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .offer-body {
+            padding: 32px;
+        }
+
+        .offer-description {
+            color: var(--gray-300);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .validity {
+            background: rgba(255, 179, 0, 0.1);
+            border-left: 3px solid var(--warning);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--gray-300);
+        }
+
+        .terms {
+            background: var(--glass);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--gray-300);
+        }
+
+        .terms strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Conditions Section */
+        .conditions-section {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.05) 0%, transparent 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 48px;
+            margin-top: 64px;
+        }
+
+        .conditions-section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .condition-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 14px;
+            color: var(--gray-300);
+        }
+
+        .condition-icon {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .offers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .featured-offer {
+                padding: 32px;
+            }
+
+            .featured-offer p {
+                max-width: 100%;
+            }
+
+            .featured-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .discount-badge {
+                position: static;
+                display: inline-block;
+                margin-bottom: 16px;
+            }
+
+            .offer-header {
+                padding: 24px;
+            }
+
+            .conditions-section {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">OFERTAS LIMITADAS</div>
+                    <h1>Promociones Exclusivas</h1>
+                    <p>Beneficios corporativos con tecnología de vanguardia y condiciones preferenciales para nuevos y actuales clientes</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Featured Offer -->
+            <div class="featured-offer">
+                <div class="featured-tag">OFERTA DESTACADA</div>
+                <h3>Paquete Corporativo Plus</h3>
+                <p>Aprovecha beneficios exclusivos en nuestros servicios premium. Tecnología 5G, fibra óptica simétrica y soporte prioritario.</p>
+                <div class="featured-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">-35%</div>
+                        <div class="stat-label">DESCUENTO</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">SOPORTE VIP</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">FIBRA ÓPTICA</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offers Grid -->
+            <div class="section-header">
+                <h2>Ofertas Vigentes</h2>
+                <p>Selecciona la promoción que mejor se adapte a tus necesidades</p>
+            </div>
+
+            <div class="offers-grid">
+                <!-- Offer 1 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="discount-badge">100%</div>
+                        <div class="offer-title">Instalación <br>Preferencial</div>
+                        <div class="offer-subtitle">Nuevas altas</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">Activación sin costo en todos nuestros planes de internet y televisión. Incluye configuración profesional y materiales.</p>
+                        <div class="validity">Vigencia: Hasta 31 de mayo 2024</div>
+                        <div class="terms">
+                            <strong>Términos:</strong> Aplica para nuevos clientes. Permanencia mínima 12 meses.
+                        </div>
+                        <button class="btn">Solicitar Activación</button>
+                    </div>
+                </div>
+
+                <!-- Offer 2 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="discount-badge">-25%</div>
+                        <div class="offer-title">Programa Triple</div>
+                        <div class="offer-subtitle">Combo empresarial</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">Contrata nuestro paquete profesional y obtén beneficios adicionales. Internet 50Mbps + 150 canales HD.</p>
+                        <div class="validity">Vigencia: Hasta 30 de junio 2024</div>
+                        <div class="terms">
+                            <strong>Beneficio:</strong> Descuento especial del 25% durante 12 meses consecutivos.
+                        </div>
+                        <button class="btn">Adquirir Paquete</button>
+                    </div>
+                </div>
+
+                <!-- Offer 3 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="discount-badge">-40%</div>
+                        <div class="offer-title">Actualizacion <br>Corporativo</div>
+                        <div class="offer-subtitle">Clientes activos</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">Actualiza a nuestro plan premium y obtén descuento progresivo durante los primeros 6 meses de contratación.</p>
+                        <div class="validity">Vigencia: Hasta 15 de julio 2024</div>
+                        <div class="terms">
+                            <strong>Requisito:</strong> Antigüedad mínima de 6 meses como cliente activo.
+                        </div>
+                        <button class="btn">Actualizar Plan</button>
+                    </div>
+                </div>
+
+                <!-- Offer 4 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="discount-badge">-20%</div>
+                        <div class="offer-title">Programa <br>Referidos</div>
+                        <div class="offer-subtitle">Beneficio dual</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">Recomienda nuestros servicios y obtén descuentos exclusivos tanto para ti como para el nuevo cliente referido.</p>
+                        <div class="validity">Vigencia: Programa permanente</div>
+                        <div class="terms">
+                            <strong>Condición:</strong> El referido debe contratar plan profesional o superior.
+                        </div>
+                        <button class="btn">Participar</button>
+                    </div>
+                </div>
+
+                <!-- Offer 5 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="discount-badge">GRATIS</div>
+                        <div class="offer-title">Router WiFi 6</div>
+                        <div class="offer-subtitle">Tecnología avanzada</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">Equipo de última generación incluido sin costo adicional al contratar nuestro plan internet premium.</p>
+                        <div class="validity">Vigencia: Hasta 30 de junio 2024</div>
+                        <div class="terms">
+                            <strong>Incluye:</strong> Router WiFi 6, configuración profesional y soporte técnico.
+                        </div>
+                        <button class="btn">Contratar</button>
+                    </div>
+                </div>
+
+                <!-- Offer 6 -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div class="discount-badge">-15%</div>
+                        <div class="offer-title">Solución <br>Empresarial</div>
+                        <div class="offer-subtitle">Múltiples sedes</div>
+                    </div>
+                    <div class="offer-body">
+                        <p class="offer-description">Descuento corporativo en servicios para empresas con requerimientos especiales y múltiples ubicaciones.</p>
+                        <div class="validity">Vigencia: Programa anual</div>
+                        <div class="terms">
+                            <strong>Aplica a:</strong> Contratos empresariales de 10 o más líneas de servicio.
+                        </div>
+                        <button class="btn">Cotizar Solución</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conditions Section -->
+            <div class="conditions-section">
+                <h3>Base Legal y Condiciones</h3>
+                <div class="conditions-grid">
+                    <div class="condition-item">
+                        <span class="condition-icon">→</span>
+                        <span>Ofertas válidas durante el periodo especificado en cada promoción</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">→</span>
+                        <span>No acumulativas con otras promociones vigentes</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">→</span>
+                        <span>Aplican términos y condiciones contractuales estándar</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">→</span>
+                        <span>STEL Bolivia se reserva el derecho de modificar promociones</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">→</span>
+                        <span>Aplica para nuevos clientes y clientes vigentes según corresponda</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">→</span>
+                        <span>Consultar términos específicos con asesor comercial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../assets/script.js"></script>
+
+  <script src="../layouts/header.js"></script>
+  <script src="../layouts/footer.js"></script>
+</body>
+</html>+
