@@ -47,62 +47,113 @@
             padding: 0 24px;
         }
 
-        /* Hero Section */
+        /* Hero Section - PREMIUM DESIGN */
         .hero {
             position: relative;
-            padding: 120px 0;
+            padding: 140px 0 100px;
             overflow: hidden;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%);
+            background: linear-gradient(135deg, #0A0E27 0%, #1a1f3a 50%, #060914 100%);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                repeating-linear-gradient(90deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px),
-                repeating-linear-gradient(0deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px);
-            pointer-events: none;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 196, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 6px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(0, 196, 255, 0.1) 0%, rgba(0, 102, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 196, 255, 0.3);
+            padding: 10px 20px;
             border-radius: 100px;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
             text-transform: uppercase;
+            color: var(--secondary);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '💳';
+            font-size: 16px;
         }
 
         .hero h1 {
-            font-size: 64px;
+            font-size: 72px;
             font-weight: 800;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 50%, var(--primary) 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 40%, var(--primary) 80%, #00E5A0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+            line-height: 1.1;
         }
 
         .hero p {
             font-size: 20px;
             color: var(--gray-300);
-            margin-bottom: 32px;
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--gray-300);
+        }
+
+        .hero-feature::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 18px;
         }
 
         /* Section Header */
@@ -595,8 +646,13 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-badge">MÚLTIPLES OPCIONES</div>
-                    <h1>Formas de Pago</h1>
+                    <h1>Formas de Pago Seguras</h1>
                     <p>Realiza tus pagos de forma segura y cómoda. Disponemos de múltiples métodos para tu conveniencia</p>
+                    <div class="hero-features">
+                        <div class="hero-feature">Pago Inmediato</div>
+                        <div class="hero-feature">100% Seguro</div>
+                        <div class="hero-feature">Múltiples Métodos</div>
+                    </div>
                 </div>
             </div>
         </section>

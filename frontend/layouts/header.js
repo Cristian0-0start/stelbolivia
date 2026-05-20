@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
         <a href="${basePath}resources/ofertas.html" class="nav-link ${activePage === 'ofertas' ? 'active' : ''}">Ofertas</a>
       </li>
       <li>
+        <a href="${basePath}resources/formas_pago.html" class="nav-link ${activePage === 'formas_pago' ? 'active' : ''}" title="Métodos de pago disponibles">💳 Formas de Pago</a>
+      </li>
+      <li>
         <a href="${basePath}resources/comunicados.html" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
       </li>
       <li>
