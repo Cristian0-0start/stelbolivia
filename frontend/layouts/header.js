@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
             navToggle.addEventListener('click', () => {
                 const expanded = navToggle.getAttribute('aria-expanded') === 'true';
                 navToggle.setAttribute('aria-expanded', !expanded);
+                navToggle.classList.toggle('active');
                 navMenu.classList.toggle('active');
             });
         }

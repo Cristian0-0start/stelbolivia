@@ -629,13 +629,15 @@
         <div class="modal-content">
             <button class="modal-close" onclick="cerrarModal()">×</button>
             <div id="modalBody"></div>
-        </div>
-    </div>
+        <    <div id="footer-placeholder"></div>
 
-    <div id="footer-placeholder"></div>
+    <!-- Cargar dependencias de Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase-client.js"></script>
 
     <script>
-        const comunicados = [
+        // Comunicados estáticos de Fallback
+        const fallbackComunicados = [
             {
                 id: 1,
                 titulo: "Incremento de Velocidad en Planes de Internet",
@@ -692,28 +694,68 @@
             }
         ];
 
+        let activeComunicados = [];
         let currentPage = 1;
         const itemsPerPage = 6;
-        let filteredComunicados = [...comunicados];
+        let filteredComunicados = [];
+
+        // Función para cargar los comunicados desde Supabase (con fallback)
+        async function cargarComunicados() {
+            const container = document.getElementById('comunicadosContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    const { data, error } = await client
+                        .from('comunicados')
+                        .select('*')
+                        .order('fecha', { ascending: false });
+                    
+                    if (!error && data && data.length > 0) {
+                        activeComunicados = data;
+                        console.log("Cargados comunicados desde base de datos Supabase.");
+                        inicializarFlujo();
+                        return;
+                    } else if (error) {
+                        console.error("Error al consultar comunicados en Supabase:", error);
+                    }
+                } catch (err) {
+                    console.error("Fallo de red conectando con Supabase:", err);
+                }
+            }
+            
+            // Usar fallback estático
+            console.log("Cargando comunicados desde fallback local estático.");
+            activeComunicados = [...fallbackComunicados];
+            inicializarFlujo();
+        }
+
+        function inicializarFlujo() {
+            updateStats();
+            filterComunicados();
+        }
 
         function updateStats() {
             const now = new Date();
-            const monthAgo = new Date(now.setMonth(now.getMonth() - 1));
-            const weekAgo = new Date(now.setDate(now.getDate() - 7));
+            const monthAgo = new Date();
+            monthAgo.setMonth(now.getMonth() - 1);
+            const weekAgo = new Date();
+            weekAgo.setDate(now.getDate() - 7);
             
-            document.getElementById('totalCount').textContent = comunicados.length;
-            document.getElementById('monthCount').textContent = comunicados.filter(c => new Date(c.fecha) > monthAgo).length;
-            document.getElementById('weekCount').textContent = comunicados.filter(c => new Date(c.fecha) > weekAgo).length;
+            document.getElementById('totalCount').textContent = activeComunicados.length;
+            document.getElementById('monthCount').textContent = activeComunicados.filter(c => new Date(c.fecha) > monthAgo).length;
+            document.getElementById('weekCount').textContent = activeComunicados.filter(c => new Date(c.fecha) > weekAgo).length;
         }
 
         function filterComunicados() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const dateFilter = document.getElementById('filterDate').value;
-            const now = new Date();
             
-            filteredComunicados = comunicados.filter(com => {
+            filteredComunicados = activeComunicados.filter(com => {
                 const matchesSearch = com.titulo.toLowerCase().includes(searchTerm) || 
-                                    com.resumen.toLowerCase().includes(searchTerm);
+                                     com.resumen.toLowerCase().includes(searchTerm) ||
+                                     com.contenido.toLowerCase().includes(searchTerm);
                 
                 let matchesDate = true;
                 if (dateFilter) {
@@ -788,7 +830,7 @@
             currentPage = page;
             renderComunicados();
             renderPagination();
-            window.scrollTo({ top: 600, behavior: 'smooth' });
+            window.scrollTo({ top: 400, behavior: 'smooth' });
         }
 
         function abrirModal(id) {
@@ -822,8 +864,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            updateStats();
-            filterComunicados();
+            cargarComunicados();
         });
     </script>
 
