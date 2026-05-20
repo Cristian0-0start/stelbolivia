@@ -147,16 +147,36 @@
         }
 
         .plan-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px 32px;
             position: relative;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            overflow: hidden;
+            z-index: 1;
         }
 
+        /* Capa de degradado sombreado sobre la imagen */
         .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, 
+                rgba(10, 14, 39, 0.85) 0%, 
+                rgba(10, 14, 39, 0.6) 50%, 
+                rgba(10, 14, 39, 0.9) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Línea superior animada */
+        .plan-card::after {
             content: '';
             position: absolute;
             top: 0;
@@ -166,26 +186,42 @@
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
             transform: scaleX(0);
             transition: transform 0.3s ease;
+            z-index: 3;
         }
 
-        .plan-card:hover::before {
+        .plan-card:hover::after {
             transform: scaleX(1);
         }
 
         .plan-card:hover {
             transform: translateY(-8px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.3);
         }
 
         .plan-card.popular {
             border: 2px solid transparent;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 196, 255, 0.05) 100%);
-            backdrop-filter: blur(10px);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .plan-card.popular::after {
+        .plan-card.popular::before {
             content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, 
+                rgba(0, 102, 255, 0.5) 0%, 
+                rgba(10, 14, 39, 0.4) 50%, 
+                rgba(0, 196, 255, 0.5) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .plan-card.popular .borde-gradient {
             position: absolute;
             top: -2px;
             left: -2px;
@@ -211,18 +247,26 @@
             white-space: nowrap;
             letter-spacing: 1px;
             text-transform: uppercase;
+            z-index: 4;
+        }
+
+        /* Contenido del card (encima del fondo) */
+        .plan-card-content {
+            position: relative;
+            z-index: 2;
         }
 
         .plan-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2) 0%, rgba(0, 196, 255, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.4) 0%, rgba(0, 196, 255, 0.3) 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 24px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         .plan-name {
@@ -311,6 +355,8 @@
             color: var(--white);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
         }
 
         .btn:hover {
@@ -668,7 +714,6 @@
             backdrop-filter: blur(20px);
         }
 
-        /* Ticket de éxito animado */
         .notification::before {
             content: '✓';
             position: relative;
@@ -687,7 +732,6 @@
             animation: checkBounce 0.7s 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
         }
 
-        /* Línea punteada de ticket */
         .notification::after {
             content: '';
             position: absolute;
@@ -705,7 +749,6 @@
             animation: fadeInUp 0.5s 0.5s ease-out backwards;
         }
 
-        /* Contenedor del mensaje */
         .notification .message {
             display: block;
             font-size: 20px;
@@ -871,74 +914,81 @@
                     <p>Velocidad y estabilidad garantizada para todas tus actividades digitales</p>
                 </div>
                 <div class="plans-grid">
-                    <div class="plan-card" data-plan="Básico" data-price="85" data-type="Internet Básico">
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 12h18M12 3v18M5 5l14 14M19 5L5 19" stroke="#0066FF"/>
-                            </svg>
+                    <div class="plan-card" style="background-image: url('https://thumbs.dreamstime.com/b/feliz-joven-mujer-de-negocios-usando-tel%C3%A9fono-celular-trabajando-en-vertical-oficina-y-sonriendo-hermosa-profesional-mirando-el-260785542.jpg');" data-plan="Básico" data-price="85" data-type="Internet Básico">
+                        <div class="plan-card-content">
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 12h18M12 3v18M5 5l14 14M19 5L5 19" stroke="#0066FF"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">Básico</div>
+                            <div class="plan-price">
+                                Bs 100 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Facturación mensual</div>
+                            <p class="plan-description">Perfecto para navegación web y redes sociales.</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 40 Mbps de descarga</li>
+                                <li><span class="feature-icon">✓</span> 20 Mbps de subida</li>
+                                <li><span class="feature-icon">✓</span> Ilimitado 24/7</li>
+                                <li><span class="feature-icon">✓</span> Soporte por email</li>
+                                <li><span class="feature-icon">✓</span> Instalación básica</li>
+                            </ul>
+                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                         </div>
-                        <div class="plan-name">Básico</div>
-                        <div class="plan-price">
-                            Bs 85 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Facturación mensual</div>
-                        <p class="plan-description">Perfecto para navegación web y redes sociales.</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 10 Mbps de descarga</li>
-                            <li><span class="feature-icon">✓</span> 5 Mbps de subida</li>
-                            <li><span class="feature-icon">✓</span> Ilimitado 24/7</li>
-                            <li><span class="feature-icon">✓</span> Soporte por email</li>
-                            <li><span class="feature-icon">✓</span> Instalación básica</li>
-                        </ul>
-                        <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                     </div>
 
-                    <div class="plan-card popular" data-plan="Profesional" data-price="139" data-type="Internet Profesional">
-                        <div class="popular-badge">Más Popular</div>
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#0066FF"/>
-                            </svg>
+                    <div class="plan-card popular" style="background-image: url('https://images.pexels.com/photos/34385497/pexels-photo-34385497.jpeg?cs=srgb&dl=pexels-cris-menles-4621648-34385497.jpg&fm=jpg');" data-plan="Profesional" data-price="139" data-type="Internet Profesional">
+                        <div class="borde-gradient"></div>
+                        <div class="plan-card-content">
+                            <div class="popular-badge">Más Popular</div>
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#0066FF"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">Profesional</div>
+                            <div class="plan-price">
+                                Bs 199 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Facturación mensual</div>
+                            <p class="plan-description">Ideal para trabajo remoto y streaming en 4K.</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 100 Mbps de descarga</li>
+                                <li><span class="feature-icon">✓</span> 50 Mbps de subida</li>
+                                <li><span class="feature-icon">✓</span> Ilimitado 24/7</li>
+                                <li><span class="feature-icon">✓</span> Soporte prioritario 24/7</li>
+                                <li><span class="feature-icon">✓</span> Router WiFi 6 incluido</li>
+                                <li><span class="feature-icon">✓</span> Instalación gratuita</li>
+                            </ul>
+                            <button class="btn select-plan-btn">Seleccionar Plan</button>
                         </div>
-                        <div class="plan-name">Profesional</div>
-                        <div class="plan-price">
-                            Bs 139 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Facturación mensual</div>
-                        <p class="plan-description">Ideal para trabajo remoto y streaming en 4K.</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 50 Mbps de descarga</li>
-                            <li><span class="feature-icon">✓</span> 20 Mbps de subida</li>
-                            <li><span class="feature-icon">✓</span> Ilimitado 24/7</li>
-                            <li><span class="feature-icon">✓</span> Soporte prioritario 24/7</li>
-                            <li><span class="feature-icon">✓</span> Router WiFi 6 incluido</li>
-                            <li><span class="feature-icon">✓</span> Instalación gratuita</li>
-                        </ul>
-                        <button class="btn select-plan-btn">Seleccionar Plan</button>
                     </div>
 
-                    <div class="plan-card" data-plan="Premium" data-price="199" data-type="Internet Premium">
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#0066FF"/>
-                            </svg>
+                    <div class="plan-card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStPUrS2iZLaIPkBHwOikI4m6Lr-pMA83xgoA&s');" data-plan="Premium" data-price="199" data-type="Internet Premium">
+                        <div class="plan-card-content">
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#0066FF"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">Premium</div>
+                            <div class="plan-price">
+                                Bs 250 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Facturación mensual</div>
+                            <p class="plan-description">Para empresas que necesitan máximo rendimiento.</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 140 Mbps de descarga</li>
+                                <li><span class="feature-icon">✓</span> 60 Mbps de subida</li>
+                                <li><span class="feature-icon">✓</span> Ilimitado 24/7</li>
+                                <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
+                                <li><span class="feature-icon">✓</span> Router WiFi 6 + Mesh</li>
+                                <li><span class="feature-icon">✓</span> IP estática gratuita</li>
+                            </ul>
+                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                         </div>
-                        <div class="plan-name">Premium</div>
-                        <div class="plan-price">
-                            Bs 199 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Facturación mensual</div>
-                        <p class="plan-description">Para empresas que necesitan máximo rendimiento.</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 100 Mbps de descarga</li>
-                            <li><span class="feature-icon">✓</span> 50 Mbps de subida</li>
-                            <li><span class="feature-icon">✓</span> Ilimitado 24/7</li>
-                            <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
-                            <li><span class="feature-icon">✓</span> Router WiFi 6 + Mesh</li>
-                            <li><span class="feature-icon">✓</span> IP estática gratuita</li>
-                        </ul>
-                        <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                     </div>
                 </div>
             </div>
@@ -952,73 +1002,80 @@
                     <p>Más de 200 canales en HD y 4K con contenido exclusivo</p>
                 </div>
                 <div class="plans-grid">
-                    <div class="plan-card" data-plan="TV Básica" data-price="19.99" data-type="Televisión Básica">
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                                <line x1="8" y1="20" x2="16" y2="20"/>
-                                <line x1="12" y1="16" x2="12" y2="20"/>
-                            </svg>
+                    <div class="plan-card" style="background-image: url('https://cdn-1.webcatalog.io/catalog/espn-plus/espn-plus-social-preview.png?v=1714779721342');" data-plan="TV Básica" data-price="19.99" data-type="Televisión Básica">
+                        <div class="plan-card-content">
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <line x1="8" y1="20" x2="16" y2="20"/>
+                                    <line x1="12" y1="16" x2="12" y2="20"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">TV Básica</div>
+                            <div class="plan-price">
+                                Bs 40 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Facturación mensual</div>
+                            <p class="plan-description">Entretenimiento para toda la familia.</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 60+ canales en SD/HD</li>
+                                <li><span class="feature-icon">✓</span> Canales locales y nacionales</li>
+                                <li><span class="feature-icon">✓</span> Noticias y entretenimiento</li>
+                                <li><span class="feature-icon">✓</span> Guía electrónica</li>
+                            </ul>
+                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                         </div>
-                        <div class="plan-name">TV Básica</div>
-                        <div class="plan-price">
-                            Bs 19.99 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Facturación mensual</div>
-                        <p class="plan-description">Entretenimiento para toda la familia.</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 60+ canales en SD/HD</li>
-                            <li><span class="feature-icon">✓</span> Canales locales y nacionales</li>
-                            <li><span class="feature-icon">✓</span> Noticias y entretenimiento</li>
-                            <li><span class="feature-icon">✓</span> Guía electrónica</li>
-                        </ul>
-                        <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                     </div>
 
-                    <div class="plan-card popular" data-plan="TV Premium" data-price="55" data-type="Televisión Premium">
-                        <div class="popular-badge">Más Vendido</div>
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                            </svg>
+                    <div class="plan-card popular" style="background-image: url('https://wallpapers.com/images/hd/portrait-disney-castle-ll9lhludf2dvexav.jpg');" data-plan="TV Premium" data-price="55" data-type="Televisión Premium">
+                        <div class="borde-gradient"></div>
+                        <div class="plan-card-content">
+                            <div class="popular-badge">Más Vendido</div>
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">TV Premium</div>
+                            <div class="plan-price">
+                                Bs 62 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Facturación mensual</div>
+                            <p class="plan-description">Cine, series y deportes en alta definición.</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 120+ canales en HD/4K</li>
+                                <li><span class="feature-icon">✓</span> Canales premium incluidos</li>
+                                <li><span class="feature-icon">✓</span> HBO, Fox, ESPN, Discovery</li>
+                                <li><span class="feature-icon">✓</span> Guía interactiva</li>
+                                <li><span class="feature-icon">✓</span> Grabación de programas</li>
+                            </ul>
+                            <button class="btn select-plan-btn">Seleccionar Plan</button>
                         </div>
-                        <div class="plan-name">TV Premium</div>
-                        <div class="plan-price">
-                            Bs 55 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Facturación mensual</div>
-                        <p class="plan-description">Cine, series y deportes en alta definición.</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 150+ canales en HD/4K</li>
-                            <li><span class="feature-icon">✓</span> Canales premium incluidos</li>
-                            <li><span class="feature-icon">✓</span> HBO, Fox, ESPN, Discovery</li>
-                            <li><span class="feature-icon">✓</span> Guía interactiva</li>
-                            <li><span class="feature-icon">✓</span> Grabación de programas</li>
-                        </ul>
-                        <button class="btn select-plan-btn">Seleccionar Plan</button>
                     </div>
 
-                    <div class="plan-card" data-plan="TV Ultimate" data-price="99" data-type="Televisión Ultimate">
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polygon points="10 8 16 12 10 16 10 8"/>
-                            </svg>
+                    <div class="plan-card" style="background-image: url('https://i.pinimg.com/1200x/42/a8/8e/42a88e17a2cbb9ead230a1f5c9b7e32c.jpg');" data-plan="TV Ultimate" data-price="99" data-type="Televisión Ultimate">
+                        <div class="plan-card-content">
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polygon points="10 8 16 12 10 16 10 8"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">TV Ultimate</div>
+                            <div class="plan-price">
+                                Bs 85 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Facturación mensual</div>
+                            <p class="plan-description">La experiencia televisiva completa.</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 200+ canales en 4K</li>
+                                <li><span class="feature-icon">✓</span> Todos los canales premium</li>
+                                <li><span class="feature-icon">✓</span> Video on demand ilimitado</li>
+                                <li><span class="feature-icon">✓</span> Multitarea simultánea</li>
+                                <li><span class="feature-icon">✓</span> Grabación ilimitada</li>
+                            </ul>
+                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                         </div>
-                        <div class="plan-name">TV Ultimate</div>
-                        <div class="plan-price">
-                            Bs 99 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Facturación mensual</div>
-                        <p class="plan-description">La experiencia televisiva completa.</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 200+ canales en 4K</li>
-                            <li><span class="feature-icon">✓</span> Todos los canales premium</li>
-                            <li><span class="feature-icon">✓</span> Video on demand ilimitado</li>
-                            <li><span class="feature-icon">✓</span> Multitarea simultánea</li>
-                            <li><span class="feature-icon">✓</span> Grabación ilimitada</li>
-                        </ul>
-                        <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
                     </div>
                 </div>
             </div>
@@ -1032,55 +1089,89 @@
                     <p>Ahorra hasta 30% contratando Internet + TV juntos</p>
                 </div>
                 <div class="plans-grid">
-                    <div class="plan-card popular" data-plan="Combo Familiar" data-price="250" data-type="Combo Familiar (Internet Profesional + TV Premium)">
-                        <div class="popular-badge">Mejor Oferta</div>
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                                <line x1="16" y1="3" x2="22" y2="7"/>
-                                <line x1="8" y1="3" x2="2" y2="7"/>
-                            </svg>
+                    <div class="plan-card popular" style="background-image: url('https://img.magnific.com/foto-gratis/panorama-nocturno-galaxia_23-2148895322.jpg?semt=ais_hybrid&w=740&q=80');" data-plan="Combo Familiar" data-price="250" data-type="Combo Familiar (Internet Profesional + TV Premium)">
+                        <div class="borde-gradient"></div>
+                        <div class="plan-card-content">
+                            <div class="popular-badge">Mejor Oferta</div>
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                    <line x1="16" y1="3" x2="22" y2="7"/>
+                                    <line x1="8" y1="3" x2="2" y2="7"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">Combo Familiar</div>
+                            <div class="plan-price">
+                                Bs 229 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Ahorro de Bs 25/mes</div>
+                            <p class="plan-description">Internet Profesional + TV Premium</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 100 Mbps de internet</li>
+                                <li><span class="feature-icon">✓</span> 60 canales HD</li>
+                                <li><span class="feature-icon">✓</span> Router WiFi 6 incluido</li>
+                                <li><span class="feature-icon">✓</span> Instalación gratuita</li>
+                                <li><span class="feature-icon">✓</span> Decodificador 4K</li>
+                            </ul>
+                            <button class="btn select-plan-btn">Contratar Ahora</button>
                         </div>
-                        <div class="plan-name">Combo Familiar</div>
-                        <div class="plan-price">
-                            Bs 250 <small>/mes</small>
-                        </div>
-                        <div class="plan-period">Ahorro de Bs 25/mes</div>
-                        <p class="plan-description">Internet Profesional + TV Premium</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 50 Mbps de internet</li>
-                            <li><span class="feature-icon">✓</span> 150 canales HD</li>
-                            <li><span class="feature-icon">✓</span> Router WiFi 6 incluido</li>
-                            <li><span class="feature-icon">✓</span> Instalación gratuita</li>
-                            <li><span class="feature-icon">✓</span> Decodificador 4K</li>
-                        </ul>
-                        <button class="btn select-plan-btn">Contratar Ahora</button>
                     </div>
 
-                    <div class="plan-card popular" data-plan="Combo Ultimate" data-price="450" data-type="Combo Ultimate (Internet Premium + TV Ultimate)">
-                        <div class="popular-badge">Premium</div>
-                        <div class="plan-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 12V8H4v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/>
-                                <line x1="4" y1="8" x2="20" y2="8"/>
-                                <line x1="12" y1="4" x2="12" y2="8"/>
-                                <line x1="8" y1="4" x2="16" y2="4"/>
-                            </svg>
+                    <div class="plan-card popular" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600');" data-plan="Combo Ultimate" data-price="450" data-type="Combo Ultimate (Internet Premium + TV Ultimate)">
+                        <div class="borde-gradient"></div>
+                        <div class="plan-card-content">
+                            <div class="popular-badge">Premium</div>
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 12V8H4v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/>
+                                    <line x1="4" y1="8" x2="20" y2="8"/>
+                                    <line x1="12" y1="4" x2="12" y2="8"/>
+                                    <line x1="8" y1="4" x2="16" y2="4"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">Combo Premium</div>
+                            <div class="plan-price">
+                                Bs 309 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Ahorro de Bs 20/mes</div>
+                            <p class="plan-description">Internet Premium + TV Ultra</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 200 Mbps de internet</li>
+                                <li><span class="feature-icon">✓</span> 120+ canales 4K</li>
+                                <li><span class="feature-icon">✓</span> IP estática gratuita</li>
+                                <li><span class="feature-icon">✓</span> Instalación gratuita</li>
+                                <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
+                            </ul>
+                            <button class="btn select-plan-btn">Contratar Ahora</button>
                         </div>
-                        <div class="plan-name">Combo Ultimate</div>
-                        <div class="plan-price">
-                            Bs 450 <small>/mes</small>
+                    </div>
+                                        <div class="plan-card popular" style="background-image: url('https://elements-resized.envatousercontent.com/elements-video-cover-images/804ba39b-7034-4c9e-a9bc-b298412ffc0e/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=4c9293ccc96c021f9d5185560ca23496faf06201655153d859a4b1e2359c6b54');" data-plan="Combo Ultimate" data-price="450" data-type="Combo Ultimate (Internet Premium + TV Ultimate)">
+                        <div class="borde-gradient"></div>
+                        <div class="plan-card-content">
+                            <div class="popular-badge">Ultimate</div>
+                            <div class="plan-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 12V8H4v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/>
+                                    <line x1="4" y1="8" x2="20" y2="8"/>
+                                    <line x1="12" y1="4" x2="12" y2="8"/>
+                                    <line x1="8" y1="4" x2="16" y2="4"/>
+                                </svg>
+                            </div>
+                            <div class="plan-name">Combo Ultimate</div>
+                            <div class="plan-price">
+                                Bs 419 <small>/mes</small>
+                            </div>
+                            <div class="plan-period">Ahorro de Bs 20/mes</div>
+                            <p class="plan-description">Internet Premium + TV Ultimate</p>
+                            <ul class="plan-features">
+                                <li><span class="feature-icon">✓</span> 400 Mbps de internet</li>
+                                <li><span class="feature-icon">✓</span> 200+ canales 4K</li>
+                                <li><span class="feature-icon">✓</span> IP estática gratuita</li>
+                                <li><span class="feature-icon">✓</span> Instalación gratuita</li>
+                                <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
+                            </ul>
+                            <button class="btn select-plan-btn">Contratar Ahora</button>
                         </div>
-                        <div class="plan-period">Ahorro de Bs 20/mes</div>
-                        <p class="plan-description">Internet Premium + TV Ultimate</p>
-                        <ul class="plan-features">
-                            <li><span class="feature-icon">✓</span> 100 Mbps de internet</li>
-                            <li><span class="feature-icon">✓</span> 200+ canales 4K</li>
-                            <li><span class="feature-icon">✓</span> IP estática gratuita</li>
-                            <li><span class="feature-icon">✓</span> Instalación gratuita</li>
-                            <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
-                        </ul>
-                        <button class="btn select-plan-btn">Contratar Ahora</button>
                     </div>
                 </div>
             </div>
