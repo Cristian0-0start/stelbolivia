@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formas de pago disponibles en STEL Bolivia">
+    <title>Formas de Pago | STEL Bolivia</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066FF;
+            --primary-dark: #0052CC;
+            --secondary: #00C4FF;
+            --accent: #7B2CBF;
+            --dark: #0A0E27;
+            --darker: #060914;
+            --gray-100: #F8F9FC;
+            --gray-200: #E9ECF5;
+            --gray-300: #D1D6E6;
+            --gray-600: #6B7280;
+            --gray-800: #1F2937;
+            --white: #FFFFFF;
+            --success: #00E5A0;
+            --warning: #FFB300;
+            --danger: #FF5555;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A0E27 0%, #060914 100%);
+            color: var(--gray-200);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 120px 0;
+            overflow: hidden;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px),
+                repeating-linear-gradient(0deg, rgba(0, 102, 255, 0.05) 0px, rgba(0, 102, 255, 0.05) 1px, transparent 1px, transparent 100px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 50%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray-300);
+            margin-bottom: 32px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+            margin-top: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--gray-300);
+        }
+
+        /* Payment Methods Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+
+        .payment-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+        }
+
+        .payment-icon-section {
+            height: 120px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 196, 255, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .payment-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--success) 0%, #00D4A3 100%);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--dark);
+        }
+
+        .payment-content {
+            padding: 32px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-type {
+            font-size: 12px;
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .payment-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+
+        .payment-description {
+            font-size: 14px;
+            color: var(--gray-300);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .payment-details {
+            background: var(--glass);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--gray-300);
+        }
+
+        .payment-details strong {
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .payment-code {
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            background: rgba(0, 102, 255, 0.1);
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 8px;
+            color: var(--primary);
+        }
+
+        .payment-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--gray-300);
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.05) 0%, transparent 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 48px;
+            margin-top: 80px;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .panel-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--success) 0%, #00D4A3 100%);
+            color: var(--dark);
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 229, 160, 0.3);
+        }
+
+        /* Admin Table */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+
+        .admin-table thead {
+            background: rgba(0, 102, 255, 0.08);
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .admin-table th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 14px;
+            color: var(--gray-300);
+        }
+
+        .admin-table tr:hover {
+            background: rgba(0, 102, 255, 0.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(0, 229, 160, 0.2);
+            color: var(--success);
+        }
+
+        .status-inactive {
+            background: rgba(255, 85, 85, 0.2);
+            color: var(--danger);
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            margin-right: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--glass-border);
+            background: transparent;
+            color: var(--gray-300);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-delete:hover {
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.95) 0%, rgba(6, 9, 20, 0.95) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--gray-300);
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 102, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: var(--gray-600);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: var(--gray-300);
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(0, 196, 255, 0.1);
+            border-left: 3px solid var(--secondary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--gray-300);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .admin-panel {
+                padding: 32px 24px;
+            }
+
+            .panel-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .admin-table {
+                font-size: 12px;
+            }
+
+            .admin-table th,
+            .admin-table td {
+                padding: 12px;
+            }
+
+            .modal-content {
+                padding: 32px 24px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">MÚLTIPLES OPCIONES</div>
+                    <h1>Formas de Pago</h1>
+                    <p>Realiza tus pagos de forma segura y cómoda. Disponemos de múltiples métodos para tu conveniencia</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Payment Methods Grid -->
+            <div class="section-header">
+                <h2>Métodos de Pago Disponibles</h2>
+                <p>Elige el método que mejor se adapte a tus necesidades</p>
+            </div>
+
+            <div class="payment-grid" id="paymentGrid">
+                <!-- Payment cards will be dynamically generated here -->
+                <div class="payment-card">
+                    <div class="payment-icon-section">💳</div>
+                    <div class="payment-content">
+                        <div class="payment-type">Tarjeta Bancaria</div>
+                        <h3 class="payment-title">Tarjeta de Crédito/Débito</h3>
+                        <p class="payment-description">Realiza pagos seguros y rápidos con tu tarjeta de crédito o débito. Procesamiento inmediato de transacciones.</p>
+                        <div class="payment-details">
+                            <strong>Procesamiento:</strong>
+                            Inmediato
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn btn-primary">Pagar</button>
+                            <button class="btn btn-secondary">Más Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-icon-section">🏦</div>
+                    <div class="payment-content">
+                        <div class="payment-type">Transferencia Bancaria</div>
+                        <h3 class="payment-title">Transferencia Directa</h3>
+                        <p class="payment-description">Realiza transferencias directas desde tu cuenta bancaria. Seguro y confiable para pagos de mayor cuantía.</p>
+                        <div class="payment-details">
+                            <strong>Cuenta:</strong>
+                            <span class="payment-code">1234 5678 9012 3456</span>
+                            <strong style="margin-top: 8px;">Titular:</strong>
+                            STEL BOLIVIA
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn btn-primary">Información</button>
+                            <button class="btn btn-secondary">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-icon-section">📱</div>
+                    <div class="payment-content">
+                        <div class="payment-type">Código QR</div>
+                        <h3 class="payment-title">Pago por QR</h3>
+                        <p class="payment-description">Escanea el código QR con tu app bancaria. La forma más rápida y segura de realizar tus pagos.</p>
+                        <div class="payment-details">
+                            <strong>Disponible en:</strong>
+                            Todas las apps bancarias que soporten QR
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn btn-primary">Ver QR</button>
+                            <button class="btn btn-secondary">Descargar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-card">
+                    <div class="payment-icon-section">💰</div>
+                    <div class="payment-content">
+                        <div class="payment-type">Billetera Digital</div>
+                        <h3 class="payment-title">Billetera Electrónica</h3>
+                        <p class="payment-description">Usa tu billetera digital para transacciones rápidas. Compatible con principales plataformas de pago.</p>
+                        <div class="payment-details">
+                            <strong>Plataformas:</strong>
+                            PayPal, Google Pay, Apple Pay
+                        </div>
+                        <div class="payment-actions">
+                            <button class="btn btn-primary">Activar</button>
+                            <button class="btn btn-secondary">Más Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel -->
+            <div class="admin-panel">
+                <div class="panel-header">
+                    <h3>🔧 Panel de Administración</h3>
+                    <button class="btn-add" onclick="openModal()">+ Agregar Método</button>
+                </div>
+
+                <div class="info-box">
+                    💡 Desde aquí puedes gestionar todos los métodos de pago disponibles. Agrega nuevos métodos, edita los existentes o desactívalos según sea necesario.
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th>Referencia</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentTableBody">
+                        <tr>
+                            <td>Tarjeta Bancaria</td>
+                            <td>Tarjeta de Crédito/Débito</td>
+                            <td>CARD-001</td>
+                            <td><span class="status-badge status-active">Activo</span></td>
+                            <td>
+                                <button class="btn-action" onclick="editPaymentMethod(1)">Editar</button>
+                                <button class="btn-action btn-delete" onclick="deletePaymentMethod(1)">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Transferencia Bancaria</td>
+                            <td>Transferencia Directa</td>
+                            <td>TRANS-001</td>
+                            <td><span class="status-badge status-active">Activo</span></td>
+                            <td>
+                                <button class="btn-action" onclick="editPaymentMethod(2)">Editar</button>
+                                <button class="btn-action btn-delete" onclick="deletePaymentMethod(2)">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Código QR</td>
+                            <td>Pago por QR</td>
+                            <td>QR-001</td>
+                            <td><span class="status-badge status-active">Activo</span></td>
+                            <td>
+                                <button class="btn-action" onclick="editPaymentMethod(3)">Editar</button>
+                                <button class="btn-action btn-delete" onclick="deletePaymentMethod(3)">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Billetera Digital</td>
+                            <td>Billetera Electrónica</td>
+                            <td>WALLET-001</td>
+                            <td><span class="status-badge status-active">Activo</span></td>
+                            <td>
+                                <button class="btn-action" onclick="editPaymentMethod(4)">Editar</button>
+                                <button class="btn-action btn-delete" onclick="deletePaymentMethod(4)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para agregar/editar formas de pago -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Agregar Forma de Pago</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="paymentForm" onsubmit="savePaymentMethod(event)">
+                <div class="form-group">
+                    <label for="paymentType">Tipo de Pago *</label>
+                    <select id="paymentType" class="form-control" required>
+                        <option value="">Selecciona un tipo...</option>
+                        <option value="tarjeta">Tarjeta Bancaria</option>
+                        <option value="transferencia">Transferencia Bancaria</option>
+                        <option value="qr">Código QR</option>
+                        <option value="billetera">Billetera Digital</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentName">Nombre *</label>
+                    <input 
+                        type="text" 
+                        id="paymentName" 
+                        class="form-control" 
+                        placeholder="Ej: Tarjeta de Crédito Principal"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentReference">Referencia/Código *</label>
+                    <input 
+                        type="text" 
+                        id="paymentReference" 
+                        class="form-control" 
+                        placeholder="Ej: 1234 5678 9012 3456 o CARD-001"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentDescription">Descripción</label>
+                    <textarea 
+                        id="paymentDescription" 
+                        class="form-control" 
+                        placeholder="Describe este método de pago..."
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentInstructions">Instrucciones</label>
+                    <textarea 
+                        id="paymentInstructions" 
+                        class="form-control" 
+                        placeholder="Pasos para realizar el pago con este método..."
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentStatus">Estado</label>
+                    <select id="paymentStatus" class="form-control">
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-submit">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../assets/script.js"></script>
+    <script src="../layouts/header.js"></script>
+    <script src="../layouts/footer.js"></script>
+
+    <script>
+        // Payment methods data storage (will be replaced with Supabase later)
+        let paymentMethods = [
+            {
+                id: 1,
+                type: 'tarjeta',
+                name: 'Tarjeta de Crédito/Débito',
+                reference: 'CARD-001',
+                description: 'Realiza pagos seguros con tu tarjeta',
+                instructions: 'Ingresa los datos de tu tarjeta',
+                status: 'activo'
+            },
+            {
+                id: 2,
+                type: 'transferencia',
+                name: 'Transferencia Directa',
+                reference: 'TRANS-001',
+                description: 'Transferencia desde tu cuenta bancaria',
+                instructions: 'Realiza una transferencia a nuestra cuenta',
+                status: 'activo'
+            },
+            {
+                id: 3,
+                type: 'qr',
+                name: 'Pago por QR',
+                reference: 'QR-001',
+                description: 'Escanea el código QR',
+                instructions: 'Usa tu app bancaria para escanear',
+                status: 'activo'
+            },
+            {
+                id: 4,
+                type: 'billetera',
+                name: 'Billetera Electrónica',
+                reference: 'WALLET-001',
+                description: 'Usa tu billetera digital',
+                instructions: 'Compatible con PayPal, Google Pay, Apple Pay',
+                status: 'activo'
+            }
+        ];
+
+        let currentEditingId = null;
+
+        function openModal() {
+            currentEditingId = null;
+            document.getElementById('modalTitle').textContent = 'Agregar Forma de Pago';
+            document.getElementById('paymentForm').reset();
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            document.getElementById('paymentForm').reset();
+            currentEditingId = null;
+        }
+
+        function editPaymentMethod(id) {
+            const method = paymentMethods.find(m => m.id === id);
+            if (!method) return;
+
+            currentEditingId = id;
+            document.getElementById('modalTitle').textContent = 'Editar Forma de Pago';
+            document.getElementById('paymentType').value = method.type;
+            document.getElementById('paymentName').value = method.name;
+            document.getElementById('paymentReference').value = method.reference;
+            document.getElementById('paymentDescription').value = method.description;
+            document.getElementById('paymentInstructions').value = method.instructions;
+            document.getElementById('paymentStatus').value = method.status;
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function deletePaymentMethod(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este método de pago?')) {
+                paymentMethods = paymentMethods.filter(m => m.id !== id);
+                updateTable();
+            }
+        }
+
+        function savePaymentMethod(event) {
+            event.preventDefault();
+
+            const newMethod = {
+                id: currentEditingId || Math.max(...paymentMethods.map(m => m.id), 0) + 1,
+                type: document.getElementById('paymentType').value,
+                name: document.getElementById('paymentName').value,
+                reference: document.getElementById('paymentReference').value,
+                description: document.getElementById('paymentDescription').value,
+                instructions: document.getElementById('paymentInstructions').value,
+                status: document.getElementById('paymentStatus').value
+            };
+
+            if (currentEditingId) {
+                const index = paymentMethods.findIndex(m => m.id === currentEditingId);
+                paymentMethods[index] = newMethod;
+            } else {
+                paymentMethods.push(newMethod);
+            }
+
+            updateTable();
+            closeModal();
+        }
+
+        function updateTable() {
+            const tbody = document.getElementById('paymentTableBody');
+            tbody.innerHTML = paymentMethods.map(method => `
+                <tr>
+                    <td>${method.type.charAt(0).toUpperCase() + method.type.slice(1)}</td>
+                    <td>${method.name}</td>
+                    <td>${method.reference}</td>
+                    <td><span class="status-badge status-${method.status}">${method.status.charAt(0).toUpperCase() + method.status.slice(1)}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="editPaymentMethod(${method.id})">Editar</button>
+                        <button class="btn-action btn-delete" onclick="deletePaymentMethod(${method.id})">Eliminar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('paymentModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
