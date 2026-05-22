@@ -39,6 +39,20 @@
             background: linear-gradient(135deg, #0A0E27 0%, #060914 100%);
             color: var(--gray-200);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #header-placeholder {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #header-placeholder.header-hidden {
+            transform: translateY(-100%);
         }
 
         .container {
@@ -47,10 +61,9 @@
             padding: 0 24px;
         }
 
-        /* Hero Section */
         .hero {
             position: relative;
-            padding: 100px 0;
+            padding: 120px 0 100px;
             overflow: hidden;
             background: radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.15) 0%, transparent 50%);
         }
@@ -97,23 +110,23 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .hero p {
             font-size: 18px;
-            color: var(--gray-300);
+            color: #FFFFFF;
             margin-bottom: 32px;
         }
 
-        /* Section Styles */
         .section {
             padding: 80px 0;
         }
 
         .section-dark {
             background: linear-gradient(135deg, rgba(0, 102, 255, 0.03) 0%, transparent 100%);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .section-header {
@@ -133,16 +146,15 @@
 
         .section-header p {
             font-size: 16px;
-            color: var(--gray-300);
+            color: #FFFFFF;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Plan Cards */
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
             margin-top: 40px;
         }
 
@@ -150,16 +162,17 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            border: 1px solid var(--glass-border);
+            border: 2px solid rgba(0, 102, 255, 0.3);
             border-radius: 24px;
-            padding: 40px 32px;
+            padding: 0;
             position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
-            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 580px;
         }
 
-        /* Capa de degradado sombreado sobre la imagen */
         .plan-card::before {
             content: '';
             position: absolute;
@@ -168,35 +181,18 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(180deg, 
-                rgba(10, 14, 39, 0.85) 0%, 
-                rgba(10, 14, 39, 0.6) 50%, 
-                rgba(10, 14, 39, 0.9) 100%);
+                rgba(10, 14, 39, 0.9) 0%, 
+                rgba(10, 14, 39, 0.7) 40%, 
+                rgba(10, 14, 39, 0.7) 70%, 
+                rgba(10, 14, 39, 0.95) 100%);
             z-index: 1;
             pointer-events: none;
-        }
-
-        /* Línea superior animada */
-        .plan-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            z-index: 3;
-        }
-
-        .plan-card:hover::after {
-            transform: scaleX(1);
         }
 
         .plan-card:hover {
             transform: translateY(-8px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.35), 0 0 0 2px rgba(0, 102, 255, 0.5);
         }
 
         .plan-card.popular {
@@ -214,114 +210,108 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(180deg, 
-                rgba(0, 102, 255, 0.5) 0%, 
-                rgba(10, 14, 39, 0.4) 50%, 
-                rgba(0, 196, 255, 0.5) 100%);
+                rgba(0, 102, 255, 0.6) 0%, 
+                rgba(10, 14, 39, 0.5) 40%, 
+                rgba(10, 14, 39, 0.5) 70%, 
+                rgba(0, 196, 255, 0.6) 100%);
             z-index: 1;
             pointer-events: none;
         }
 
-        .plan-card.popular .borde-gradient {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            border-radius: 24px;
-            z-index: -1;
-            opacity: 0.5;
+        .plan-card.popular {
+            border: 2px solid var(--primary);
+        }
+
+        .plan-card.popular:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.4), 0 0 0 2px var(--secondary);
         }
 
         .popular-badge {
             position: absolute;
-            top: -12px;
+            top: 16px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--white);
-            padding: 6px 20px;
+            padding: 8px 24px;
             border-radius: 100px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             white-space: nowrap;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             z-index: 4;
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
         }
 
-        /* Contenido del card (encima del fondo) */
         .plan-card-content {
             position: relative;
             z-index: 2;
+            padding: 35px 28px 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: 1;
         }
 
         .plan-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.4) 0%, rgba(0, 196, 255, 0.3) 100%);
-            border-radius: 16px;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.35) 0%, rgba(0, 196, 255, 0.25) 100%);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .plan-name {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--white);
             letter-spacing: -0.5px;
         }
 
-        .plan-price {
-            font-size: 48px;
-            font-weight: 800;
+        .plan-speed {
+            font-size: 52px;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
+            margin-bottom: 4px;
+            line-height: 1;
+            letter-spacing: -2px;
+            transition: all 0.6s ease;
         }
 
-        .plan-price small {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--gray-600);
-            -webkit-text-fill-color: var(--gray-600);
-        }
-
-        .plan-period {
-            color: var(--gray-600);
+        .plan-speed-label {
             font-size: 14px;
-            margin-bottom: 24px;
-        }
-
-        .plan-description {
-            color: var(--gray-300);
-            margin-bottom: 32px;
-            font-size: 15px;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .plan-features {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: auto;
+            flex: 1;
         }
 
         .plan-features li {
-            padding: 10px 0;
+            padding: 9px 0;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            border-bottom: 1px solid var(--glass-border);
-            color: var(--gray-300);
+            gap: 10px;
+            font-size: 13.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
         }
 
         .plan-features li:last-child {
@@ -329,22 +319,59 @@
         }
 
         .feature-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background: linear-gradient(135deg, var(--success) 0%, #00B894 100%);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 12px;
+            font-size: 10px;
             flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .plan-price-section {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .plan-price {
+            font-size: 44px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            line-height: 1;
+        }
+
+        .plan-price small {
+            font-size: 16px;
+            font-weight: 500;
+            color: #FFFFFF;
+            -webkit-text-fill-color: #FFFFFF;
+        }
+
+        .plan-period {
+            color: #FFFFFF;
+            font-size: 12px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
         .btn {
             width: 100%;
-            padding: 16px 24px;
-            border-radius: 12px;
+            padding: 15px 24px;
+            border-radius: 14px;
             font-weight: 700;
             font-size: 14px;
             cursor: pointer;
@@ -354,14 +381,30 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: var(--white);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             position: relative;
             z-index: 2;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 102, 255, 0.4);
         }
 
         .btn-outline {
@@ -384,10 +427,14 @@
             background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
         }
 
-        /* Comparison Table */
+        .speed-counter {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
         .comparison-table {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             overflow: hidden;
             margin-top: 60px;
@@ -402,7 +449,7 @@
         .comparison-table td {
             padding: 20px;
             text-align: left;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .comparison-table th {
@@ -415,7 +462,7 @@
         }
 
         .comparison-table td {
-            color: var(--gray-300);
+            color: #FFFFFF;
         }
 
         .comparison-table tr:hover td {
@@ -432,7 +479,6 @@
             font-weight: 700;
         }
 
-        /* Modal Styles - Multi Step */
         .modal {
             display: none;
             position: fixed;
@@ -453,7 +499,7 @@
 
         .modal-content {
             background: linear-gradient(135deg, #0A0E27 0%, #060914 100%);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             max-width: 600px;
             width: 90%;
@@ -471,7 +517,7 @@
             height: 40px;
             border-radius: 50%;
             background: var(--glass);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--white);
             font-size: 24px;
             cursor: pointer;
@@ -499,7 +545,7 @@
 
         .selected-plan {
             background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 196, 255, 0.05) 100%);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 24px;
@@ -534,7 +580,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--gray-300);
+            color: #FFFFFF;
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -548,7 +594,7 @@
             width: 100%;
             padding: 14px 16px;
             background: var(--glass);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             font-family: 'Inter', sans-serif;
             font-size: 14px;
@@ -563,7 +609,8 @@
         }
 
         .form-input::placeholder {
-            color: var(--gray-600);
+            color: #FFFFFF;
+            opacity: 0.5;
         }
 
         .form-row {
@@ -616,9 +663,9 @@
             width: 100%;
             padding: 12px;
             background: var(--glass);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            color: var(--gray-300);
+            color: #FFFFFF;
             cursor: pointer;
         }
 
@@ -635,7 +682,8 @@
         .file-name {
             margin-top: 8px;
             font-size: 12px;
-            color: var(--gray-600);
+            color: #FFFFFF;
+            opacity: 0.7;
         }
 
         .step {
@@ -665,36 +713,40 @@
             height: 40px;
             border-radius: 50%;
             background: var(--glass);
-            border: 2px solid var(--glass-border);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: var(--gray-600);
+            color: #FFFFFF;
+            opacity: 0.5;
         }
 
         .step-dot.active .dot {
             background: var(--primary);
             border-color: var(--primary);
             color: white;
+            opacity: 1;
         }
 
         .step-dot.completed .dot {
             background: var(--success);
             border-color: var(--success);
             color: white;
+            opacity: 1;
         }
 
         .step-dot span {
             font-size: 12px;
-            color: var(--gray-600);
+            color: #FFFFFF;
+            opacity: 0.7;
         }
 
         .step-dot.active span {
             color: var(--primary);
+            opacity: 1;
         }
 
-        /* Notification PRO - Centro con ticket de éxito */
         .notification {
             position: fixed;
             top: 50%;
@@ -753,7 +805,7 @@
             display: block;
             font-size: 20px;
             margin-top: 12px;
-            color: var(--gray-200);
+            color: #FFFFFF;
             line-height: 1.5;
             animation: fadeInUp 0.5s 0.6s ease-out backwards;
         }
@@ -761,9 +813,10 @@
         .notification .sub-message {
             display: block;
             font-size: 14px;
-            color: var(--gray-300);
+            color: #FFFFFF;
             margin-top: 8px;
             animation: fadeInUp 0.5s 0.7s ease-out backwards;
+            opacity: 0.8;
         }
 
         @keyframes ticketPro {
@@ -816,17 +869,68 @@
             }
         }
 
-        /* Responsive */
+        @media (max-width: 1200px) {
+            .plans-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            
+            .plan-card-content {
+                padding: 30px 22px 25px;
+            }
+            
+            .plan-speed {
+                font-size: 42px;
+            }
+            
+            .plan-price {
+                font-size: 36px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .plans-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 24px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            
+            .plan-card {
+                min-height: 520px;
+            }
+            
+            .plan-card-content {
+                padding: 25px 18px 22px;
+            }
+            
+            .plan-speed {
+                font-size: 36px;
+            }
+            
+            .plan-name {
+                font-size: 22px;
+            }
+            
+            .plan-features li {
+                font-size: 12px;
+                padding: 7px 0;
+            }
+            
+            .plan-price {
+                font-size: 32px;
             }
         }
 
         @media (max-width: 768px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
             .hero {
-                padding: 60px 0;
+                padding: 100px 0 60px;
             }
 
             .hero h1 {
@@ -845,6 +949,10 @@
                 font-size: 32px;
             }
             
+            .plan-card {
+                min-height: auto;
+            }
+
             .plan-card.popular {
                 transform: scale(1);
             }
@@ -853,8 +961,12 @@
                 transform: translateY(-8px);
             }
             
+            .plan-speed {
+                font-size: 44px;
+            }
+            
             .plan-price {
-                font-size: 36px;
+                font-size: 38px;
             }
             
             .comparison-table {
@@ -889,13 +1001,35 @@
                 font-size: 32px;
             }
         }
+
+        @media (max-width: 480px) {
+            .plan-card-content {
+                padding: 22px 16px 20px;
+            }
+            
+            .plan-speed {
+                font-size: 38px;
+            }
+            
+            .plan-price {
+                font-size: 32px;
+            }
+            
+            .plan-name {
+                font-size: 20px;
+            }
+            
+            .btn {
+                padding: 13px 20px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="header-placeholder"></div>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
@@ -914,19 +1048,21 @@
                     <p>Velocidad y estabilidad garantizada para todas tus actividades digitales</p>
                 </div>
                 <div class="plans-grid">
+                    <!-- Plan Básico - Total: 60 Mbps (40+20) -->
                     <div class="plan-card" style="background-image: url('https://thumbs.dreamstime.com/b/feliz-joven-mujer-de-negocios-usando-tel%C3%A9fono-celular-trabajando-en-vertical-oficina-y-sonriendo-hermosa-profesional-mirando-el-260785542.jpg');" data-plan="Básico" data-price="85" data-type="Internet Básico">
                         <div class="plan-card-content">
                             <div class="plan-icon">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 12h18M12 3v18M5 5l14 14M19 5L5 19" stroke="#0066FF"/>
+                                    <path d="M3 12h18M12 3v18M5 5l14 14M19 5L5 19" stroke="#FFFFFF"/>
                                 </svg>
                             </div>
                             <div class="plan-name">Básico</div>
-                            <div class="plan-price">
-                                Bs 100 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="60">0</span> <span style="font-size:24px;">Mbps</span>
                             </div>
-                            <div class="plan-period">Facturación mensual</div>
-                            <p class="plan-description">Perfecto para navegación web y redes sociales.</p>
+                            <div class="plan-speed-label">Velocidad Total</div>
+                            
                             <ul class="plan-features">
                                 <li><span class="feature-icon">✓</span> 40 Mbps de descarga</li>
                                 <li><span class="feature-icon">✓</span> 20 Mbps de subida</li>
@@ -934,25 +1070,33 @@
                                 <li><span class="feature-icon">✓</span> Soporte por email</li>
                                 <li><span class="feature-icon">✓</span> Instalación básica</li>
                             </ul>
-                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 85 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Facturación mensual</div>
+                                <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Plan Profesional - Total: 150 Mbps (100+50) -->
                     <div class="plan-card popular" style="background-image: url('https://images.pexels.com/photos/34385497/pexels-photo-34385497.jpeg?cs=srgb&dl=pexels-cris-menles-4621648-34385497.jpg&fm=jpg');" data-plan="Profesional" data-price="139" data-type="Internet Profesional">
-                        <div class="borde-gradient"></div>
                         <div class="plan-card-content">
                             <div class="popular-badge">Más Popular</div>
                             <div class="plan-icon">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#0066FF"/>
+                                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#FFFFFF"/>
                                 </svg>
                             </div>
                             <div class="plan-name">Profesional</div>
-                            <div class="plan-price">
-                                Bs 199 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="150">0</span> <span style="font-size:24px;">Mbps</span>
                             </div>
-                            <div class="plan-period">Facturación mensual</div>
-                            <p class="plan-description">Ideal para trabajo remoto y streaming en 4K.</p>
+                            <div class="plan-speed-label">Velocidad Total</div>
+                            
                             <ul class="plan-features">
                                 <li><span class="feature-icon">✓</span> 100 Mbps de descarga</li>
                                 <li><span class="feature-icon">✓</span> 50 Mbps de subida</li>
@@ -961,24 +1105,33 @@
                                 <li><span class="feature-icon">✓</span> Router WiFi 6 incluido</li>
                                 <li><span class="feature-icon">✓</span> Instalación gratuita</li>
                             </ul>
-                            <button class="btn select-plan-btn">Seleccionar Plan</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 139 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Facturación mensual</div>
+                                <button class="btn select-plan-btn">Seleccionar Plan</button>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Plan Premium - Total: 200 Mbps (140+60) -->
                     <div class="plan-card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStPUrS2iZLaIPkBHwOikI4m6Lr-pMA83xgoA&s');" data-plan="Premium" data-price="199" data-type="Internet Premium">
                         <div class="plan-card-content">
                             <div class="plan-icon">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="3"/>
-                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#0066FF"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#FFFFFF"/>
                                 </svg>
                             </div>
                             <div class="plan-name">Premium</div>
-                            <div class="plan-price">
-                                Bs 250 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="200">0</span> <span style="font-size:24px;">Mbps</span>
                             </div>
-                            <div class="plan-period">Facturación mensual</div>
-                            <p class="plan-description">Para empresas que necesitan máximo rendimiento.</p>
+                            <div class="plan-speed-label">Velocidad Total</div>
+                            
                             <ul class="plan-features">
                                 <li><span class="feature-icon">✓</span> 140 Mbps de descarga</li>
                                 <li><span class="feature-icon">✓</span> 60 Mbps de subida</li>
@@ -987,7 +1140,14 @@
                                 <li><span class="feature-icon">✓</span> Router WiFi 6 + Mesh</li>
                                 <li><span class="feature-icon">✓</span> IP estática gratuita</li>
                             </ul>
-                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 199 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Facturación mensual</div>
+                                <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1002,7 +1162,8 @@
                     <p>Más de 200 canales en HD y 4K con contenido exclusivo</p>
                 </div>
                 <div class="plans-grid">
-                    <div class="plan-card" style="background-image: url('https://cdn-1.webcatalog.io/catalog/espn-plus/espn-plus-social-preview.png?v=1714779721342');" data-plan="TV Básica" data-price="19.99" data-type="Televisión Básica">
+                    <!-- TV Básica - Total: 60 canales -->
+                    <div class="plan-card" style="background-image: url('https://cdn-1.webcatalog.io/catalog/espn-plus/espn-plus-social-preview.png?v=1714779721342');" data-plan="TV Básica" data-price="40" data-type="Televisión Básica">
                         <div class="plan-card-content">
                             <div class="plan-icon">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1012,23 +1173,31 @@
                                 </svg>
                             </div>
                             <div class="plan-name">TV Básica</div>
-                            <div class="plan-price">
-                                Bs 40 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="60">0</span> <span style="font-size:24px;">Canales</span>
                             </div>
-                            <div class="plan-period">Facturación mensual</div>
-                            <p class="plan-description">Entretenimiento para toda la familia.</p>
+                            <div class="plan-speed-label">Total Canales</div>
+                            
                             <ul class="plan-features">
-                                <li><span class="feature-icon">✓</span> 60+ canales en SD/HD</li>
+                                <li><span class="feature-icon">✓</span> 45 canales SD</li>
+                                <li><span class="feature-icon">✓</span> 15 canales HD</li>
                                 <li><span class="feature-icon">✓</span> Canales locales y nacionales</li>
-                                <li><span class="feature-icon">✓</span> Noticias y entretenimiento</li>
                                 <li><span class="feature-icon">✓</span> Guía electrónica</li>
                             </ul>
-                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 40 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Facturación mensual</div>
+                                <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="plan-card popular" style="background-image: url('https://wallpapers.com/images/hd/portrait-disney-castle-ll9lhludf2dvexav.jpg');" data-plan="TV Premium" data-price="55" data-type="Televisión Premium">
-                        <div class="borde-gradient"></div>
+                    <!-- TV Premium - Total: 120 canales -->
+                    <div class="plan-card popular" style="background-image: url('https://wallpapers.com/images/hd/portrait-disney-castle-ll9lhludf2dvexav.jpg');" data-plan="TV Premium" data-price="62" data-type="Televisión Premium">
                         <div class="plan-card-content">
                             <div class="popular-badge">Más Vendido</div>
                             <div class="plan-icon">
@@ -1037,23 +1206,32 @@
                                 </svg>
                             </div>
                             <div class="plan-name">TV Premium</div>
-                            <div class="plan-price">
-                                Bs 62 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="120">0</span> <span style="font-size:24px;">Canales</span>
                             </div>
-                            <div class="plan-period">Facturación mensual</div>
-                            <p class="plan-description">Cine, series y deportes en alta definición.</p>
+                            <div class="plan-speed-label">Total Canales</div>
+                            
                             <ul class="plan-features">
-                                <li><span class="feature-icon">✓</span> 120+ canales en HD/4K</li>
-                                <li><span class="feature-icon">✓</span> Canales premium incluidos</li>
+                                <li><span class="feature-icon">✓</span> 80 canales HD</li>
+                                <li><span class="feature-icon">✓</span> 40 canales 4K</li>
                                 <li><span class="feature-icon">✓</span> HBO, Fox, ESPN, Discovery</li>
                                 <li><span class="feature-icon">✓</span> Guía interactiva</li>
                                 <li><span class="feature-icon">✓</span> Grabación de programas</li>
                             </ul>
-                            <button class="btn select-plan-btn">Seleccionar Plan</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 62 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Facturación mensual</div>
+                                <button class="btn select-plan-btn">Seleccionar Plan</button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="plan-card" style="background-image: url('https://i.pinimg.com/1200x/42/a8/8e/42a88e17a2cbb9ead230a1f5c9b7e32c.jpg');" data-plan="TV Ultimate" data-price="99" data-type="Televisión Ultimate">
+                    <!-- TV Ultimate - Total: 200 canales -->
+                    <div class="plan-card" style="background-image: url('https://i.pinimg.com/1200x/42/a8/8e/42a88e17a2cbb9ead230a1f5c9b7e32c.jpg');" data-plan="TV Ultimate" data-price="85" data-type="Televisión Ultimate">
                         <div class="plan-card-content">
                             <div class="plan-icon">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1062,19 +1240,27 @@
                                 </svg>
                             </div>
                             <div class="plan-name">TV Ultimate</div>
-                            <div class="plan-price">
-                                Bs 85 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="200">0</span> <span style="font-size:24px;">Canales</span>
                             </div>
-                            <div class="plan-period">Facturación mensual</div>
-                            <p class="plan-description">La experiencia televisiva completa.</p>
+                            <div class="plan-speed-label">Total Canales</div>
+                            
                             <ul class="plan-features">
-                                <li><span class="feature-icon">✓</span> 200+ canales en 4K</li>
-                                <li><span class="feature-icon">✓</span> Todos los canales premium</li>
+                                <li><span class="feature-icon">✓</span> 120 canales HD</li>
+                                <li><span class="feature-icon">✓</span> 80 canales 4K</li>
                                 <li><span class="feature-icon">✓</span> Video on demand ilimitado</li>
                                 <li><span class="feature-icon">✓</span> Multitarea simultánea</li>
                                 <li><span class="feature-icon">✓</span> Grabación ilimitada</li>
                             </ul>
-                            <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 85 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Facturación mensual</div>
+                                <button class="btn btn-outline select-plan-btn">Seleccionar Plan</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1089,8 +1275,8 @@
                     <p>Ahorra hasta 30% contratando Internet + TV juntos</p>
                 </div>
                 <div class="plans-grid">
-                    <div class="plan-card popular" style="background-image: url('https://img.magnific.com/foto-gratis/panorama-nocturno-galaxia_23-2148895322.jpg?semt=ais_hybrid&w=740&q=80');" data-plan="Combo Familiar" data-price="250" data-type="Combo Familiar (Internet Profesional + TV Premium)">
-                        <div class="borde-gradient"></div>
+                    <!-- Combo Familiar - Total: 150 Mbps + 120 canales -->
+                    <div class="plan-card popular" style="background-image: url('https://img.magnific.com/foto-gratis/panorama-nocturno-galaxia_23-2148895322.jpg?semt=ais_hybrid&w=740&q=80');" data-plan="Combo Familiar" data-price="229" data-type="Combo Familiar (Internet 150Mbps + TV 120 canales)">
                         <div class="plan-card-content">
                             <div class="popular-badge">Mejor Oferta</div>
                             <div class="plan-icon">
@@ -1101,24 +1287,32 @@
                                 </svg>
                             </div>
                             <div class="plan-name">Combo Familiar</div>
-                            <div class="plan-price">
-                                Bs 229 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="150">0</span> <span style="font-size:24px;">Mbps</span>
                             </div>
-                            <div class="plan-period">Ahorro de Bs 25/mes</div>
-                            <p class="plan-description">Internet Profesional + TV Premium</p>
+                            <div class="plan-speed-label">Internet + TV 120 canales</div>
+                            
                             <ul class="plan-features">
-                                <li><span class="feature-icon">✓</span> 100 Mbps de internet</li>
-                                <li><span class="feature-icon">✓</span> 60 canales HD</li>
+                                <li><span class="feature-icon">✓</span> 100 Mbps descarga + 50 Mbps subida</li>
+                                <li><span class="feature-icon">✓</span> 120 canales HD/4K</li>
                                 <li><span class="feature-icon">✓</span> Router WiFi 6 incluido</li>
                                 <li><span class="feature-icon">✓</span> Instalación gratuita</li>
                                 <li><span class="feature-icon">✓</span> Decodificador 4K</li>
                             </ul>
-                            <button class="btn select-plan-btn">Contratar Ahora</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 229 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Ahorro de Bs 25/mes</div>
+                                <button class="btn select-plan-btn">Contratar Ahora</button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="plan-card popular" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600');" data-plan="Combo Ultimate" data-price="450" data-type="Combo Ultimate (Internet Premium + TV Ultimate)">
-                        <div class="borde-gradient"></div>
+                    <!-- Combo Premium - Total: 200 Mbps + 200 canales -->
+                    <div class="plan-card popular" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600');" data-plan="Combo Premium" data-price="309" data-type="Combo Premium (Internet 200Mbps + TV 200 canales)">
                         <div class="plan-card-content">
                             <div class="popular-badge">Premium</div>
                             <div class="plan-icon">
@@ -1130,23 +1324,32 @@
                                 </svg>
                             </div>
                             <div class="plan-name">Combo Premium</div>
-                            <div class="plan-price">
-                                Bs 309 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="200">0</span> <span style="font-size:24px;">Mbps</span>
                             </div>
-                            <div class="plan-period">Ahorro de Bs 20/mes</div>
-                            <p class="plan-description">Internet Premium + TV Ultra</p>
+                            <div class="plan-speed-label">Internet + TV 200 canales</div>
+                            
                             <ul class="plan-features">
-                                <li><span class="feature-icon">✓</span> 200 Mbps de internet</li>
-                                <li><span class="feature-icon">✓</span> 120+ canales 4K</li>
+                                <li><span class="feature-icon">✓</span> 140 Mbps descarga + 60 Mbps subida</li>
+                                <li><span class="feature-icon">✓</span> 200 canales 4K</li>
                                 <li><span class="feature-icon">✓</span> IP estática gratuita</li>
                                 <li><span class="feature-icon">✓</span> Instalación gratuita</li>
                                 <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
                             </ul>
-                            <button class="btn select-plan-btn">Contratar Ahora</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 309 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Ahorro de Bs 20/mes</div>
+                                <button class="btn select-plan-btn">Contratar Ahora</button>
+                            </div>
                         </div>
                     </div>
-                                        <div class="plan-card popular" style="background-image: url('https://elements-resized.envatousercontent.com/elements-video-cover-images/804ba39b-7034-4c9e-a9bc-b298412ffc0e/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=4c9293ccc96c021f9d5185560ca23496faf06201655153d859a4b1e2359c6b54');" data-plan="Combo Ultimate" data-price="450" data-type="Combo Ultimate (Internet Premium + TV Ultimate)">
-                        <div class="borde-gradient"></div>
+                    
+                    <!-- Combo Ultimate - Total: 400 Mbps + 200 canales -->
+                    <div class="plan-card popular" style="background-image: url('https://elements-resized.envatousercontent.com/elements-video-cover-images/804ba39b-7034-4c9e-a9bc-b298412ffc0e/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=4c9293ccc96c021f9d5185560ca23496faf06201655153d859a4b1e2359c6b54');" data-plan="Combo Ultimate" data-price="419" data-type="Combo Ultimate (Internet 400Mbps + TV 200 canales)">
                         <div class="plan-card-content">
                             <div class="popular-badge">Ultimate</div>
                             <div class="plan-icon">
@@ -1158,19 +1361,27 @@
                                 </svg>
                             </div>
                             <div class="plan-name">Combo Ultimate</div>
-                            <div class="plan-price">
-                                Bs 419 <small>/mes</small>
+                            
+                            <div class="plan-speed">
+                                <span class="speed-counter" data-speed="400">0</span> <span style="font-size:24px;">Mbps</span>
                             </div>
-                            <div class="plan-period">Ahorro de Bs 20/mes</div>
-                            <p class="plan-description">Internet Premium + TV Ultimate</p>
+                            <div class="plan-speed-label">Internet + TV 200 canales</div>
+                            
                             <ul class="plan-features">
-                                <li><span class="feature-icon">✓</span> 400 Mbps de internet</li>
+                                <li><span class="feature-icon">✓</span> 300 Mbps descarga + 100 Mbps subida</li>
                                 <li><span class="feature-icon">✓</span> 200+ canales 4K</li>
                                 <li><span class="feature-icon">✓</span> IP estática gratuita</li>
                                 <li><span class="feature-icon">✓</span> Instalación gratuita</li>
                                 <li><span class="feature-icon">✓</span> Soporte VIP 24/7</li>
                             </ul>
-                            <button class="btn select-plan-btn">Contratar Ahora</button>
+                            
+                            <div class="plan-price-section">
+                                <div class="plan-price">
+                                    Bs 419 <small>/mes</small>
+                                </div>
+                                <div class="plan-period">Ahorro de Bs 20/mes</div>
+                                <button class="btn select-plan-btn">Contratar Ahora</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1196,16 +1407,22 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td><strong>Velocidad Total</strong></td>
+                                <td><strong>60 Mbps</strong></td>
+                                <td><strong>150 Mbps</strong></td>
+                                <td><strong>200 Mbps</strong></td>
+                            </tr>
+                            <tr>
                                 <td><strong>Velocidad de descarga</strong></td>
-                                <td>10 Mbps</td>
-                                <td>50 Mbps</td>
+                                <td>40 Mbps</td>
                                 <td>100 Mbps</td>
+                                <td>140 Mbps</td>
                             </tr>
                             <tr>
                                 <td><strong>Velocidad de subida</strong></td>
-                                <td>5 Mbps</td>
                                 <td>20 Mbps</td>
                                 <td>50 Mbps</td>
+                                <td>60 Mbps</td>
                             </tr>
                             <tr>
                                 <td><strong>Soporte técnico</strong></td>
@@ -1236,15 +1453,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <h2>¿Listo para mejorar tu experiencia digital?</h2>
-                <p>Únete a más de 50,000 clientes satisfechos en todo Bolivia</p>
-                <a href="contacto.html" class="cta-button">Contratar Ahora →</a>
-            </div>
-        </section>
     </main>
 
     <!-- Modal Multi-Step -->
@@ -1259,7 +1467,6 @@
                 <div class="price" id="selectedPlanPrice">Bs 0</div>
             </div>
 
-            <!-- Step Indicators -->
             <div class="step-indicator">
                 <div class="step-dot" id="step1Dot">
                     <div class="dot">1</div>
@@ -1271,7 +1478,6 @@
                 </div>
             </div>
 
-            <!-- Step 1: Personal Data -->
             <div id="step1" class="step active-step">
                 <form id="step1Form">
                     <div class="form-row">
@@ -1310,13 +1516,11 @@
                 </form>
             </div>
 
-            <!-- Step 2: QR and Voucher -->
             <div id="step2" class="step">
                 <div class="qr-section">
-                    <p style="margin-bottom: 16px; color: var(--gray-300);">Realiza el pago escaneando el siguiente código QR:</p>
+                    <p style="margin-bottom: 16px; color: #FFFFFF;">Realiza el pago escaneando el siguiente código QR:</p>
                     <div class="qr-code">
-                        <!-- CAMBIA LA RUTA DE LA IMAGEN QR AQUÍ -->
-                      <img id="qrImage" src="..........." alt="Código QR para pago">
+                        <img id="qrImage" src="..........." alt="Código QR para pago">
                     </div>
                     <p style="margin: 16px 0; font-size: 14px; color: var(--warning);">Monto a pagar: <strong id="montoPago">Bs 0</strong></p>
                     
@@ -1338,7 +1542,55 @@
     <div id="footer-placeholder"></div>
     
     <script>
-        // Configuración del Bot de Telegram
+        let lastScrollTop = 0;
+        const header = document.getElementById('header-placeholder');
+        
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        function animateSpeedCounters() {
+            const counters = document.querySelectorAll('.speed-counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-speed'));
+                const duration = 1500;
+                const steps = 60;
+                const increment = target / steps;
+                const stepTime = duration / steps;
+                let current = 0;
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= target) {
+                                    counter.textContent = target;
+                                    clearInterval(timer);
+                                } else {
+                                    counter.textContent = Math.floor(current);
+                                }
+                            }, stepTime);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(counter);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', animateSpeedCounters);
+
         const BOT_TOKEN = '8028154208:AAE1wnMf-drrtove0qVH7fNu1o4z4GkOpO0';
         const CHAT_ID = '-1003527960281';
 
@@ -1348,9 +1600,7 @@
         let currentStep = 1;
         let voucherFile = null;
 
-        // Función para mostrar notificación PRO con ticket de éxito
         function showNotification(message, isError = false) {
-            // Remover notificaciones existentes
             const existingNotifications = document.querySelectorAll('.notification');
             existingNotifications.forEach(n => n.remove());
 
@@ -1373,7 +1623,6 @@
             
             document.body.appendChild(notification);
             
-            // Auto remover después de 6 segundos con animación de salida
             setTimeout(() => {
                 notification.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
                 notification.style.opacity = '0';
@@ -1383,7 +1632,6 @@
             }, 6000);
         }
 
-        // Función para convertir archivo a Base64
         function fileToBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1393,9 +1641,7 @@
             });
         }
 
-        // Función para enviar datos a Telegram con imagen
         async function sendToTelegram(formData, imageBase64) {
-            // Primero enviar el mensaje con los datos
             const message = `📡 *NUEVA SOLICITUD DE PLAN STEL* 📡\n\n` +
                 `📌 *Plan:* ${formData.plan}\n` +
                 `💰 *Precio:* Bs ${formData.precio}/mes\n` +
@@ -1408,7 +1654,6 @@
                 `📎 *Adjunto comprobante de pago*`;
 
             try {
-                // Enviar mensaje de texto
                 const textResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1425,9 +1670,7 @@
                     throw new Error('Error enviando mensaje');
                 }
                 
-                // Si hay imagen, enviarla como foto
                 if (imageBase64) {
-                    // Enviar como documento (más compatible)
                     const blob = await (await fetch(imageBase64)).blob();
                     const formDataImg = new FormData();
                     formDataImg.append('chat_id', CHAT_ID);
@@ -1449,7 +1692,6 @@
             }
         }
 
-        // Seleccionar todos los botones de planes
         document.querySelectorAll('.select-plan-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const card = this.closest('.plan-card');
@@ -1457,14 +1699,12 @@
                 currentPrice = card.getAttribute('data-price');
                 currentPlanType = card.getAttribute('data-type') || currentPlan;
                 
-                // Actualizar modal
                 document.getElementById('selectedPlanName').textContent = currentPlanType;
                 document.getElementById('selectedPlanPrice').textContent = 'Bs ' + currentPrice + '/mes';
                 document.getElementById('montoPago').textContent = 'Bs ' + currentPrice;
                 document.getElementById('planSeleccionado').value = currentPlanType;
                 document.getElementById('precioSeleccionado').value = currentPrice;
                 
-                // Resetear pasos
                 currentStep = 1;
                 document.getElementById('step1').classList.add('active-step');
                 document.getElementById('step2').classList.remove('active-step');
@@ -1477,12 +1717,10 @@
                 document.getElementById('fileName').textContent = '';
                 voucherFile = null;
                 
-                // Mostrar modal
                 document.getElementById('contractModal').classList.add('active');
             });
         });
 
-        // Cerrar modal
         function cerrarModal() {
             document.getElementById('contractModal').classList.remove('active');
             document.getElementById('step1Form').reset();
@@ -1492,9 +1730,7 @@
             voucherFile = null;
         }
 
-        // Ir al paso 2
         document.getElementById('nextToStep2').addEventListener('click', function() {
-            // Validar campos del paso 1
             const nombre = document.getElementById('nombre').value.trim();
             const telefono = document.getElementById('telefono').value.trim();
             const ci = document.getElementById('ci').value.trim();
@@ -1505,7 +1741,6 @@
                 return;
             }
             
-            // Cambiar de paso
             currentStep = 2;
             document.getElementById('step1').classList.remove('active-step');
             document.getElementById('step2').classList.add('active-step');
@@ -1514,7 +1749,6 @@
             document.getElementById('step2Dot').classList.add('active');
         });
 
-        // Volver al paso 1
         document.getElementById('backToStep1').addEventListener('click', function() {
             currentStep = 1;
             document.getElementById('step2').classList.remove('active-step');
@@ -1524,7 +1758,6 @@
             document.getElementById('step1Dot').classList.add('active');
         });
 
-        // Mostrar nombre del archivo seleccionado
         document.getElementById('comprobante').addEventListener('change', function(e) {
             if (e.target.files.length > 0) {
                 voucherFile = e.target.files[0];
@@ -1535,20 +1768,16 @@
             }
         });
 
-        // Envío final
         document.getElementById('submitFinal').addEventListener('click', async function() {
-            // Validar que se haya cargado un comprobante
             if (!voucherFile) {
                 showNotification('Por favor cargue el comprobante de pago', true);
                 return;
             }
             
-            // Deshabilitar botón
             const submitBtn = document.getElementById('submitFinal');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
             
-            // Recolectar datos
             const formData = {
                 plan: document.getElementById('planSeleccionado').value,
                 precio: document.getElementById('precioSeleccionado').value,
@@ -1560,10 +1789,7 @@
             };
             
             try {
-                // Convertir imagen a Base64
                 const imageBase64 = await fileToBase64(voucherFile);
-                
-                // Enviar a Telegram
                 const success = await sendToTelegram(formData, imageBase64);
                 
                 if (success) {
@@ -1581,7 +1807,6 @@
             }
         });
 
-        // Cerrar modal al hacer click fuera
         document.getElementById('contractModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 cerrarModal();
