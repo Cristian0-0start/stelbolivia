@@ -45,7 +45,7 @@
 
   /* ── Fade-in on scroll (IntersectionObserver) ── */
   const animTargets = document.querySelectorAll(
-    '.service-card, .plan-card, .why-card, .comm-tag, .hero-stat'
+    '.service-card, .plan-card, .why-card, .comm-tag, .hero-stat, .home-comunicado-card'
   );
 
   if ('IntersectionObserver' in window && animTargets.length) {
@@ -208,6 +208,30 @@ document.addEventListener('DOMContentLoaded', function() {
             overlay.classList.remove('active');
             document.body.style.overflow = '';
         }
+    }
+
+    // Tema claro / oscuro
+    const themeToggle = document.getElementById('theme-toggle');
+    const storedTheme = localStorage.getItem('stel-theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const initialTheme = storedTheme || preferredTheme;
+
+    function setTheme(theme) {
+        document.body.classList.toggle('theme-light', theme === 'light');
+        document.body.classList.toggle('theme-dark', theme === 'dark');
+        localStorage.setItem('stel-theme', theme);
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'light' ? 'Oscuro' : 'Claro';
+            themeToggle.setAttribute('aria-label', theme === 'light' ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro');
+        }
+    }
+
+    if (themeToggle) {
+        setTheme(initialTheme);
+        themeToggle.addEventListener('click', function () {
+            const current = document.body.classList.contains('theme-light') ? 'light' : 'dark';
+            setTheme(current === 'light' ? 'dark' : 'light');
+        });
     }
     
     // Ajustar para cambios de tamaño de ventana

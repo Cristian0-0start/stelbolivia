@@ -107,9 +107,20 @@ CREATE POLICY "Permitir lectura pública de comunicados" ON public.comunicados
 CREATE POLICY "Permitir inserción pública de comunicados" ON public.comunicados
     FOR INSERT WITH CHECK (true);
 
+-- Permisos para que el rol anon del navegador pueda leer (requerido en proyectos nuevos)
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT ON public.comunicados TO anon, authenticated;
+GRANT SELECT ON public.clientes TO anon, authenticated;
+GRANT INSERT, UPDATE ON public.clientes TO anon, authenticated;
+GRANT SELECT, INSERT ON public.servicios_contratados TO anon, authenticated;
+GRANT SELECT, INSERT ON public.solicitudes_planes TO anon, authenticated;
+
+-- Tiempo real: la web se actualiza al editar comunicados en Supabase
+ALTER PUBLICATION supabase_realtime ADD TABLE public.comunicados;
+
 
 -- =========================================================================
--- DATOS SEMILLA (MOCK DATA) DE EJEMPLO PARA PRUEBAS
+-- DATOS SEMILLA OPCIONALES (ejecutar solo si desea datos de prueba iniciales)
 -- =========================================================================
 
 -- Insertar Clientes de Prueba

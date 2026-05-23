@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -552,7 +552,7 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">INFORMACIÓN OFICIAL</div>
+                    <div class="hero-badge">INFORMACIÃ“N OFICIAL</div>
                     <h1>Comunicados STEL</h1>
                     <p>Mantente informado sobre novedades, actualizaciones y comunicados importantes de nuestra red de telecomunicaciones</p>
                 </div>
@@ -564,15 +564,15 @@
             <div class="container">
                 <div class="search-filters">
                     <div class="search-input-wrapper">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título o contenido...">
+                        <span class="search-icon">ðŸ”</span>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por tÃ­tulo o contenido...">
                     </div>
                     <select id="filterDate" class="filter-select">
                         <option value="">Todos los periodos</option>
-                        <option value="7">Últimos 7 días</option>
-                        <option value="30">Últimos 30 días</option>
-                        <option value="90">Últimos 90 días</option>
-                        <option value="365">Último año</option>
+                        <option value="7">Ãšltimos 7 dÃ­as</option>
+                        <option value="30">Ãšltimos 30 dÃ­as</option>
+                        <option value="90">Ãšltimos 90 dÃ­as</option>
+                        <option value="365">Ãšltimo aÃ±o</option>
                     </select>
                 </div>
             </div>
@@ -592,7 +592,7 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-number" id="weekCount">0</div>
-                        <div class="stat-label">Última semana</div>
+                        <div class="stat-label">Ãšltima semana</div>
                     </div>
                 </div>
             </div>
@@ -602,8 +602,8 @@
         <section class="comunicados-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Últimos Comunicados</h2>
-                    <p>Información oficial y actualizaciones importantes de STEL Bolivia</p>
+                    <h2>Ãšltimos Comunicados</h2>
+                    <p>InformaciÃ³n oficial y actualizaciones importantes de STEL Bolivia</p>
                 </div>
 
                 <div id="comunicadosContainer" class="comunicados-grid">
@@ -614,9 +614,9 @@
                 </div>
 
                 <div id="emptyState" class="empty-state" style="display: none;">
-                    <div class="empty-icon">📢</div>
+                    <div class="empty-icon">ðŸ“¢</div>
                     <h3>No hay comunicados disponibles</h3>
-                    <p>En este momento no hay comunicados oficiales para mostrar. Por favor, revisa más tarde.</p>
+                    <p>En este momento no hay comunicados oficiales para mostrar. Por favor, revisa mÃ¡s tarde.</p>
                 </div>
 
                 <div id="pagination" class="pagination"></div>
@@ -627,247 +627,24 @@
     <!-- Modal -->
     <div id="comunicadoModal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="cerrarModal()">×</button>
+            <button type="button" class="modal-close" onclick="cerrarModal()" aria-label="Cerrar">Ã—</button>
             <div id="modalBody"></div>
-        <    <div id="footer-placeholder"></div>
+        </div>
+    </div>
 
-    <!-- Cargar dependencias de Supabase -->
+    <div id="footer-placeholder"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/supabase-client.js"></script>
-
+    <script src="../assets/comunicados-app.js"></script>
     <script>
-        // Comunicados estáticos de Fallback
-        const fallbackComunicados = [
-            {
-                id: 1,
-                titulo: "Incremento de Velocidad en Planes de Internet",
-                resumen: "STEL Bolivia anuncia mejora significativa en todos sus planes de internet residencial sin costo adicional para los clientes.",
-                contenido: "Nos complace informar a nuestros clientes que a partir del 1 de junio de 2024, todos los planes de internet residencial experimentarán un incremento automático en su velocidad de navegación. Los planes Básico pasan de 10Mbps a 15Mbps, Profesional de 50Mbps a 75Mbps, y Premium de 100Mbps a 150Mbps. Esta mejora se aplicará de forma automática sin necesidad de realizar ningún trámite adicional. Agradecemos la confianza depositada en nuestros servicios y reafirmamos nuestro compromiso con la calidad y la innovación tecnológica.",
-                fecha: new Date('2024-05-15T10:00:00'),
-                autor: "Dirección de Tecnología",
-                categoria: "Servicios"
-            },
-            {
-                id: 2,
-                titulo: "Expansión de Red de Fibra Óptica",
-                resumen: "STEL Bolivia expande su infraestructura de fibra óptica a nuevas zonas metropolitanas.",
-                contenido: "STEL Bolivia anuncia la expansión de su red de fibra óptica a los municipios de El Alto, Viacha y Sacaba. Esta expansión permitirá ofrecer servicios de internet de alta velocidad a más de 50,000 nuevos hogares y negocios. Las zonas beneficiadas incluirán cobertura 100% fibra óptica con velocidades simétricas de hasta 500Mbps. Se estima que la implementación se complete en un período de 6 meses, priorizando las áreas con mayor demanda.",
-                fecha: new Date('2024-05-10T09:30:00'),
-                autor: "Gerencia de Infraestructura",
-                categoria: "Infraestructura"
-            },
-            {
-                id: 3,
-                titulo: "Mantenimiento Programado de Red",
-                resumen: "Se realizará mantenimiento preventivo en la red troncal durante el próximo fin de semana.",
-                contenido: "Con el objetivo de garantizar la calidad y estabilidad de nuestros servicios, se realizará un mantenimiento programado de la red troncal el sábado 25 de mayo de 22:00 a 06:00 horas. Durante este período, algunos servicios podrían presentar interrupciones intermitentes. Se recomienda a los clientes planificar sus actividades en consecuencia. Las zonas afectadas incluyen: Zona Sur, Zona Central y parte de la Zona Norte. Disculpen las molestias ocasionadas.",
-                fecha: new Date('2024-05-08T14:15:00'),
-                autor: "Departamento de Operaciones",
-                categoria: "Mantenimiento"
-            },
-            {
-                id: 4,
-                titulo: "Nueva Plataforma de Atención al Cliente",
-                resumen: "Lanzamos nuestra nueva plataforma digital para atención al cliente las 24 horas.",
-                contenido: "STEL Bolivia presenta su nueva plataforma de atención al cliente basada en inteligencia artificial. Ahora puedes realizar consultas, reportar fallas y gestionar tus servicios a través de nuestro chat web, disponible 24/7. Además, nuestra nueva app móvil incluye funcionalidades avanzadas como autodiagnóstico de red, gestión de pagos y soporte técnico remoto. Descarga la app desde Google Play o App Store.",
-                fecha: new Date('2024-05-05T11:00:00'),
-                autor: "Innovación Digital",
-                categoria: "Novedades"
-            },
-            {
-                id: 5,
-                titulo: "Promoción Aniversario STEL",
-                resumen: "Celebramos nuestro aniversario con descuentos especiales en paquetes combinados.",
-                contenido: "En conmemoración de nuestro 15 aniversario, ofrecemos descuentos exclusivos del 30% en todos nuestros paquetes combinados de internet y televisión durante el mes de junio. Además, los nuevos clientes recibirán 3 meses adicionales sin costo en servicios de streaming. No pierdas esta oportunidad única y contacta a nuestros asesores comerciales para más información.",
-                fecha: new Date('2024-05-01T08:00:00'),
-                autor: "Marketing STEL",
-                categoria: "Promociones"
-            },
-            {
-                id: 6,
-                titulo: "Nuevos Canales 4K en TV Cable",
-                resumen: "Incorporate nuevos canales en resolución 4K para todos nuestros planes de televisión.",
-                contenido: "Ampliamos nuestra oferta de contenido con 15 nuevos canales en resolución 4K. Los nuevos canales incluyen deportes, documentales de naturaleza, series premium y eventos en vivo. Esta actualización es automática para todos los clientes con decodificadores compatibles. Verifica la disponibilidad en tu zona y disfruta de la mejor calidad de imagen en tu hogar.",
-                fecha: new Date('2024-04-28T16:30:00'),
-                autor: "Contenidos STEL",
-                categoria: "Televisión"
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.StelComunicadosApp) {
+                StelComunicadosApp.initComunicadosPage();
             }
-        ];
-
-        let activeComunicados = [];
-        let currentPage = 1;
-        const itemsPerPage = 6;
-        let filteredComunicados = [];
-
-        // Función para cargar los comunicados desde Supabase (con fallback)
-        async function cargarComunicados() {
-            const container = document.getElementById('comunicadosContainer');
-            const emptyState = document.getElementById('emptyState');
-            
-            const client = getSupabaseClient();
-            if (client) {
-                try {
-                    const { data, error } = await client
-                        .from('comunicados')
-                        .select('*')
-                        .order('fecha', { ascending: false });
-                    
-                    if (!error && data && data.length > 0) {
-                        activeComunicados = data;
-                        console.log("Cargados comunicados desde base de datos Supabase.");
-                        inicializarFlujo();
-                        return;
-                    } else if (error) {
-                        console.error("Error al consultar comunicados en Supabase:", error);
-                    }
-                } catch (err) {
-                    console.error("Fallo de red conectando con Supabase:", err);
-                }
-            }
-            
-            // Usar fallback estático
-            console.log("Cargando comunicados desde fallback local estático.");
-            activeComunicados = [...fallbackComunicados];
-            inicializarFlujo();
-        }
-
-        function inicializarFlujo() {
-            updateStats();
-            filterComunicados();
-        }
-
-        function updateStats() {
-            const now = new Date();
-            const monthAgo = new Date();
-            monthAgo.setMonth(now.getMonth() - 1);
-            const weekAgo = new Date();
-            weekAgo.setDate(now.getDate() - 7);
-            
-            document.getElementById('totalCount').textContent = activeComunicados.length;
-            document.getElementById('monthCount').textContent = activeComunicados.filter(c => new Date(c.fecha) > monthAgo).length;
-            document.getElementById('weekCount').textContent = activeComunicados.filter(c => new Date(c.fecha) > weekAgo).length;
-        }
-
-        function filterComunicados() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const dateFilter = document.getElementById('filterDate').value;
-            
-            filteredComunicados = activeComunicados.filter(com => {
-                const matchesSearch = com.titulo.toLowerCase().includes(searchTerm) || 
-                                     com.resumen.toLowerCase().includes(searchTerm) ||
-                                     com.contenido.toLowerCase().includes(searchTerm);
-                
-                let matchesDate = true;
-                if (dateFilter) {
-                    const days = parseInt(dateFilter);
-                    const cutoffDate = new Date();
-                    cutoffDate.setDate(cutoffDate.getDate() - days);
-                    matchesDate = new Date(com.fecha) >= cutoffDate;
-                }
-                
-                return matchesSearch && matchesDate;
-            });
-            
-            currentPage = 1;
-            renderComunicados();
-            renderPagination();
-        }
-
-        function renderComunicados() {
-            const container = document.getElementById('comunicadosContainer');
-            const emptyState = document.getElementById('emptyState');
-            
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const paginatedItems = filteredComunicados.slice(start, end);
-            
-            if (paginatedItems.length === 0) {
-                container.innerHTML = '';
-                emptyState.style.display = 'block';
-                document.getElementById('pagination').style.display = 'none';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            document.getElementById('pagination').style.display = 'flex';
-            
-            container.innerHTML = paginatedItems.map(com => `
-                <div class="comunicado-card" onclick="abrirModal(${com.id})">
-                    <div>
-                        <span class="comunicado-date">${new Date(com.fecha).toLocaleDateString('es-BO', { day: '2-digit', month: '2-digit', year: 'numeric' })}</span>
-                        <span class="comunicado-category">${com.categoria}</span>
-                    </div>
-                    <h3 class="comunicado-title">${com.titulo}</h3>
-                    <p class="comunicado-resumen">${com.resumen}</p>
-                    <div class="read-more">
-                        Leer comunicado completo
-                        <span>→</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredComunicados.length / itemsPerPage);
-            const paginationDiv = document.getElementById('pagination');
-            
-            if (totalPages <= 1) {
-                paginationDiv.style.display = 'none';
-                return;
-            }
-            
-            paginationDiv.style.display = 'flex';
-            let html = '';
-            
-            for (let i = 1; i <= totalPages; i++) {
-                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-            }
-            
-            paginationDiv.innerHTML = html;
-        }
-
-        function goToPage(page) {
-            currentPage = page;
-            renderComunicados();
-            renderPagination();
-            window.scrollTo({ top: 400, behavior: 'smooth' });
-        }
-
-        function abrirModal(id) {
-            const comunicado = filteredComunicados.find(c => c.id === id);
-            if (comunicado) {
-                const modalBody = document.getElementById('modalBody');
-                modalBody.innerHTML = `
-                    <div>
-                        <span class="modal-date">${new Date(comunicado.fecha).toLocaleDateString('es-BO', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
-                        <span class="comunicado-category" style="margin-left: 12px;">${comunicado.categoria}</span>
-                    </div>
-                    <h2 class="modal-title">${comunicado.titulo}</h2>
-                    <div class="modal-author">Por: ${comunicado.autor}</div>
-                    <div class="modal-divider"></div>
-                    <div class="modal-content-text">
-                        ${comunicado.contenido}
-                    </div>
-                `;
-            }
-        }
-
-        function cerrarModal() {
-            document.getElementById('comunicadoModal').classList.remove('active');
-        }
-
-        document.getElementById('searchInput').addEventListener('input', filterComunicados);
-        document.getElementById('filterDate').addEventListener('change', filterComunicados);
-        document.getElementById('comunicadoModal').addEventListener('click', function(e) {
-            if (e.target === this) cerrarModal();
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarComunicados();
         });
     </script>
-
-  <script src="../layouts/header.js"></script>
-  <script src="../layouts/footer.js"></script>
+    <script src="../layouts/header.js"></script>
+    <script src="../layouts/footer.js"></script>
 </body>
 </html>
