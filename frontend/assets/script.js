@@ -340,3 +340,98 @@ document.addEventListener('DOMContentLoaded', function() {
         timelineObserver.observe(item);
     });
 });
+// ===== HERO CAROUSEL =====
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    
+    if (slides.length > 0 && dots.length > 0) {
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        const slideInterval = 6000; // 6 seconds per slide
+        let autoSlide;
+
+        function goToSlide(index) {
+            // Remove active from current
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            // Set new current
+            currentSlide = index;
+            
+            // Add active to new
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slideCount);
+        }
+
+        autoSlide = setInterval(nextSlide, slideInterval);
+
+        // Allow manual dot clicking
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(autoSlide); // Reset timer
+                goToSlide(index);
+                autoSlide = setInterval(nextSlide, slideInterval);
+            });
+        });
+    }
+});
+
+/* ===== FLOATING HAMBURGER MENU ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    // Create floating hamburger button
+    const floatingHamburger = document.createElement('button');
+    floatingHamburger.className = 'floating-hamburger';
+    floatingHamburger.setAttribute('aria-label', 'Menú de contacto flotante');
+    floatingHamburger.innerHTML = '<span></span><span></span><span></span>';
+    
+    // Create floating menu
+    const floatingMenu = document.createElement('nav');
+    floatingMenu.className = 'floating-menu';
+    floatingMenu.innerHTML = `
+        <div class="floating-menu-title">Contacto Rápido</div>
+        <a href="resources/contacto.html" class="floating-menu-link">Formulario de Contacto</a>
+        <a href="tel:+591" class="floating-menu-link">Llamar Ahora</a>
+        <a href="resources/planes.html" class="floating-menu-link">Ver Planes</a>
+        <a href="resources/empresa.html" class="floating-menu-link">Para Empresas</a>
+    `;
+    
+    // Add to DOM
+    document.body.appendChild(floatingHamburger);
+    document.body.appendChild(floatingMenu);
+    
+    // Toggle menu
+    floatingHamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isActive = floatingHamburger.classList.toggle('active');
+        floatingMenu.classList.toggle('active', isActive);
+    });
+    
+    // Close menu when clicking on a link
+    floatingMenu.querySelectorAll('.floating-menu-link').forEach(link => {
+        link.addEventListener('click', function() {
+            floatingHamburger.classList.remove('active');
+            floatingMenu.classList.remove('active');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!floatingHamburger.contains(e.target) && !floatingMenu.contains(e.target)) {
+            floatingHamburger.classList.remove('active');
+            floatingMenu.classList.remove('active');
+        }
+    });
+    
+    // Close menu with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && floatingMenu.classList.contains('active')) {
+            floatingHamburger.classList.remove('active');
+            floatingMenu.classList.remove('active');
+        }
+    });
+});

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="footer-brand">
       <a href="${basePath}index.html" class="footer-logo" aria-label="STEL Bolivia">
         <svg width="32" height="32" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="28" height="28" rx="8" fill="#0a56e8"/>
+          <rect width="28" height="28" rx="8" fill="#0059ff"/>
           <path d="M7 14 L14 7 L21 14 L14 21 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
           <circle cx="14" cy="14" r="3" fill="white"/>
         </svg>

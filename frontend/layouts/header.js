@@ -41,15 +41,13 @@ document.addEventListener("DOMContentLoaded", function() {
         <a href="${basePath}resources/ofertas.html" class="nav-link ${activePage === 'ofertas' ? 'active' : ''}">Ofertas</a>
       </li>
       <li>
-        <a href="${basePath}resources/formas_pago.html" class="nav-link ${activePage === 'formas_pago' ? 'active' : ''}" title="Métodos de pago disponibles">💳 Formas de Pago</a>
-      </li>
-      <li>
         <a href="${basePath}resources/comunicados.html" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
       </li>
       <li>
         <a href="${basePath}resources/contacto.html" class="nav-link nav-link--cta ${activePage === 'contacto' ? 'active' : ''}">Contacto</a>
       </li>
     </ul>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
   </nav>`;
 
     const headerPlaceholder = document.getElementById('header-placeholder');
@@ -62,11 +60,32 @@ document.addEventListener("DOMContentLoaded", function() {
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
         if (navToggle && navMenu) {
+            const navOverlay = document.getElementById('nav-overlay');
+            const navLinks = navMenu.querySelectorAll('.nav-link');
+            const setMenuState = (open) => {
+                navToggle.setAttribute('aria-expanded', open);
+                navToggle.classList.toggle('active', open);
+                navMenu.classList.toggle('active', open);
+                if (navOverlay) {
+                    navOverlay.classList.toggle('active', open);
+                }
+            };
+
             navToggle.addEventListener('click', () => {
                 const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                navToggle.setAttribute('aria-expanded', !expanded);
-                navToggle.classList.toggle('active');
-                navMenu.classList.toggle('active');
+                setMenuState(!expanded);
+            });
+
+            if (navOverlay) {
+                navOverlay.addEventListener('click', () => setMenuState(false));
+            }
+
+            navLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        setMenuState(false);
+                    }
+                });
             });
         }
     }
