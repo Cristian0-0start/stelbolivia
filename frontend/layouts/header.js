@@ -10,9 +10,14 @@ document.addEventListener("DOMContentLoaded", function() {
         activePage = filename.replace('.html', '').replace('.php', '') || 'index';
     }
 
+    const homeHref = activePage === 'index' ? '#inicio' : `${basePath}index.html`;
+    const planesHref = activePage === 'index' ? '#planes' : `${basePath}resources/planes.html`;
+    const comunicadosHref = activePage === 'index' ? '#comunicados' : `${basePath}resources/comunicados.html`;
+    const contactoHref = activePage === 'index' ? '#contacto' : `${basePath}resources/contacto.html`;
+
     const headerHTML = `
   <nav class="nav-container">
-    <a href="${basePath}index.html" class="logo" aria-label="STEL Bolivia - Inicio">
+    <a href="${homeHref}" class="logo" aria-label="STEL Bolivia - Inicio">
       <span class="logo-icon">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="28" height="28" rx="8" fill="#0a56e8"/>
@@ -23,28 +28,28 @@ document.addEventListener("DOMContentLoaded", function() {
       <span class="logo-text">STEL</span>
     </a>
 
-    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
       <span></span><span></span><span></span>
     </button>
 
     <ul class="nav-links" id="nav-menu" role="list">
       <li>
-        <a href="${basePath}index.html" class="nav-link ${activePage === 'index' ? 'active' : ''}">Inicio</a>
+        <a href="${homeHref}" class="nav-link ${activePage === 'index' ? 'active' : ''}">Inicio</a>
       </li>
       <li>
         <a href="${basePath}resources/empresa.html" class="nav-link ${activePage === 'empresa' ? 'active' : ''}">Empresa</a>
       </li>
       <li>
-        <a href="${basePath}resources/planes.html" class="nav-link ${activePage === 'planes' ? 'active' : ''}">Planes</a>
+        <a href="${planesHref}" class="nav-link ${activePage === 'planes' ? 'active' : ''}">Planes</a>
       </li>
       <li>
         <a href="${basePath}resources/ofertas.html" class="nav-link ${activePage === 'ofertas' ? 'active' : ''}">Ofertas</a>
       </li>
       <li>
-        <a href="${basePath}resources/comunicados.html" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
+        <a href="${comunicadosHref}" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
       </li>
       <li>
-        <a href="${basePath}resources/contacto.html" class="nav-link nav-link--cta ${activePage === 'contacto' ? 'active' : ''}">Contacto</a>
+        <a href="${contactoHref}" class="nav-link nav-link--cta ${activePage === 'contacto' ? 'active' : ''}">Contacto</a>
       </li>
     </ul>
     <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>

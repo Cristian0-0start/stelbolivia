@@ -11,38 +11,6 @@
     onScroll();
   }
 
-  /* ── Mobile nav toggle ── */
-  const toggle = document.getElementById('nav-toggle');
-  const menu   = document.getElementById('nav-menu');
-
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-
-    /* Close on link click */
-    menu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Abrir menú');
-        document.body.style.overflow = '';
-      });
-    });
-
-    /* Close on outside click */
-    document.addEventListener('click', e => {
-      if (!header.contains(e.target) && menu.classList.contains('open')) {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
   /* ── Fade-in on scroll (IntersectionObserver) ── */
   const animTargets = document.querySelectorAll(
     '.service-card, .plan-card, .why-card, .comm-tag, .hero-stat, .home-comunicado-card'
@@ -80,11 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('site-header');
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-    
-    // Crear overlay para móvil
-    const overlay = document.createElement('div');
-    overlay.className = 'nav-overlay';
-    document.body.appendChild(overlay);
     
     // ===== LÓGICA DE AUTO-HIDE/SHOW =====
     let lastScrollY = window.pageYOffset;
@@ -164,52 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejecutar verificación inicial
     handleHeaderVisibility();
     
-    // ===== MENÚ MÓVIL =====
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            
-            this.setAttribute('aria-expanded', !isExpanded);
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            // Prevenir scroll cuando el menú está abierto
-            document.body.style.overflow = isExpanded ? '' : 'hidden';
-            
-            // Asegurar que el header esté visible cuando el menú está abierto
-            if (!isExpanded) {
-                header.classList.remove('hidden');
-            }
-        });
-        
-        // Cerrar menú al hacer clic en overlay
-        overlay.addEventListener('click', closeMenu);
-        
-        // Cerrar menú al hacer clic en un enlace
-        const navLinks = navMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-        
-        // Cerrar menú con tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-    }
-    
-    function closeMenu() {
-        if (navToggle && navMenu) {
-            navToggle.setAttribute('aria-expanded', 'false');
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    }
-
     // Tema claro / oscuro
     const themeToggle = document.getElementById('theme-toggle');
     const storedTheme = localStorage.getItem('stel-theme');
@@ -240,7 +157,16 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
             if (window.innerWidth > 768 && navMenu && navMenu.classList.contains('active')) {
-                closeMenu();
+                if (navToggle) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.classList.remove('active');
+                }
+                navMenu.classList.remove('active');
+                const navOverlay = document.getElementById('nav-overlay');
+                if (navOverlay) {
+                    navOverlay.classList.remove('active');
+                }
+                document.body.style.overflow = '';
             }
         }, 250);
     });
