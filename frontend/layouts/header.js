@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (filename) {
         activePage = filename.replace('.html', '').replace('.php', '') || 'index';
     }
-//cam
+
     const headerHTML = `
     <header class="site-header" id="site-header">
       <nav class="nav-container">
