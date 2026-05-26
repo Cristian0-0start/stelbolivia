@@ -14,17 +14,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+
+  <style>
+    body {
+      background: radial-gradient(circle at 25% 20%, #071422 0%, #0b1e50 100%);
+      color: #e6efff;
+    }
+    .section--alt {
+      background: #081124;
+    }
+    .section-header h2,
+    .section-desc,
+    .service-card__content p,
+    .plan-card__desc,
+    .why-content p,
+    .hero-subtitle,
+    .cta-content p,
+    .comunicados-cta-wrap .comm-tag,
+    .why-list li {
+      color: #0cceff;
+      font-family: 'DM Sans', sans-serif;
+    }
 
 
 
+    .section-tag {
+      background: rgba(13, 28, 53, 0.85);
+      color: #7dd3fc;
+    }
 
+    .service-card__icon,
+    .plan-card__badge,
+    .why-card__value,
+    .hero-badge {
+      background: rgba(255,255,255,0.08);
+      color: #d9f4ff;
+    }
+    .hero-slide-overlay {
+      background: linear-gradient(180deg, rgba(6, 12, 27, 0.85), rgba(10, 17, 37, 0.96));
+    }
+    .hero-slide-bg {
+      filter: brightness(0.65) saturate(1.05);
+      transform: scale(1.02);
+    }
+    .hero-title--accent {
+      color: #8dd5ff;
+    }
+    .btn-white {
+      background: #0f1a38;
+      color: #7cbeff;
+      border-color: rgba(255,255,255,0.16);
+    }
+    .btn-ghost-white,
+    .btn-ghost {
+      color: #f3f9ff;
+      border-color: rgba(255,255,255,0.22);
+    }
+    .btn-ghost-white:hover,
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    .section-header h2 {
+      color: #f8fbff;
+    }
+    .service-card__content h3,
+    .plan-card__name,
+    .why-content h2,
+    .cta-content h2 {
+      color: #ffffff;
+    }
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+    .comm-tag {
+      background: rgba(255,255,255,0.08);
+      color: #d9f4ff;
+    }
+  </style>
 </head>
 <body>
 
@@ -77,43 +141,156 @@
     </section>
  -->
     <!-- ===== HERO ===== -->
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="hero-orb hero-orb--1"></div>
-        <div class="hero-orb hero-orb--2"></div>
-        <div class="hero-grid"></div>
-      </div>
-      <div class="container hero-inner">
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          Red activa en toda Bolivia
-        </div>
-        <h1 id="hero-heading" class="hero-title">
-          Conectividad que<br>
-          <span class="hero-title--accent">impulsa tu vida</span>
-        </h1>
-        <p class="hero-subtitle">
-          Internet de fibra óptica y televisión cable premium para tu hogar y negocio.
-          Velocidad real, sin cortes, con soporte 24/7.
-        </p>
-        <div class="hero-actions">
-          <a href="resources/planes.html" class="btn btn-primary btn-lg">Ver planes y precios</a>
-          <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Hablar con un asesor</a>
-        </div>
-        <div class="hero-stats" aria-label="Estadísticas de STEL Bolivia">
-          <div class="hero-stat">
-            <strong>+1K</strong>
-            <span>Hogares conectados</span>
+    <section id="inicio" class="hero" aria-labelledby="hero-heading">
+      
+      <!-- Fade Carousel Track -->
+      <div class="hero-carousel-container" id="heroTrack">
+        
+        <!-- SLIDE 1: INTERNET -->
+        <div class="hero-slide active">
+          <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/Frame-2.jpeg')"></div>
+          <div class="hero-slide-overlay"></div>
+          
+          <div class="container hero-inner">
+            <div class="hero-content-wrapper">
+              <div class="hero-content">
+                <div class="hero-badge">
+                  <span class="badge-dot"></span>
+                  Internet 100% Fibra Óptica
+                </div>
+                <h1 class="hero-title">
+                  Velocidad que<br>
+                  <span class="hero-title--accent">transforma tu vida</span>
+                </h1>
+                <p class="hero-subtitle">
+                  Navega, juega y trabaja sin límites. Internet simétrico con la conexión más estable de Bolivia y al mejor precio.
+                </p>
+                <div class="hero-actions">
+                  <a href="resources/planes.html" class="btn btn-primary btn-lg">Ver planes de Internet</a>
+                  <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Contactar ventas</a>
+                </div>
+              </div>
+              
+              <!-- Professional Animated Internet Cards (Separated, Links) -->
+              <div class="hero-animated-cards">
+                <a href="resources/planes.html" class="pro-card card-internet-1">
+                  <div class="pro-card-header">
+                    <span class="pro-tag">Recomendado</span>
+                    <h3 class="pro-title">Hogar Plus</h3>
+                  </div>
+                  <div class="pro-card-body">
+                    <div class="pro-speed">50<span>Mbps</span></div>
+                    <ul class="pro-features">
+                      <li>Velocidad Simétrica</li>
+                      <li>Instalación Gratis</li>
+                    </ul>
+                  </div>
+                </a>
+                
+                <a href="resources/planes.html" class="pro-card pro-card-highlight card-internet-2">
+                  <div class="pro-card-header">
+                    <span class="pro-tag pro-tag-highlight">Gamer</span>
+                    <h3 class="pro-title">Ultra Gamer</h3>
+                  </div>
+                  <div class="pro-card-body">
+                    <div class="pro-speed">100<span>Mbps</span></div>
+                    <ul class="pro-features">
+                      <li>Ping Mínimo</li>
+                      <li>Router Wi-Fi 6</li>
+                    </ul>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="hero-stat-divider" aria-hidden="true"></div>
-          <div class="hero-stat">
-            <strong>99.8%</strong>
-            <span>Uptime garantizado</span>
+        </div>
+
+        <!-- SLIDE 2: TELEVISIÓN -->
+        <div class="hero-slide">
+          <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/Frame\ 1.png');"></div>
+          <div class="hero-slide-overlay"></div>
+          
+          <div class="container hero-inner">
+            <div class="hero-content-wrapper">
+              <div class="hero-content">
+                <div class="hero-badge">
+                  <span class="badge-dot" style="background: #06b6d4; box-shadow: 0 0 0 3px rgba(6,182,212,.25);"></span>
+                  Entretenimiento sin límites
+                </div>
+                <h1 class="hero-title">
+                  Televisión Premium<br>
+                  <span class="hero-title--accent" style="background: linear-gradient(90deg, #0ea5e9, #6366f1); -webkit-background-clip: text;">para tu familia</span>
+                </h1>
+                <p class="hero-subtitle">
+                  Disfruta de la mejor programación con más de 200 canales en HD. Series, películas y deportes en vivo con calidad cinematográfica.
+                </p>
+                <div class="hero-actions">
+                  <a href="resources/planes.html" class="btn btn-primary btn-lg" style="background: #0ea5e9; border-color: #0ea5e9; box-shadow: 0 8px 32px rgba(14,165,233,.28);">Ver paquetes de TV</a>
+                  <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Solicitar instalación</a>
+                </div>
+              </div>
+              
+              <!-- Professional Animated TV Cards (Separated, Links) -->
+              <div class="hero-animated-cards">
+                <a href="resources/planes.html" class="pro-card card-tv-1">
+                  <div class="pro-card-header">
+                    <span class="pro-tag" style="background: rgba(14, 165, 233, 0.2); color: #38bdf8;">Familiar</span>
+                    <h3 class="pro-title">TV HD Total</h3>
+                  </div>
+                  <div class="pro-card-body">
+                    <div class="pro-speed">150+<span>Canales</span></div>
+                    <ul class="pro-features">
+                      <li>50 Canales en HD</li>
+                      <li>Decodificador Gratis</li>
+                    </ul>
+                  </div>
+                </a>
+                
+                <a href="resources/planes.html" class="pro-card pro-card-highlight card-tv-2" style="border-color: rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.15);">
+                  <div class="pro-card-header">
+                    <span class="pro-tag pro-tag-highlight" style="background: #6366f1;">Premium</span>
+                    <h3 class="pro-title">Cine & Deportes</h3>
+                  </div>
+                  <div class="pro-card-body">
+                    <div class="pro-speed">200+<span>Canales</span></div>
+                    <ul class="pro-features">
+                      <li>Paquete Premium 4K</li>
+                      <li>Ligas Internacionales</li>
+                    </ul>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="hero-stat-divider" aria-hidden="true"></div>
-          <div class="hero-stat">
-            <strong>24/7</strong>
-            <span>Soporte técnico</span>
+        </div>
+
+        <!-- SLIDE 3: COMBOS -->
+        <div class="hero-slide">
+          <div class="hero-slide-bg" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpqBtWJwwVtQ8WBw5hAehHu7vNz--tcXgY2A&s');"></div>
+          <div class="hero-slide-overlay"></div>
+          
+          <div class="container hero-inner">
+            <div class="hero-content-wrapper">
+              <div class="hero-content">
+                <div class="hero-badge">
+                  <span class="badge-dot" style="background: #a855f7; box-shadow: 0 0 0 3px rgba(168,85,247,.25);"></span>
+                  La conexión definitiva
+                </div>
+                <h1 class="hero-title">
+                  Combos<br>
+                  <span class="hero-title--accent" style="background: linear-gradient(90deg, #a855f7, #ec4899); -webkit-background-clip: text;">Internet + TV</span>
+                </h1>
+                <p class="hero-subtitle">
+                  Ahorra al máximo combinando la velocidad insuperable de la fibra óptica con el mejor entretenimiento en un solo plan integral.
+                </p>
+                <div class="hero-actions">
+                  <a href="resources/planes.html" class="btn btn-primary btn-lg" style="background: #a855f7; border-color: #a855f7; box-shadow: 0 8px 32px rgba(168,85,247,.28);">Descubrir Combos</a>
+                  <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Hablar con un experto</a>
+                </div>
+              </div>
+              
+              
+            </div>
           </div>
         </div>
 

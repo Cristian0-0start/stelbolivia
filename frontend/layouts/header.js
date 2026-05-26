@@ -110,3 +110,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  this.classList.toggle('active');
+  document.getElementById('nav-menu').classList.toggle('active');
+  // Actualizar aria-expanded
+  const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+  this.setAttribute('aria-expanded', !expanded);
+});
