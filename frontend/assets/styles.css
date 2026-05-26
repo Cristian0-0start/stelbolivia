@@ -1346,6 +1346,7 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
 
 /* Enlace activo */
 .nav-link.active {
+  margin-bottom: 5px;
     color: #ffffff;
     background: rgba(10, 86, 232, 0.3);
     box-shadow: 0 4px 15px rgba(10, 86, 232, 0.2);
@@ -1589,10 +1590,11 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
     
     .nav-link {
         font-size: 1rem;
-        padding: 14px 22px;
+        padding: 5px 5px;
         width: 100%;
         text-align: left;
         border-radius: 12px;
+        margin: 6px 0;
     }
     
     .nav-link--cta {
