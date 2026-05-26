@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (filename) {
         activePage = filename.replace('.html', '').replace('.php', '') || 'index';
     }
-
+//cam
     const headerHTML = `
   <nav class="nav-container">
     <a href="${basePath}index.html" class="logo" aria-label="STEL Bolivia - Inicio">
