@@ -1,5 +1,72 @@
 /* assets/script.js — STEL Bolivia */
 
+  document.addEventListener('DOMContentLoaded', function () {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    // Crear overlay si no existe
+    let navOverlay = document.getElementById('nav-overlay');
+    if (!navOverlay) {
+      navOverlay = document.createElement('div');
+      navOverlay.id = 'nav-overlay';
+      navOverlay.className = 'nav-overlay';
+      document.body.appendChild(navOverlay);
+    }
+
+    function toggleMenu() {
+      const isActive = navMenu.classList.contains('active');
+
+      if (isActive) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    function openMenu() {
+      navToggle.classList.add('active');
+      navMenu.classList.add('active');
+      navOverlay.classList.add('active');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Cerrar menú');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      navOverlay.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Abrir menú');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    navOverlay.addEventListener('click', closeMenu);
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMenu();
+        navToggle.focus();
+      }
+    });
+
+    // Cerrar al hacer clic en un link del menú
+    const menuLinks = navMenu.querySelectorAll('.nav-link');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        setTimeout(closeMenu, 300);
+      });
+    });
+  });
+
+
 (function () {
   'use strict';
 
@@ -55,51 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollThreshold = 40; // Distancia mínima de scroll para activar hide/show
     const topThreshold = 40; // Distancia desde el top donde siempre se muestra
     
-    function handleHeaderVisibility() {
-        const currentScrollY = window.pageYOffset;
-        
-        // Siempre mostrar el header si está cerca del top
-        if (currentScrollY < topThreshold) {
-            header.classList.remove('hidden');
-            header.classList.add('at-top');
-            if (currentScrollY > 10) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            lastScrollY = currentScrollY;
-            return;
-        }
-        
-        // Remover clase at-top cuando no está en el top
-        header.classList.remove('at-top');
-        
-        // Determinar dirección del scroll
-        const scrollingDown = currentScrollY > lastScrollY;
-        const scrollDifference = Math.abs(currentScrollY - lastScrollY);
-        
-        // Solo activar hide/show si hay suficiente diferencia de scroll
-        if (scrollDifference > scrollThreshold) {
-            if (scrollingDown && currentScrollY > 200) {
-                // Scrolling hacia abajo - ocultar header
-                header.classList.add('hidden');
-            } else if (!scrollingDown) {
-                // Scrolling hacia arriba - mostrar header
-                header.classList.remove('hidden');
-            }
-        }
-        
-        // Efecto scrolled cuando no está en el top
-        if (currentScrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Guardar posición actual para la próxima comparación
-        lastScrollY = currentScrollY;
-    }
-    
+
     // Throttle para mejor rendimiento
     let ticking = false;
     window.addEventListener('scroll', function() {
@@ -308,56 +331,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ===== FLOATING HAMBURGER MENU ===== */
-document.addEventListener('DOMContentLoaded', function() {
-    // Create floating hamburger button
-    const floatingHamburger = document.createElement('button');
-    floatingHamburger.className = 'floating-hamburger';
-    floatingHamburger.setAttribute('aria-label', 'Menú de contacto flotante');
-    floatingHamburger.innerHTML = '<span></span><span></span><span></span>';
-    
-    // Create floating menu
-    const floatingMenu = document.createElement('nav');
-    floatingMenu.className = 'floating-menu';
-    floatingMenu.innerHTML = `
-        <div class="floating-menu-title">Contacto Rápido</div>
-        <a href="resources/contacto.html" class="floating-menu-link">Formulario de Contacto</a>
-        <a href="tel:+591" class="floating-menu-link">Llamar Ahora</a>
-        <a href="resources/planes.html" class="floating-menu-link">Ver Planes</a>
-        <a href="resources/empresa.html" class="floating-menu-link">Para Empresas</a>
-    `;
-    
-    // Add to DOM
-    document.body.appendChild(floatingHamburger);
-    document.body.appendChild(floatingMenu);
-    
-    // Toggle menu
-    floatingHamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const isActive = floatingHamburger.classList.toggle('active');
-        floatingMenu.classList.toggle('active', isActive);
-    });
-    
-    // Close menu when clicking on a link
-    floatingMenu.querySelectorAll('.floating-menu-link').forEach(link => {
-        link.addEventListener('click', function() {
-            floatingHamburger.classList.remove('active');
-            floatingMenu.classList.remove('active');
-        });
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!floatingHamburger.contains(e.target) && !floatingMenu.contains(e.target)) {
-            floatingHamburger.classList.remove('active');
-            floatingMenu.classList.remove('active');
-        }
-    });
-    
-    // Close menu with ESC key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && floatingMenu.classList.contains('active')) {
-            floatingHamburger.classList.remove('active');
-            floatingMenu.classList.remove('active');
-        }
-    });
-});
