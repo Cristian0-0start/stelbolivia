@@ -109,7 +109,7 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
   flex-shrink: 0;
 }
 .logo:hover { color: var(--blue-600); }
-.logo-text { letter-spacing: -.02em; }
+
 
 /* Nav links */
 .nav-links {
@@ -1158,13 +1158,16 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
 
 .logo-text {
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-    font-size: 1.5rem;
+    font-size: 20px;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     background: linear-gradient(135deg, #ffffff 0%, #a8c8ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    left: -10px;
+    top: 4.5px;;
 }
 
 /* ===== MENÚ DE NAVEGACIÓN ===== */

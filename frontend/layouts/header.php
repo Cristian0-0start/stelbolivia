@@ -7,14 +7,29 @@ if (!defined('CURRENT_PAGE')) {
 <header class="site-header" id="site-header">
   <nav class="nav-container">
     <a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/resources/') !== false) ? '../index.php' : 'index.php'; ?>" class="logo" aria-label="STEL Bolivia - Inicio">
-      <span class="logo-icon">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="28" height="28" rx="8" fill="#0a56e8"/>
-          <path d="M7 14 L14 7 L21 14 L14 21 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-          <circle cx="14" cy="14" r="3" fill="white"/>
-        </svg>
-      </span>
-      <span class="logo-text">STEL</span>
+<span class="logo-icon">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <!-- Rectángulo blanco de fondo -->
+    
+    
+    <!-- Imagen recortada con el borde redondeado -->
+    <defs>
+      <clipPath id="roundedClip">
+        <rect width="28" height="28" rx="8"/>
+      </clipPath>
+    </defs>
+    
+    <!-- Imagen dentro del SVG con clip-path -->
+    <image 
+      href="logo1.png" 
+      width="28" 
+      height="28" 
+      preserveAspectRatio="xMidYMid slice"
+      clip-path="url(#roundedClip)"
+    />
+  </svg>
+</span>
+      <span class="logo-text">TEL</span>
     </a>
 
     <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
