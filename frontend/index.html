@@ -14,7 +14,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+ 
+ <script>
+  
+    document.addEventListener('DOMContentLoaded', function () {
+      const navToggle = document.getElementById('nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+
+      // Crear overlay si no existe
+      let navOverlay = document.getElementById('nav-overlay');
+      if (!navOverlay) {
+        navOverlay = document.createElement('div');
+        navOverlay.id = 'nav-overlay';
+        navOverlay.className = 'nav-overlay';
+        document.body.appendChild(navOverlay);
+      }
+
+      function toggleMenu() {
+        const isActive = navMenu.classList.contains('active');
+
+        if (isActive) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+
+      function openMenu() {
+        navToggle.classList.add('active');
+        navMenu.classList.add('active');
+        navOverlay.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        navToggle.setAttribute('aria-label', 'Cerrar menú');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        navOverlay.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menú');
+        document.body.style.overflow = '';
+      }
+
+      navToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      navOverlay.addEventListener('click', closeMenu);
+
+      // Cerrar con Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+          closeMenu();
+          navToggle.focus();
+        }
+      });
+
+      // Cerrar al hacer clic en un link del menú
+      const menuLinks = navMenu.querySelectorAll('.nav-link');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function () {
+          setTimeout(closeMenu, 300);
+        });
+      });
+    });
+
+ </script>
+ <style>
     body {
       background: radial-gradient(circle at 25% 20%, #071422 0%, #0b1e50 100%);
       color: #e6efff;
