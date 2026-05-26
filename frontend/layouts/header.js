@@ -10,14 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (filename) {
         activePage = filename.replace('.html', '').replace('.php', '') || 'index';
     }
-    
-    console.log('Página activa:', activePage); // Debug
-
-    const homeHref = activePage === 'index' ? '#inicio' : `${basePath}index.html`;
-    const planesHref = activePage === 'index' ? '#planes' : `${basePath}resources/planes.html`;
-    const comunicadosHref = activePage === 'index' ? '#comunicados' : `${basePath}resources/comunicados.html`;
-    const contactoHref = activePage === 'index' ? '#contacto' : `${basePath}resources/contacto.html`;
-
+//cam
     const headerHTML = `
     <header class="site-header" id="site-header">
       <nav class="nav-container">
