@@ -316,3 +316,44 @@ document.addEventListener('DOMContentLoaded', function() {
         timelineObserver.observe(item);
     });
 });
+
+// ===== HERO CAROUSEL =====
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    
+    if (slides.length > 0 && dots.length > 0) {
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        const slideInterval = 6000; // 6 seconds per slide
+        let autoSlide;
+
+        function goToSlide(index) {
+            // Remove active from current
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            // Set new current
+            currentSlide = index;
+            
+            // Add active to new
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slideCount);
+        }
+
+        autoSlide = setInterval(nextSlide, slideInterval);
+
+        // Allow manual dot clicking
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(autoSlide); // Reset timer
+                goToSlide(index);
+                autoSlide = setInterval(nextSlide, slideInterval);
+            });
+        });
+    }
+});
