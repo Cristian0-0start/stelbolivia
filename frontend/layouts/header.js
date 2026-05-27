@@ -9,45 +9,59 @@ document.addEventListener("DOMContentLoaded", function() {
     if (filename) {
         activePage = filename.replace('.html', '').replace('.php', '') || 'index';
     }
-
+//c
     const headerHTML = `
   <nav class="nav-container">
-    <a href="${homeHref}" class="logo" aria-label="STEL Bolivia - Inicio">
-      <span class="logo-icon">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="28" height="28" rx="8" fill="#0a56e8"/>
-          <path d="M7 14 L14 7 L21 14 L14 21 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-          <circle cx="14" cy="14" r="3" fill="white"/>
-        </svg>
-      </span>
-      <span class="logo-text">STEL</span>
+    <a href="${basePath}index.html" class="logo" aria-label="STEL Bolivia - Inicio">
+<span class="logo-icon">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <!-- Rectángulo blanco de fondo -->
+    
+    
+    <!-- Imagen recortada con el borde redondeado -->
+    <defs>
+      <clipPath id="roundedClip">
+        <rect width="28" height="28" rx="8"/>
+      </clipPath>
+    </defs>
+    
+    <!-- Imagen dentro del SVG con clip-path -->
+    <image 
+      href="/logo1.png" 
+      width="28" 
+      height="28" 
+      preserveAspectRatio="xMidYMid slice"
+      clip-path="url(#roundedClip)"
+    />
+  </svg>
+</span>
+      <span class="logo-text">TEL</span>
     </a>
 
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
       <span></span><span></span><span></span>
     </button>
 
     <ul class="nav-links" id="nav-menu" role="list">
       <li>
-        <a href="${homeHref}" class="nav-link ${activePage === 'index' ? 'active' : ''}">Inicio</a>
+        <a href="${basePath}index.html" class="nav-link ${activePage === 'index' ? 'active' : ''}">Inicio</a>
       </li>
       <li>
         <a href="${basePath}resources/empresa.html" class="nav-link ${activePage === 'empresa' ? 'active' : ''}">Empresa</a>
       </li>
       <li>
-        <a href="${planesHref}" class="nav-link ${activePage === 'planes' ? 'active' : ''}">Planes</a>
+        <a href="${basePath}resources/planes.html" class="nav-link ${activePage === 'planes' ? 'active' : ''}">Planes</a>
       </li>
       <li>
         <a href="${basePath}resources/ofertas.html" class="nav-link ${activePage === 'ofertas' ? 'active' : ''}">Ofertas</a>
       </li>
       <li>
-        <a href="${comunicadosHref}" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
+        <a href="${basePath}resources/comunicados.html" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
       </li>
       <li>
-        <a href="${contactoHref}" class="nav-link nav-link--cta ${activePage === 'contacto' ? 'active' : ''}">Contacto</a>
+        <a href="${basePath}resources/contacto.html" class="nav-link nav-link--cta ${activePage === 'contacto' ? 'active' : ''}">Contacto</a>
       </li>
     </ul>
-    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
   </nav>`;
 
     const headerPlaceholder = document.getElementById('header-placeholder');
@@ -60,34 +74,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
         if (navToggle && navMenu) {
-            const navOverlay = document.getElementById('nav-overlay');
-            const navLinks = navMenu.querySelectorAll('.nav-link');
-            const setMenuState = (open) => {
-                navToggle.setAttribute('aria-expanded', open);
-                navToggle.classList.toggle('active', open);
-                navMenu.classList.toggle('active', open);
-                if (navOverlay) {
-                    navOverlay.classList.toggle('active', open);
-                }
-            };
-
             navToggle.addEventListener('click', () => {
                 const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                setMenuState(!expanded);
-            });
-
-            if (navOverlay) {
-                navOverlay.addEventListener('click', () => setMenuState(false));
-            }
-
-            navLinks.forEach((link) => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        setMenuState(false);
-                    }
-                });
+                navToggle.setAttribute('aria-expanded', !expanded);
+                navMenu.classList.toggle('active');
             });
         }
     }
 });
-// hoala akñfsnvjbvñjask dvñ.adskmnv
