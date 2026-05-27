@@ -1,5 +1,4 @@
-/* assets/script.js — STEL Bolivia */
-
+/* assets/script.js — STEL Bolivia hola */
 
 (function () {
   'use strict';
