@@ -530,8 +530,6 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
   background-size: cover;
   background-position: center;
   z-index: 0;
-  /* subtle zoom effect */
-  animation: bgZoom 20s linear infinite alternate;
 }
 
 @keyframes bgZoom {
@@ -542,8 +540,7 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
 .hero-slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.75) 45%, rgba(15, 23, 42, 0.2) 100%);
-  z-index: 1;
+  
 }
 
 /* Nav Dots */
@@ -616,7 +613,7 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
 }
 
 .hero-content-wrapper {
-  display: flex;
+ 
   align-items: center;
   justify-content: space-between;
   gap: 40px;
@@ -1985,7 +1982,6 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
 }
 
 .hero-slide-bg {
-  filter: brightness(1.08) contrast(1.15) saturate(1.1);
   position: absolute;
   inset: 0;
   background-size: cover;
@@ -2505,9 +2501,7 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
   .hero-slide-bg {
     display: none !important;
   }
-  .hero-slide-overlay {
-    background: linear-gradient(180deg, rgba(4, 46, 255, 0.96), rgba(4, 9, 23, 0.96));
-  }
+
   .hero-animated-cards {
     display: none;
   }

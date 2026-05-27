@@ -97,143 +97,55 @@
 
   <main id="main-content">
 
-    <!-- ===== PROMO SECTION ===== 
-    <section class="promo-banner" aria-labelledby="promo-heading">
-      <div class="promo-container">
-        <div class="promo-left">
-          <div class="promo-text-group">
-            <h2 id="promo-heading" class="promo-title">
-              <span class="promo-title-accent">Instalación</span>
-              <span class="promo-title-accent">gratuita</span>
-            </h2>
-          </div>
-          <div class="promo-dots">
-            <span class="promo-dot"></span>
-            <span class="promo-dot"></span>
-            <span class="promo-dot"></span>
-            <span class="promo-dot"></span>
-            <span class="promo-dot"></span>
-          </div>
-        </div>
 
-        <div class="promo-center">
-          <img src="/frontend/assets/images/Frame 1.png" alt="TV" class="promo-image">
-        </div>
+<!-- ===== HERO ===== -->
+<section id="inicio" class="hero" aria-labelledby="hero-heading">
 
-        <div class="promo-right">
-          <div class="promo-offer-card">
-            <div class="promo-card-title">TV Básica</div>
-            <div class="promo-card-price">
-              <span class="promo-card-label">x</span>
-              <span class="promo-card-amount">19.99<span class="promo-currency">Bs</span></span>
-            </div>
+  <!-- Fade Carousel Track -->
+  <div class="hero-carousel-container" id="heroTrack">
+
+    <!-- SLIDE 1: INTERNET -->
+    <div class="hero-slide active">
+      <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/internet.png')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-content-wrapper">
+          <div class="hero-actions">
+            <a href="resources/planes.html" class="btn btn-primary btn-lg"
+              style="background: #0ea5e9; border-color: #0ea5e9; box-shadow: 0 8px 32px rgba(14,165,233,.28);">Planes de
+              Internet</a>
+            <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Contactar ventas</a>
           </div>
-
-          <a href="resources/contacto.html" class="promo-call-btn" aria-label="Llamar para más información">
-            <span class="promo-call-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-            </span>
-            <span class="promo-call-text">LLAMANOS</span>
-          </a>
         </div>
       </div>
-    </section>
- -->
-    <!-- ===== HERO ===== -->
-    <section id="inicio" class="hero" aria-labelledby="hero-heading">
+    </div>
 
-      <!-- Fade Carousel Track -->
-      <div class="hero-carousel-container" id="heroTrack">
-
-        <!-- SLIDE 1: INTERNET -->
-        <div class="hero-slide active">
-          <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/internet.png')"></div>
-          <div class="hero-slide-overlay"></div>
-
-          <div class="container hero-inner">
-            <div class="hero-content-wrapper">
-              <div class="hero-content">
-                <!-- STEL Bolivia Main Title - Large & Elegant with Professional Gradient -->
-                <h1 class="hero-main-title">
-                  <span class="stel-logo">STEL</span>
-                  <span class="bolivia-text">Bolivia</span>
-                  <span>Internet</span>
-                </h1>
-                
-                <!-- Animated Text Changer: Rotating between key features -->
-                <div class="hero-features-animator">
-                  <div class="feature-item active">Conexión segura</div>
-                  <div class="feature-item">Instalación profesional</div>
-                  <div class="feature-item">Soporte 24/7</div>
-                  <div class="feature-item">Velocidad garantizada</div>
-                </div>
-                
-                <p class="hero-subtitle">
-                  Soluciones de conectividad confiables para tu empresa
-                </p>
-                <div class="hero-actions">
-                  <a href="resources/planes.html" class="btn btn-primary btn-lg" style="background: #0ea5e9; border-color: #0ea5e9; box-shadow: 0 8px 32px rgba(14,165,233,.28);">Planes de Internet</a>
-                  <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Contactar ventas</a>
-               
-              </div>
-
-            </div>
+    <!-- SLIDE 2: TELEVISIÓN -->
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/tv.png');"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-content-wrapper">
+          <div class="hero-actions">
+            <a href="resources/planes.html" class="btn btn-primary btn-lg"
+              style="background: #0ea5e9; border-color: #0ea5e9; box-shadow: 0 8px 32px rgba(14,165,233,.28);">Ver
+              paquetes de TV</a>
+            <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Solicitar instalación</a>
           </div>
         </div>
-
-        <!-- SLIDE 2: TELEVISIÓN -->
-        <div class="hero-slide">
-          <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/tv.png');"></div>
-          <div class="hero-slide-overlay"></div>
-
-          <div class="container hero-inner">
-            <div class="hero-content-wrapper">
-              <div class="hero-content">
-                
-                
-<h1 class="hero-main-title">
-  <span class="stel-logo">STEL</span>
-  <span class="bolivia-text">Bolivia</span>
-  <span>TV</span>
-</h1>
-
-<!-- Animated Text Changer: Rotating between key features -->
-<div class="hero-features-animator">
-  <div class="feature-item active">Conexión segura</div>
-  <div class="feature-item">Instalación profesional</div>
-  <div class="feature-item">Soporte 24/7</div>
-  <div class="feature-item">Velocidad garantizada</div>
-</div>
-
-<p class="hero-subtitle">
-  Soluciones de conectividad confiables para tu empresa
-</p>
-
-
-
-                <div class="hero-actions">
-                  <a href="resources/planes.html" class="btn btn-primary btn-lg" style="background: #0ea5e9; border-color: #0ea5e9; box-shadow: 0 8px 32px rgba(14,165,233,.28);">Ver paquetes de TV</a>
-                  <a href="resources/contacto.html" class="btn btn-ghost btn-lg">Solicitar instalación</a>
-                </div>
-              </div>
-              
-
-            </div>
-          </div>
-        </div>
-
       </div>
+    </div> 
 
-      <!-- Carousel Navigation Dots -->
-      <div class="hero-nav-dots">
-        <button class="hero-dot active" aria-label="Slide 1"></button>
-        <button class="hero-dot" aria-label="Slide 2"></button>
-        <button class="hero-dot" aria-label="Slide 3"></button>
-      </div>
+  </div> 
 
-    </section>
+  <!-- Carousel Navigation Dots -->
+  <div class="hero-nav-dots">
+    <button class="hero-dot active" aria-label="Slide 1"></button>
+    <button class="hero-dot" aria-label="Slide 2"></button>
+    <button class="hero-dot" aria-label="Slide 3"></button>
+  </div>
+
+</section> 
 
     <!-- ===== SERVICIOS ===== -->
     <section class="section" aria-labelledby="servicios-heading">
