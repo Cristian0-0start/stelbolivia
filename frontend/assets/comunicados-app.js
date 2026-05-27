@@ -243,16 +243,25 @@
                     <span class="modal-date">${formatFecha(comunicado.fecha, { day: '2-digit', month: 'long', year: 'numeric' })}</span>
                     <span class="comunicado-category" style="margin-left: 12px;">${escapeHtml(comunicado.categoria)}</span>
                 </div>
-                <h2 class="modal-title">${escapeHtml(comunicado.titulo)}</h2>
+                <h2 class="modal-title" id="modalTitle">${escapeHtml(comunicado.titulo)}</h2>
                 <div class="modal-author">Por: ${escapeHtml(comunicado.autor)}</div>
                 <div class="modal-divider"></div>
                 <div class="modal-content-text">${escapeHtml(comunicado.contenido).replace(/\n/g, '<br>')}</div>
             `;
             modal.classList.add('active');
+            
+            // Focus en el botón cerrar para accesibilidad
+            const closeBtn = modal.querySelector('.modal-close');
+            if (closeBtn) closeBtn.focus();
         }
 
         window.cerrarModal = function cerrarModal() {
-            if (modal) modal.classList.remove('active');
+            if (modal) {
+                modal.classList.remove('active');
+                // Retornar focus al botón que abrió el modal (si existe)
+                const activeCard = document.querySelector('.comunicado-card:focus');
+                if (activeCard) activeCard.focus();
+            }
         };
 
         async function aplicarDatos(lista) {
@@ -285,6 +294,13 @@
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) window.cerrarModal();
+            });
+            
+            // Cerrar modal con tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    window.cerrarModal();
+                }
             });
         }
 
