@@ -420,6 +420,8 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; font-weight
 }
 .btn-primary:hover { background: var(--blue-600); border-color: var(--blue-600); }
 
+
+
 .btn-ghost {
   background: rgb(255, 78, 184);
   color: black;
