@@ -28,7 +28,7 @@ if (!defined('CURRENT_PAGE')) {
       clip-path="url(#roundedClip)"
     />
   </svg>
-  //ca
+  //c
 </span>
       <span class="logo-text">TEL</span>
     </a>
