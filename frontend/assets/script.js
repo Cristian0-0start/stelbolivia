@@ -263,4 +263,135 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-/* ===== FLOATING HAMBURGER MENU ===== */
+// ========================================================
+// STEL NEWS SYSTEM
+// ========================================================
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const overlay = document.getElementById('stelNewsOverlay');
+
+    if (!overlay || typeof obtenerComunicados !== 'function') {
+        return;
+    }
+
+    const titulo = document.getElementById('stelNewsTitulo');
+    const resumen = document.getElementById('stelNewsResumen');
+    const contenido = document.getElementById('stelNewsContenido');
+    const categoria = document.getElementById('stelNewsCategoria');
+    const fecha = document.getElementById('stelNewsFecha');
+    const counter = document.getElementById('stelNewsCounter');
+    const progress = document.getElementById('stelProgressBar');
+
+    let comunicados = [];
+    let current = 0;
+
+    async function cargarComunicados() {
+
+        const { data, error } = await obtenerComunicados();
+
+        if (error || !Array.isArray(data) || !data.length) {
+            return;
+        }
+
+        comunicados = data;
+
+        mostrarComunicado(0);
+
+        setTimeout(() => {
+            overlay.classList.add('active');
+        }, 1200);
+    }
+
+    function mostrarComunicado(index) {
+
+        const item = comunicados[index];
+
+        if (!item) {
+            cerrarSistema();
+            return;
+        }
+
+        titulo.innerHTML = item.titulo || '';
+        resumen.innerHTML = item.resumen || '';
+
+        contenido.innerHTML =
+            (item.contenido || '')
+            .replace(/\n/g, '<br><br>');
+
+        categoria.innerHTML = item.categoria || 'Comunicado';
+        fecha.innerHTML = new Date(item.fecha)
+            .toLocaleDateString('es-BO', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+
+        counter.innerHTML =
+            `${index + 1} / ${comunicados.length}`;
+
+        const percent =
+            ((index + 1) / comunicados.length) * 100;
+
+        progress.style.width = percent + '%';
+    }
+
+    function siguienteComunicado() {
+
+        current++;
+
+        if (current >= comunicados.length) {
+            cerrarSistema();
+            return;
+        }
+
+        overlay.classList.remove('active');
+
+        setTimeout(() => {
+
+            mostrarComunicado(current);
+
+            overlay.classList.add('active');
+
+        }, 320);
+    }
+
+    function cerrarSistema() {
+
+        overlay.classList.remove('active');
+
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 500);
+    }
+
+    overlay.addEventListener('click', (e) => {
+
+        const modal = document.querySelector('.stel-news-modal');
+
+        if (!modal.contains(e.target)) {
+            siguienteComunicado();
+        }
+
+    });
+
+    // realtime supabase
+    if (typeof suscribirComunicados === 'function') {
+
+        suscribirComunicados((data) => {
+
+            if (!Array.isArray(data)) return;
+
+            comunicados = data;
+
+            if (current >= comunicados.length) {
+                cerrarSistema();
+            }
+
+        });
+
+    }
+
+    cargarComunicados();
+
+});
