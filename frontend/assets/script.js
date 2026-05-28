@@ -1,4 +1,4 @@
-/* assets/script.js — STEL Bolivia */
+/* assets/script.js — STEL Bolivia hola */
 
 (function () {
   'use strict';
@@ -11,41 +11,9 @@
     onScroll();
   }
 
-  /* ── Mobile nav toggle ── */
-  const toggle = document.getElementById('nav-toggle');
-  const menu   = document.getElementById('nav-menu');
-
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-
-    /* Close on link click */
-    menu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Abrir menú');
-        document.body.style.overflow = '';
-      });
-    });
-
-    /* Close on outside click */
-    document.addEventListener('click', e => {
-      if (!header.contains(e.target) && menu.classList.contains('open')) {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
   /* ── Fade-in on scroll (IntersectionObserver) ── */
   const animTargets = document.querySelectorAll(
-    '.service-card, .plan-card, .why-card, .comm-tag, .hero-stat'
+    '.service-card, .plan-card, .why-card, .comm-tag, .hero-stat, .home-comunicado-card'
   );
 
   if ('IntersectionObserver' in window && animTargets.length) {
@@ -81,62 +49,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     
-    // Crear overlay para móvil
-    const overlay = document.createElement('div');
-    overlay.className = 'nav-overlay';
-    document.body.appendChild(overlay);
-    
     // ===== LÓGICA DE AUTO-HIDE/SHOW =====
     let lastScrollY = window.pageYOffset;
     let scrollTimeout;
     const scrollThreshold = 40; // Distancia mínima de scroll para activar hide/show
     const topThreshold = 40; // Distancia desde el top donde siempre se muestra
     
-    function handleHeaderVisibility() {
-        const currentScrollY = window.pageYOffset;
-        
-        // Siempre mostrar el header si está cerca del top
-        if (currentScrollY < topThreshold) {
-            header.classList.remove('hidden');
-            header.classList.add('at-top');
-            if (currentScrollY > 10) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            lastScrollY = currentScrollY;
-            return;
-        }
-        
-        // Remover clase at-top cuando no está en el top
-        header.classList.remove('at-top');
-        
-        // Determinar dirección del scroll
-        const scrollingDown = currentScrollY > lastScrollY;
-        const scrollDifference = Math.abs(currentScrollY - lastScrollY);
-        
-        // Solo activar hide/show si hay suficiente diferencia de scroll
-        if (scrollDifference > scrollThreshold) {
-            if (scrollingDown && currentScrollY > 200) {
-                // Scrolling hacia abajo - ocultar header
-                header.classList.add('hidden');
-            } else if (!scrollingDown) {
-                // Scrolling hacia arriba - mostrar header
-                header.classList.remove('hidden');
-            }
-        }
-        
-        // Efecto scrolled cuando no está en el top
-        if (currentScrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Guardar posición actual para la próxima comparación
-        lastScrollY = currentScrollY;
-    }
-    
+
     // Throttle para mejor rendimiento
     let ticking = false;
     window.addEventListener('scroll', function() {
@@ -164,50 +83,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejecutar verificación inicial
     handleHeaderVisibility();
     
-    // ===== MENÚ MÓVIL =====
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            
-            this.setAttribute('aria-expanded', !isExpanded);
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            // Prevenir scroll cuando el menú está abierto
-            document.body.style.overflow = isExpanded ? '' : 'hidden';
-            
-            // Asegurar que el header esté visible cuando el menú está abierto
-            if (!isExpanded) {
-                header.classList.remove('hidden');
-            }
-        });
-        
-        // Cerrar menú al hacer clic en overlay
-        overlay.addEventListener('click', closeMenu);
-        
-        // Cerrar menú al hacer clic en un enlace
-        const navLinks = navMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-        
-        // Cerrar menú con tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-    }
-    
-    function closeMenu() {
-        if (navToggle && navMenu) {
-            navToggle.setAttribute('aria-expanded', 'false');
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
+    // Tema claro / oscuro
+    const themeToggle = document.getElementById('theme-toggle');
+    const storedTheme = localStorage.getItem('stel-theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const initialTheme = storedTheme || preferredTheme;
+
+    function setTheme(theme) {
+        document.body.classList.toggle('theme-light', theme === 'light');
+        document.body.classList.toggle('theme-dark', theme === 'dark');
+        localStorage.setItem('stel-theme', theme);
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'light' ? 'Oscuro' : 'Claro';
+            themeToggle.setAttribute('aria-label', theme === 'light' ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro');
         }
+    }
+
+    if (themeToggle) {
+        setTheme(initialTheme);
+        themeToggle.addEventListener('click', function () {
+            const current = document.body.classList.contains('theme-light') ? 'light' : 'dark';
+            setTheme(current === 'light' ? 'dark' : 'light');
+        });
     }
     
     // Ajustar para cambios de tamaño de ventana
@@ -216,7 +113,16 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
             if (window.innerWidth > 768 && navMenu && navMenu.classList.contains('active')) {
-                closeMenu();
+                if (navToggle) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.classList.remove('active');
+                }
+                navMenu.classList.remove('active');
+                const navOverlay = document.getElementById('nav-overlay');
+                if (navOverlay) {
+                    navOverlay.classList.remove('active');
+                }
+                document.body.style.overflow = '';
             }
         }, 250);
     });
@@ -316,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
         timelineObserver.observe(item);
     });
 });
-
 // ===== HERO CAROUSEL =====
 document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.hero-slide');
@@ -356,4 +261,137 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+});
+
+// ========================================================
+// STEL NEWS SYSTEM
+// ========================================================
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const overlay = document.getElementById('stelNewsOverlay');
+
+    if (!overlay || typeof obtenerComunicados !== 'function') {
+        return;
+    }
+
+    const titulo = document.getElementById('stelNewsTitulo');
+    const resumen = document.getElementById('stelNewsResumen');
+    const contenido = document.getElementById('stelNewsContenido');
+    const categoria = document.getElementById('stelNewsCategoria');
+    const fecha = document.getElementById('stelNewsFecha');
+    const counter = document.getElementById('stelNewsCounter');
+    const progress = document.getElementById('stelProgressBar');
+
+    let comunicados = [];
+    let current = 0;
+
+    async function cargarComunicados() {
+
+        const { data, error } = await obtenerComunicados();
+
+        if (error || !Array.isArray(data) || !data.length) {
+            return;
+        }
+
+        comunicados = data;
+
+        mostrarComunicado(0);
+
+        setTimeout(() => {
+            overlay.classList.add('active');
+        }, 1200);
+    }
+
+    function mostrarComunicado(index) {
+
+        const item = comunicados[index];
+
+        if (!item) {
+            cerrarSistema();
+            return;
+        }
+
+        titulo.innerHTML = item.titulo || '';
+        resumen.innerHTML = item.resumen || '';
+
+        contenido.innerHTML =
+            (item.contenido || '')
+            .replace(/\n/g, '<br><br>');
+
+        categoria.innerHTML = item.categoria || 'Comunicado';
+        fecha.innerHTML = new Date(item.fecha)
+            .toLocaleDateString('es-BO', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+
+        counter.innerHTML =
+            `${index + 1} / ${comunicados.length}`;
+
+        const percent =
+            ((index + 1) / comunicados.length) * 100;
+
+        progress.style.width = percent + '%';
+    }
+
+    function siguienteComunicado() {
+
+        current++;
+
+        if (current >= comunicados.length) {
+            cerrarSistema();
+            return;
+        }
+
+        overlay.classList.remove('active');
+
+        setTimeout(() => {
+
+            mostrarComunicado(current);
+
+            overlay.classList.add('active');
+
+        }, 320);
+    }
+
+    function cerrarSistema() {
+
+        overlay.classList.remove('active');
+
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 500);
+    }
+
+    overlay.addEventListener('click', (e) => {
+
+        const modal = document.querySelector('.stel-news-modal');
+
+        if (!modal.contains(e.target)) {
+            siguienteComunicado();
+        }
+
+    });
+
+    // realtime supabase
+    if (typeof suscribirComunicados === 'function') {
+
+        suscribirComunicados((data) => {
+
+            if (!Array.isArray(data)) return;
+
+            comunicados = data;
+
+            if (current >= comunicados.length) {
+                cerrarSistema();
+            }
+
+        });
+
+    }
+
+    cargarComunicados();
+
 });
