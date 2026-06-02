@@ -88,6 +88,315 @@
       background: rgba(255,255,255,0.08);
       color: #d9f4ff;
     }
+
+    /* Chat widget flotante en la esquina inferior derecha */
+    .chat-widget-toggle {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 20px 32px rgba(15, 23, 42, 0.22);
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      font-size: 1.05rem;
+    }
+
+    .chat-widget {
+      position: fixed;
+      right: 24px;
+      bottom: 92px;
+      width: min(320px, calc(100vw - 32px));
+      max-width: 320px;
+      background: rgba(11, 30, 70, 0.98);
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      border-radius: 26px;
+      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.35);
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px) scale(0.98);
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+      flex-direction: column;
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .chat-widget.open {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .chat-widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      border-bottom: 1px solid rgba(96, 165, 250, 0.22);
+    }
+
+    .chat-widget-header h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: #ffffff;
+      letter-spacing: 0.01em;
+    }
+
+    .chat-close {
+      background: rgba(255, 255, 255, 0.14);
+      border: none;
+      color: #e2e8f0;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease;
+    }
+
+    .chat-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-widget-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .chat-bubble {
+      display: inline-flex;
+      max-width: 100%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      line-height: 1.4;
+      word-break: break-word;
+      font-size: 0.95rem;
+    }
+
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.08);
+      color: #e6f4ff;
+      border-top-left-radius: 4px;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: rgba(14, 165, 233, 0.2);
+      color: #ffffff;
+      border-top-right-radius: 4px;
+    }
+
+    .chat-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-answer-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .chat-answer-panel span {
+      display: block;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .chat-answer-panel p {
+      margin: 0;
+      color: #cbd5e1;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .chat-action-button {
+      width: 100%;
+      text-align: left;
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: #e6f4ff;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .chat-action-button:hover,
+    .chat-action-button:focus {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .chat-back-button {
+      border: none;
+      background: transparent;
+      color: #93c5fd;
+      font-size: 0.9rem;
+      padding: 0;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .chat-back-button:hover {
+      color: #bfdbfe;
+      text-decoration: underline;
+    }
+
+    .chat-section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .chat-widget-body textarea,
+    .chat-widget-body input {
+      width: 100%;
+      min-height: 48px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      background: rgba(15, 23, 42, 0.95);
+      color: #f8fafc;
+      resize: none;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .chat-widget-body textarea {
+      min-height: 90px;
+    }
+
+    .chat-widget-body textarea:focus {
+      outline: none;
+      border-color: rgba(96, 165, 250, 0.95);
+      background: rgba(15, 23, 42, 0.98);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    }
+
+    .chat-widget-body textarea::placeholder {
+      color: #cbd5e1;
+    }
+
+    .chat-widget-footer {
+      padding: 0 18px 18px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chat-widget-footer button {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 12px 24px rgba(14, 165, 233, 0.25);
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .chat-widget-footer button:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(135deg, #22d3ee, #a78bfa);
+      box-shadow: 0 14px 28px rgba(14, 165, 233, 0.28);
+    }
+
+    .chat-widget-status {
+      min-height: 18px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .chat-widget-toggle {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: chatPulse 2.6s ease-in-out infinite;
+    }
+
+    .chat-widget-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 24px 40px rgba(14, 165, 233, 0.32);
+    }
+
+    @keyframes chatPulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-1px) scale(1.03);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .chat-widget-toggle {
+        right: 16px;
+        bottom: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 1rem;
+      }
+
+      .chat-widget {
+        right: 12px;
+        bottom: 82px;
+        width: min(280px, calc(100vw - 24px));
+        max-width: 280px;
+        border-radius: 22px;
+      }
+
+      .chat-widget-header {
+        padding: 14px 16px;
+      }
+
+      .chat-widget-body {
+        padding: 14px;
+      }
+
+      .chat-widget-footer {
+        padding: 0 16px 16px;
+      }
+
+      .chat-widget-body textarea {
+        min-height: 95px;
+      }
+    }
   </style>
 </head>
 
@@ -190,7 +499,7 @@
               </svg>
             </div>
             <div class="service-card__content">
-              <h3>Televisión Cable Premium</h3>
+              <h3>Televisión  por Cable Premium</h3>
               <p>Cientos de canales en HD y 4K. Películas, series, deportes y documentales. Entretenimiento sin límites
                 para toda la familia.</p>
               <ul class="service-features" aria-label="Características del servicio de TV">
@@ -236,20 +545,20 @@
         </div>
         <div class="plans-preview">
           <article class="plan-card">
-            <div class="plan-card__speed">10 <span>Mbps</span></div>
+            <div class="plan-card__speed">60 <span>Mbps</span></div>
             <h3 class="plan-card__name">Hogar Básico</h3>
-            <p class="plan-card__desc">Ideal para 1–3 dispositivos. Navega, trabaja y estudia sin preocupaciones.</p>
+            <p class="plan-card__desc">Ideal para 1–11 dispositivos. Navega, trabaja y estudia sin preocupaciones.</p>
             <a href="resources/planes.html" class="btn btn-outline">Ver detalle</a>
           </article>
           <article class="plan-card plan-card--featured">
             <div class="plan-card__badge">Más popular</div>
-            <div class="plan-card__speed">50<span>Mbps</span></div>
+            <div class="plan-card__speed">150<span>Mbps</span></div>
             <h3 class="plan-card__name">Hogar Plus</h3>
             <p class="plan-card__desc">Para familias activas. Streaming, gaming y videollamadas sin interrupciones.</p>
             <a href="resources/planes.html" class="btn btn-primary">Ver detalle</a>
           </article>
           <article class="plan-card">
-            <div class="plan-card__speed">100<span>Mbps</span></div>
+            <div class="plan-card__speed">200<span>Mbps</span></div>
             <h3 class="plan-card__name">Empresarial</h3>
             <p class="plan-card__desc">Máximo rendimiento para negocios. IP fija, SLA garantizado y soporte preferente.
             </p>
@@ -348,6 +657,81 @@
     </section>
   </main>
   <div id="footer-placeholder"></div>
+
+  <button id="chatToggle" class="chat-widget-toggle" aria-label="Abrir chat">💬</button>
+
+  <div id="chatWidget" class="chat-widget" aria-hidden="true">
+    <div class="chat-widget-header">
+      <h4>Mensajería</h4>
+      <button id="chatClose" class="chat-close" aria-label="Cerrar chat">×</button>
+    </div>
+    <div class="chat-widget-body">
+      <div id="chatMessages" class="chat-messages" aria-live="polite">
+        <!-- Mensajes del bot/usuario aparecerán aquí -->
+      </div>
+
+      <div id="chatMenu" class="chat-actions">
+        <div class="chat-section-header">
+          <span>Opciones de atención</span>
+        </div>
+        <button id="optSupport" class="chat-action-button" type="button">Atención al cliente</button>
+        <button id="optFaq" class="chat-action-button" type="button">Preguntas frecuentes</button>
+      </div>
+
+      <div id="faqList" class="chat-actions" style="display:none;">
+        <div class="chat-section-header">
+          <button id="faqBack" class="chat-back-button" type="button">← Volver</button>
+          <span>Preguntas frecuentes</span>
+        </div>
+        <button class="chat-action-button" type="button" data-id="1">¿Por qué está lento mi internet?</button>
+        <button class="chat-action-button" type="button" data-id="2">¿Puede el router afectar la velocidad?</button>
+        <button class="chat-action-button" type="button" data-id="3">¿Qué puedo hacer si la velocidad baja en horas pico?</button>
+      </div>
+
+      <div id="faqAnswer1" class="chat-actions" style="display:none;">
+        <div class="chat-section-header">
+          <button id="faqAnswer1Back" class="chat-back-button" type="button">← Volver</button>
+          <span>¿Por qué está lento mi internet?</span>
+        </div>
+        <div class="chat-answer-panel">
+          <p>Respuesta: Puede deberse a varios factores: congestión en horas pico, interferencias en la red Wi-Fi, demasiados dispositivos conectados o un router con firmware antiguo. Recomendamos reiniciar el router, conectar por cable para comparar y, si persiste, solicitar revisión técnica.</p>
+        </div>
+      </div>
+
+      <div id="faqAnswer2" class="chat-actions" style="display:none;">
+        <div class="chat-section-header">
+          <button id="faqAnswer2Back" class="chat-back-button" type="button">← Volver</button>
+          <span>¿Puede el router afectar la velocidad?</span>
+        </div>
+        <div class="chat-answer-panel">
+          <p>Respuesta: Sí. Un router antiguo o mal ubicado (muy lejos o cerca de obstáculos) puede reducir la velocidad. Actualiza el firmware, sitúa el equipo en un lugar central y prueba con conexión por cable para confirmar.</p>
+        </div>
+      </div>
+
+      <div id="faqAnswer3" class="chat-actions" style="display:none;">
+        <div class="chat-section-header">
+          <button id="faqAnswer3Back" class="chat-back-button" type="button">← Volver</button>
+          <span>¿Qué puedo hacer si la velocidad baja en horas pico?</span>
+        </div>
+        <div class="chat-answer-panel">
+          <p>Respuesta: En horas pico (típicamente noche) la red puede presentar mayor uso. Para mejorar: limita dispositivos intensivos, usa canales Wi-Fi menos concurridos o considera un plan con mayor capacidad. Si necesitas, solicitamos una revisión técnica.</p>
+        </div>
+      </div>
+
+      <div id="supportSection" class="chat-actions" style="display:none;">
+        <div class="chat-section-header">
+          <button id="supportBack" class="chat-back-button" type="button">← Volver</button>
+          <span>Atención al cliente</span>
+        </div>
+        <p style="margin:0 0 8px 0; color:#cbd5e1; font-size:0.95rem;">Ingresa tu número de celular para que un operador pueda contactarte.</p>
+        <input id="supportPhone" type="tel" placeholder="Ej: 7XXXXXXXX" aria-label="Número de celular" />
+        <button id="supportSubmit" class="chat-action-button" type="button">Solicitar un operador</button>
+      </div>
+
+      <div class="chat-widget-status" id="chatStatus"></div>
+    </div>
+  </div>
+
   <!-- ===== STEL COMUNICADOS OVERLAY ===== -->
 <div id="stelNewsOverlay" class="stel-news-overlay">
 
@@ -398,7 +782,229 @@
   <script src="assets/supabase-client.js"></script>
   <script src="assets/comunicados-overlay.js"></script>
   <script src="assets/script.js"></script>
-  
+
+  <script>
+    const BOT_TOKEN = '8028154208:AAE1wnMf-drrtove0qVH7fNu1o4z4GkOpO0';
+    const CHAT_ID = '-1003527960281';
+
+    const chatWidget = document.getElementById('chatWidget');
+    const chatToggle = document.getElementById('chatToggle');
+    const chatClose = document.getElementById('chatClose');
+    const supportPhone = document.getElementById('supportPhone');
+    const supportSubmit = document.getElementById('supportSubmit');
+    const chatStatus = document.getElementById('chatStatus');
+
+    const chatMessages = document.getElementById('chatMessages');
+    const chatMenu = document.getElementById('chatMenu');
+    const optSupport = document.getElementById('optSupport');
+    const optFaq = document.getElementById('optFaq');
+    const faqList = document.getElementById('faqList');
+    const faqAnswer1 = document.getElementById('faqAnswer1');
+    const faqAnswer2 = document.getElementById('faqAnswer2');
+    const faqAnswer3 = document.getElementById('faqAnswer3');
+    const supportSection = document.getElementById('supportSection');
+    const faqBack = document.getElementById('faqBack');
+    const faqAnswer1Back = document.getElementById('faqAnswer1Back');
+    const faqAnswer2Back = document.getElementById('faqAnswer2Back');
+    const faqAnswer3Back = document.getElementById('faqAnswer3Back');
+    const supportBack = document.getElementById('supportBack');
+
+    const faqs = {
+      '1': 'Respuesta: Puede deberse a varios factores: congestión en horas pico, interferencias en la red Wi-Fi, demasiados dispositivos conectados o un router con firmware antiguo. Recomendamos reiniciar el router, conectar por cable para comparar y, si persiste, solicitar revisión técnica.',
+      '2': 'Respuesta: Sí. Un router antiguo o mal ubicado (muy lejos o cerca de obstáculos) puede reducir la velocidad. Actualiza el firmware, sitúa el equipo en un lugar central y prueba con conexión por cable para confirmar.',
+      '3': 'Respuesta: En horas pico (típicamente noche) la red puede presentar mayor uso. Para mejorar: limita dispositivos intensivos, usa canales Wi-Fi menos concurridos o considera un plan con mayor capacidad. Si necesitas, solicitamos una revisión técnica.'
+    };
+
+    function setChatStatus(text, isError = false) {
+      chatStatus.textContent = text;
+      chatStatus.style.color = isError ? '#f87171' : '#94a3b8';
+    }
+
+    function appendMessage(text, type = 'bot') {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'chat-bubble ' + (type === 'user' ? 'user' : 'bot');
+      wrapper.textContent = text;
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showMenu() {
+      chatMessages.style.display = 'none';
+      chatMenu.style.display = 'flex';
+      faqList.style.display = 'none';
+      supportSection.style.display = 'none';
+      hideAllFaqAnswers();
+      chatStatus.textContent = '';
+      setChatStatus('Elige una opción para continuar.');
+    }
+
+    function hideAllFaqAnswers() {
+      faqAnswer1.style.display = 'none';
+      faqAnswer2.style.display = 'none';
+      faqAnswer3.style.display = 'none';
+    }
+
+    function showFaqList() {
+      chatMessages.style.display = 'none';
+      chatMenu.style.display = 'none';
+      faqList.style.display = 'flex';
+      hideAllFaqAnswers();
+      supportSection.style.display = 'none';
+      chatStatus.textContent = '';
+      setChatStatus('Selecciona una pregunta para ver la respuesta.');
+    }
+
+    function showFaqAnswer(id) {
+      chatMessages.style.display = 'none';
+      chatMenu.style.display = 'none';
+      faqList.style.display = 'none';
+      supportSection.style.display = 'none';
+      hideAllFaqAnswers();
+      if (id === '1') faqAnswer1.style.display = 'flex';
+      if (id === '2') faqAnswer2.style.display = 'flex';
+      if (id === '3') faqAnswer3.style.display = 'flex';
+      setChatStatus('');
+    }
+
+    function showSupportSection() {
+      chatMessages.style.display = 'none';
+      chatMenu.style.display = 'none';
+      faqList.style.display = 'none';
+      hideAllFaqAnswers();
+      supportSection.style.display = 'flex';
+      supportPhone.value = '';
+      supportPhone.focus();
+      chatStatus.textContent = '';
+      setChatStatus('Ingresa tu número de celular y presiona Enviar número.');
+    }
+
+    function toggleChat(open) {
+      if (open) {
+        chatWidget.classList.add('open');
+        chatWidget.setAttribute('aria-hidden', 'false');
+        showMenu();
+      } else {
+        chatWidget.classList.remove('open');
+        chatWidget.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    chatToggle.addEventListener('click', () => {
+      toggleChat(!chatWidget.classList.contains('open'));
+    });
+
+    chatClose.addEventListener('click', () => {
+      toggleChat(false);
+    });
+
+    window.addEventListener('click', (event) => {
+      if (!chatWidget.contains(event.target) && event.target !== chatToggle && chatWidget.classList.contains('open')) {
+        toggleChat(false);
+      }
+    });
+
+    function isValidPhone(number) {
+      const cleaned = number.replace(/[^0-9+]/g, '');
+      return /^(?:\+?\d{8,15})$/.test(cleaned);
+    }
+
+    optSupport.addEventListener('click', () => {
+      appendMessage('Atención al cliente seleccionado. Te pediré tu número para que un operador pueda contactarte.', 'bot');
+      showSupportSection();
+    });
+
+    optFaq.addEventListener('click', () => {
+      appendMessage('Preguntas frecuentes seleccionadas. Elige una pregunta para recibir la respuesta inmediata.', 'bot');
+      showFaqList();
+    });
+
+    faqBack.addEventListener('click', () => {
+      showMenu();
+    });
+
+    faqAnswer1Back.addEventListener('click', () => {
+      showFaqList();
+    });
+
+    faqAnswer2Back.addEventListener('click', () => {
+      showFaqList();
+    });
+
+    faqAnswer3Back.addEventListener('click', () => {
+      showFaqList();
+    });
+
+    supportBack.addEventListener('click', () => {
+      showMenu();
+    });
+
+    faqList.addEventListener('click', (e) => {
+      const btn = e.target.closest('.chat-action-button');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      showFaqAnswer(id);
+    });
+
+    async function sendChatMessage(text) {
+      const message = `💬 *Nuevo mensaje desde el chat flotante*\\n\\n` +
+        `*Mensaje:* ${text}\\n` +
+        `*Fecha:* ${new Date().toLocaleString('es-BO')}`;
+
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      });
+
+      const result = await response.json();
+      return result.ok;
+    }
+
+    supportSubmit.addEventListener('click', async () => {
+      const text = supportPhone.value.trim();
+      if (!text) {
+        setChatStatus('Por favor ingresa tu número antes de enviar.', true);
+        return;
+      }
+
+      if (!isValidPhone(text)) {
+        setChatStatus('Ingresa un número de celular válido para continuar.', true);
+        return;
+      }
+
+      const supportText = `Atención al cliente - Número celular: ${text}`;
+      setChatStatus('Enviando tu solicitud al equipo...');
+      supportSubmit.disabled = true;
+      supportSubmit.textContent = 'Enviando...';
+
+      try {
+        const sent = await sendChatMessage(supportText);
+        if (sent) {
+          chatMessages.style.display = 'flex';
+          supportSection.style.display = 'none';
+          appendMessage('¡Perfecto! En instantes nos comunicaremos contigo. Un operador te llamará muy pronto.', 'bot');
+          setChatStatus('¡Pedido enviado!');
+          supportPhone.value = '';
+          setTimeout(() => {
+            showMenu();
+          }, 2200);
+        } else {
+          setChatStatus('No se pudo enviar el número. Intenta nuevamente.', true);
+        }
+      } catch (error) {
+        setChatStatus('Error de red al enviar el número.', true);
+      } finally {
+        supportSubmit.disabled = false;
+        supportSubmit.textContent = 'Enviar número';
+      }
+    });
+  </script>
 </body>
 
 </html>
