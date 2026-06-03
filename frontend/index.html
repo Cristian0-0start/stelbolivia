@@ -397,6 +397,66 @@
         min-height: 95px;
       }
     }
+
+    /* Toast flotante dentro del widget de chat (centrado) */
+    .floating-toast {
+      position: absolute;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      min-width: 220px;
+      max-width: calc(100% - 32px);
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      color: #ffffff;
+      padding: 12px 14px;
+      border-radius: 12px;
+      box-shadow: 0 18px 36px rgba(2,6,23,0.45);
+      z-index: 1002;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-family: inherit;
+      animation: toastIn 420ms cubic-bezier(.2,.9,.3,1) forwards;
+    }
+
+    .floating-toast .toast-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #fff;
+      flex: 0 0 36px;
+    }
+
+    .floating-toast .toast-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .floating-toast .toast-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.1;
+    }
+
+    .floating-toast .toast-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.95);
+    }
+
+    @keyframes toastIn {
+      0% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.98); }
+      60% { opacity: 1; transform: translateX(-50%) translateY(-6px) scale(1.02); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+    }
+
+    @keyframes toastOut {
+      to { opacity: 0; transform: translateX(-50%) translateY(-18px) scale(0.98); }
+    }
   </style>
 </head>
 
@@ -538,7 +598,7 @@
     <!-- ===== PLANES DESTACADOS ===== -->
     <section id="planes" class="section section--alt" aria-labelledby="planes-heading">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header">E
           <span class="section-tag">Precios transparentes</span>
           <h2 id="planes-heading">Planes para cada necesidad</h2>
           <p class="section-desc">Desde el hogar hasta la empresa, tenemos el plan perfecto para ti.</p>
@@ -688,44 +748,14 @@
         <button class="chat-action-button" type="button" data-id="3">¿Qué puedo hacer si la velocidad baja en horas pico?</button>
       </div>
 
-      <div id="faqAnswer1" class="chat-actions" style="display:none;">
-        <div class="chat-section-header">
-          <button id="faqAnswer1Back" class="chat-back-button" type="button">← Volver</button>
-          <span>¿Por qué está lento mi internet?</span>
-        </div>
-        <div class="chat-answer-panel">
-          <p>Respuesta: Puede deberse a varios factores: congestión en horas pico, interferencias en la red Wi-Fi, demasiados dispositivos conectados o un router con firmware antiguo. Recomendamos reiniciar el router, conectar por cable para comparar y, si persiste, solicitar revisión técnica.</p>
-        </div>
-      </div>
-
-      <div id="faqAnswer2" class="chat-actions" style="display:none;">
-        <div class="chat-section-header">
-          <button id="faqAnswer2Back" class="chat-back-button" type="button">← Volver</button>
-          <span>¿Puede el router afectar la velocidad?</span>
-        </div>
-        <div class="chat-answer-panel">
-          <p>Respuesta: Sí. Un router antiguo o mal ubicado (muy lejos o cerca de obstáculos) puede reducir la velocidad. Actualiza el firmware, sitúa el equipo en un lugar central y prueba con conexión por cable para confirmar.</p>
-        </div>
-      </div>
-
-      <div id="faqAnswer3" class="chat-actions" style="display:none;">
-        <div class="chat-section-header">
-          <button id="faqAnswer3Back" class="chat-back-button" type="button">← Volver</button>
-          <span>¿Qué puedo hacer si la velocidad baja en horas pico?</span>
-        </div>
-        <div class="chat-answer-panel">
-          <p>Respuesta: En horas pico (típicamente noche) la red puede presentar mayor uso. Para mejorar: limita dispositivos intensivos, usa canales Wi-Fi menos concurridos o considera un plan con mayor capacidad. Si necesitas, solicitamos una revisión técnica.</p>
-        </div>
-      </div>
-
       <div id="supportSection" class="chat-actions" style="display:none;">
         <div class="chat-section-header">
           <button id="supportBack" class="chat-back-button" type="button">← Volver</button>
-          <span>Atención al cliente</span>
+          <span id="supportHeaderTitle">Atención al cliente</span>
         </div>
-        <p style="margin:0 0 8px 0; color:#cbd5e1; font-size:0.95rem;">Ingresa tu número de celular para que un operador pueda contactarte.</p>
+        <p id="supportPrompt" style="margin:0 0 8px 0; color:#cbd5e1; font-size:0.95rem;">Ingresa tu número de celular para que un operador pueda contactarte.</p>
         <input id="supportPhone" type="tel" placeholder="Ej: 7XXXXXXXX" aria-label="Número de celular" />
-        <button id="supportSubmit" class="chat-action-button" type="button">Solicitar un operador</button>
+        <button id="supportSubmit" class="chat-action-button" type="button">Enviar número</button>
       </div>
 
       <div class="chat-widget-status" id="chatStatus"></div>
@@ -799,21 +829,14 @@
     const optSupport = document.getElementById('optSupport');
     const optFaq = document.getElementById('optFaq');
     const faqList = document.getElementById('faqList');
-    const faqAnswer1 = document.getElementById('faqAnswer1');
-    const faqAnswer2 = document.getElementById('faqAnswer2');
-    const faqAnswer3 = document.getElementById('faqAnswer3');
     const supportSection = document.getElementById('supportSection');
+    const supportHeaderTitle = document.getElementById('supportHeaderTitle');
+    const supportPrompt = document.getElementById('supportPrompt');
     const faqBack = document.getElementById('faqBack');
-    const faqAnswer1Back = document.getElementById('faqAnswer1Back');
-    const faqAnswer2Back = document.getElementById('faqAnswer2Back');
-    const faqAnswer3Back = document.getElementById('faqAnswer3Back');
     const supportBack = document.getElementById('supportBack');
 
-    const faqs = {
-      '1': 'Respuesta: Puede deberse a varios factores: congestión en horas pico, interferencias en la red Wi-Fi, demasiados dispositivos conectados o un router con firmware antiguo. Recomendamos reiniciar el router, conectar por cable para comparar y, si persiste, solicitar revisión técnica.',
-      '2': 'Respuesta: Sí. Un router antiguo o mal ubicado (muy lejos o cerca de obstáculos) puede reducir la velocidad. Actualiza el firmware, sitúa el equipo en un lugar central y prueba con conexión por cable para confirmar.',
-      '3': 'Respuesta: En horas pico (típicamente noche) la red puede presentar mayor uso. Para mejorar: limita dispositivos intensivos, usa canales Wi-Fi menos concurridos o considera un plan con mayor capacidad. Si necesitas, solicitamos una revisión técnica.'
-    };
+    let selectedQuestion = null;
+    let pendingAction = null;
 
     function setChatStatus(text, isError = false) {
       chatStatus.textContent = text;
@@ -828,6 +851,34 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showFloatingToast(title, sub, duration = 3000) {
+      const toast = document.createElement('div');
+      toast.className = 'floating-toast';
+      toast.innerHTML = `
+        <div class="toast-icon">✓</div>
+        <div class="toast-body">
+          <div class="toast-title">${escapeHtml(title)}</div>
+          ${sub ? `<div class="toast-sub">${escapeHtml(sub)}</div>` : ''}
+        </div>`;
+      // ensure chatWidget is positioned relatively
+      chatWidget.style.position = chatWidget.style.position || 'fixed';
+      chatWidget.appendChild(toast);
+      // hide after duration
+      setTimeout(() => {
+        toast.style.animation = 'toastOut 420ms ease forwards';
+        setTimeout(() => toast.remove(), 420);
+      }, duration);
+    }
+
     function showMenu() {
       chatMessages.style.display = 'none';
       chatMenu.style.display = 'flex';
@@ -839,31 +890,16 @@
     }
 
     function hideAllFaqAnswers() {
-      faqAnswer1.style.display = 'none';
-      faqAnswer2.style.display = 'none';
-      faqAnswer3.style.display = 'none';
+      // no-op since FAQ answers ya no se muestran
     }
 
     function showFaqList() {
       chatMessages.style.display = 'none';
       chatMenu.style.display = 'none';
       faqList.style.display = 'flex';
-      hideAllFaqAnswers();
       supportSection.style.display = 'none';
       chatStatus.textContent = '';
-      setChatStatus('Selecciona una pregunta para ver la respuesta.');
-    }
-
-    function showFaqAnswer(id) {
-      chatMessages.style.display = 'none';
-      chatMenu.style.display = 'none';
-      faqList.style.display = 'none';
-      supportSection.style.display = 'none';
-      hideAllFaqAnswers();
-      if (id === '1') faqAnswer1.style.display = 'flex';
-      if (id === '2') faqAnswer2.style.display = 'flex';
-      if (id === '3') faqAnswer3.style.display = 'flex';
-      setChatStatus('');
+      setChatStatus('Selecciona una pregunta para enviarla junto con tu número.');
     }
 
     function showSupportSection() {
@@ -875,7 +911,18 @@
       supportPhone.value = '';
       supportPhone.focus();
       chatStatus.textContent = '';
-      setChatStatus('Ingresa tu número de celular y presiona Enviar número.');
+      if (pendingAction === 'faq' && selectedQuestion) {
+        supportHeaderTitle.textContent = 'Confirmar pregunta';
+        supportPrompt.textContent = `Vamos a enviar tu pregunta seleccionada. Ingresa tu número para continuar.`;
+        supportSubmit.textContent = 'Enviar pregunta';
+      } else {
+        supportHeaderTitle.textContent = 'Atención al cliente';
+        supportPrompt.textContent = 'Ingresa tu número de celular para que un operador pueda contactarte.';
+        supportSubmit.textContent = 'Enviar número';
+      }
+      setChatStatus(pendingAction === 'faq'
+        ? 'Ingresa tu número para que podamos atender tu pregunta elegida de inmediato.'
+        : 'Ingresa tu número de celular y presiona Enviar número.');
     }
 
     function toggleChat(open) {
@@ -909,29 +956,19 @@
     }
 
     optSupport.addEventListener('click', () => {
-      appendMessage('Atención al cliente seleccionado. Te pediré tu número para que un operador pueda contactarte.', 'bot');
+      pendingAction = 'support';
+      selectedQuestion = null;
       showSupportSection();
     });
 
     optFaq.addEventListener('click', () => {
-      appendMessage('Preguntas frecuentes seleccionadas. Elige una pregunta para recibir la respuesta inmediata.', 'bot');
+      pendingAction = 'faq';
+      selectedQuestion = null;
       showFaqList();
     });
 
     faqBack.addEventListener('click', () => {
       showMenu();
-    });
-
-    faqAnswer1Back.addEventListener('click', () => {
-      showFaqList();
-    });
-
-    faqAnswer2Back.addEventListener('click', () => {
-      showFaqList();
-    });
-
-    faqAnswer3Back.addEventListener('click', () => {
-      showFaqList();
     });
 
     supportBack.addEventListener('click', () => {
@@ -941,14 +978,13 @@
     faqList.addEventListener('click', (e) => {
       const btn = e.target.closest('.chat-action-button');
       if (!btn) return;
-      const id = btn.dataset.id;
-      showFaqAnswer(id);
+      selectedQuestion = btn.textContent.trim();
+      showSupportSection();
     });
 
     async function sendChatMessage(text) {
-      const message = `💬 *Nuevo mensaje desde el chat flotante*\\n\\n` +
-        `*Mensaje:* ${text}\\n` +
-        `*Fecha:* ${new Date().toLocaleString('es-BO')}`;
+      const message = `${text}\n` +
+        `Fecha: ${new Date().toLocaleString('es-BO')}`;
 
       const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
@@ -978,7 +1014,9 @@
         return;
       }
 
-      const supportText = `Atención al cliente - Número celular: ${text}`;
+      const supportText = pendingAction === 'faq' && selectedQuestion
+        ? `Acción inmediata\nPregunta: ${selectedQuestion}\nTeléfono: ${text}`
+        : `Atención al cliente\nTeléfono: ${text}`;
       setChatStatus('Enviando tu solicitud al equipo...');
       supportSubmit.disabled = true;
       supportSubmit.textContent = 'Enviando...';
@@ -988,7 +1026,8 @@
         if (sent) {
           chatMessages.style.display = 'flex';
           supportSection.style.display = 'none';
-          appendMessage('¡Perfecto! En instantes nos comunicaremos contigo. Un operador te llamará muy pronto.', 'bot');
+          // mostrar toast animado en lugar de mensaje estático
+          showFloatingToast('Solicitud enviada', 'Gracias — en breve un operador se comunicará contigo.', 3000);
           setChatStatus('¡Pedido enviado!');
           supportPhone.value = '';
           setTimeout(() => {
