@@ -55,12 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <li>
         <a href="${basePath}resources/ofertas.html" class="nav-link ${activePage === 'ofertas' ? 'active' : ''}">Ofertas</a>
       </li>
-      <li>
-        <a href="${basePath}resources/comunicados.html" class="nav-link ${activePage === 'comunicados' ? 'active' : ''}">Comunicados</a>
-      </li>
-      <li>
-        <a href="${basePath}resources/contacto.html" class="nav-link nav-link--cta ${activePage === 'contacto' ? 'active' : ''}">Contacto</a>
-      </li>
+ 
     </ul>
   </nav>`;
 

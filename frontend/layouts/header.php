@@ -53,14 +53,7 @@ if (!defined('CURRENT_PAGE')) {
         <a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/resources/') !== false) ? 'ofertas.html' : 'resources/ofertas.html'; ?>"
           class="nav-link <?php echo CURRENT_PAGE === 'ofertas' ? 'active' : ''; ?>">Ofertas</a>
       </li>
-      <li>
-        <a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/resources/') !== false) ? 'comunicados.html' : 'resources/comunicados.html'; ?>"
-          class="nav-link <?php echo CURRENT_PAGE === 'comunicados' ? 'active' : ''; ?>">Comunicados</a>
-      </li>
-      <li>
-        <a href="<?php echo (strpos($_SERVER['PHP_SELF'], '/resources/') !== false) ? 'contacto.html' : 'resources/contacto.html'; ?>"
-          class="nav-link nav-link--cta <?php echo CURRENT_PAGE === 'contacto' ? 'active' : ''; ?>">Contacto</a>
-      </li>
+
     </ul>
   </nav>
 </header>
