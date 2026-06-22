@@ -628,13 +628,10 @@
                     <p>Oficinas centrales y centros de atención al cliente</p>
                 </div>
                 <div class="map-container">
-                    <div class="map-placeholder">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <p>Av. Principal #123, Edificio STEL</p>
-                        <p>La Paz - Bolivia</p>
+                    <div class="map-placeholder"> <br>
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3953.663563087938!2d-68.1476930262707!3d-16.527839961983005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sbo!4v1779996382242!5m2!1ses-419!2sbo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <p>Av. Del policia</p>
+                        <p>El Alto - Bolivia</p>
                     </div>
                 </div>
             </div>
@@ -645,25 +642,63 @@
     <script src="../assets/script.js"></script>
     
     <script>
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show success message (simulated)
+        const BOT_TOKEN = '8028154208:AAE1wnMf-drrtove0qVH7fNu1o4z4GkOpO0';
+        const CHAT_ID = '-1003527960281';
+
+        function showMessage(message, isError = false) {
             const formContainer = document.querySelector('.form-container');
-            const successDiv = document.createElement('div');
-            successDiv.className = 'success-message';
-            successDiv.innerHTML = '✓ Mensaje enviado correctamente. Te contactaremos a la brevedad.';
-            
-            formContainer.insertBefore(successDiv, formContainer.firstChild);
-            
-            // Reset form
-            this.reset();
-            
-            // Remove success message after 5 seconds
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.style.borderColor = isError ? '#FF4B4B' : '';
+            messageDiv.style.color = isError ? '#FF4B4B' : '';
+            messageDiv.innerText = message;
+
+            const previousMessage = formContainer.querySelector('.success-message');
+            if (previousMessage) previousMessage.remove();
+            formContainer.insertBefore(messageDiv, formContainer.firstChild);
+
             setTimeout(() => {
-                successDiv.remove();
+                messageDiv.remove();
             }, 5000);
+        }
+
+        async function sendContactToTelegram(formData) {
+            const message = `📩 *Nuevo mensaje desde Contacto STEL*\n\n` +
+                `*Nombre:* ${formData.nombre}\n` +
+                `*Correo:* ${formData.email}\n` +
+                `*Teléfono:* ${formData.telefono || 'No especificado'}\n` +
+                `*Asunto:* ${formData.asunto}\n` +
+                `*Mensaje:* ${formData.mensaje}\n` +
+                `*Fecha:* ${new Date().toLocaleString('es-BO')}`;
+
+            const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            });
+
+            const result = await response.json();
+            return result.ok;
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = Object.fromEntries(new FormData(this).entries());
+            const sent = await sendContactToTelegram(formData);
+
+            if (sent) {
+                showMessage('✓ Mensaje enviado correctamente. Te contactaremos a la brevedad.');
+                this.reset();
+            } else {
+                showMessage('✕ Error al enviar el mensaje. Por favor intenta nuevamente.', true);
+            }
         });
     </script>
 
