@@ -20,13 +20,13 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
  
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <style>
+ <style>
     body {
       background: radial-gradient(circle at 25% 20%, #071422 0%, #0b1e50 100%);
       color: #e6efff;
@@ -46,6 +46,8 @@
       color: #0cceff;
       font-family: 'DM Sans', sans-serif;
     }
+
+
 
     .section-tag {
       background: rgba(13, 28, 53, 0.85);
@@ -86,89 +88,6 @@
       background: rgba(255,255,255,0.08);
       color: #d9f4ff;
     }
-
-    /* ===== HERO CAROUSEL ===== */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 500px;
-    }
-
-    .hero-carousel-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      min-height: 500px;
-    }
-
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero-slide.active {
-      opacity: 1;
-      visibility: visible;
-      position: relative;
-    }
-
-    /* ===== FONDOS HERO: ESCRITORIO vs MÓVIL ===== */
-    .hero-slide-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 1;
-    }
-
-    .hero-slide-bg-mobile {
-      display: none;
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 1;
-    }
-
-    .hero-slide-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 2;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero-content-wrapper {
-      width: 100%;
-      padding: 40px 0;
-    }
-
-    /* Responsive: móvil */
-    @media (max-width: 768px) {
-      .hero-slide-bg {
-        display: none;
-      }
-      .hero-slide-bg-mobile {
-        display: block;
-      }
-    }
-    /* ============================================= */
 
     /* Chat widget flotante en la esquina inferior derecha */
     .chat-widget-toggle {
@@ -538,130 +457,6 @@
     @keyframes toastOut {
       to { opacity: 0; transform: translateX(-50%) translateY(-18px) scale(0.98); }
     }
-
-    /* Estilos para el overlay de comunicados STEL */
-    .stel-news-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-    }
-
-    .stel-news-overlay.active {
-      display: flex;
-    }
-
-    .stel-news-modal {
-      background: #0b1e50;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 24px;
-      max-width: 720px;
-      width: 90%;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 28px 32px;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-      position: relative;
-      color: #e6efff;
-    }
-
-    .stel-news-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .stel-news-badge {
-      background: rgba(14, 165, 233, 0.2);
-      color: #7dd3fc;
-      padding: 4px 14px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .stel-news-counter {
-      color: #94a3b8;
-      font-size: 0.85rem;
-    }
-
-    .stel-news-meta {
-      display: flex;
-      gap: 16px;
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-    }
-
-    .stel-news-content h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #f8fbff;
-      margin: 8px 0 12px 0;
-    }
-
-    .stel-news-content p {
-      line-height: 1.6;
-      color: #cbd5e1;
-    }
-
-    .stel-news-divider {
-      height: 1px;
-      background: rgba(255, 255, 255, 0.08);
-      margin: 16px 0;
-    }
-
-    .stel-news-text {
-      color: #e6efff;
-      line-height: 1.7;
-    }
-
-    .stel-news-footer {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .stel-news-progress {
-      width: 100%;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .stel-news-progress-bar {
-      height: 100%;
-      background: #0ea5e9;
-      width: 0%;
-      border-radius: 4px;
-      transition: width 0.3s ease;
-    }
-
-    .stel-news-hint {
-      color: #94a3b8;
-      font-size: 0.85rem;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      .stel-news-modal {
-        padding: 20px 16px;
-        width: 95%;
-        border-radius: 18px;
-      }
-      .stel-news-content h2 {
-        font-size: 1.3rem;
-      }
-    }
   </style>
 </head>
 
@@ -671,79 +466,82 @@
 
   <main id="main-content">
 
-    <!-- ===== HERO ===== -->
-    <section id="inicio" class="hero" aria-labelledby="hero-heading">
 
-      <!-- Fade Carousel Track (Automático - sin botones) -->
-      <div class="hero-carousel-container" id="heroTrack">
+<!-- ===== HERO ===== -->
+<section id="inicio" class="hero" aria-labelledby="hero-heading">
 
-        <!-- SLIDE 1: INTERNET -->
-        <div class="hero-slide active" data-slide="1">
-          <!-- Fondo escritorio: internet.png | Fondo móvil: vertical.jpg -->
-          <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/internet.png');"></div>
-          <div class="hero-slide-bg-mobile" style="background-image: url('/frontend/assets/vertical.jpg');"></div>
-          <div class="hero-slide-overlay"></div>
-          <div class="container hero-inner">
-            <div class="hero-content-wrapper">
-              <div class="hero-plan-cards">
-                <div class="floating-plan-card">
-                  <div class="plan-card-header">
-                    <span class="plan-label">60 Mbps</span>
-                    <strong>Bs 85/mes</strong>
-                  </div>
-                  <p>Ideal para navegación, streaming y trabajo desde casa.</p>
-                </div>
-                <div class="floating-plan-card floating-plan-card--featured">
-                  <div class="plan-card-header">
-                    <span class="plan-label">150 Mbps</span>
-                    <strong>Bs 139/mes</strong>
-                  </div>
-                  <p>Perfecto para familias y entretenimiento en múltiples dispositivos.</p>
-                </div>
-              </div><br>
-              <div class="hero-actions">
-                <a href="resources/planes.html" class="btn btn-primary btn-lg btn-hero-primary">Ver planes de Internet</a>
+  <!-- Fade Carousel Track -->
+  <div class="hero-carousel-container" id="heroTrack">
+
+    <!-- SLIDE 1: INTERNET -->
+    <div class="hero-slide active">
+      <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/internet.png')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-content-wrapper">
+          <div class="hero-plan-cards">
+            <div class="floating-plan-card">
+              <div class="plan-card-header">
+                <span class="plan-label">60 Mbps</span>
+                <strong>Bs 85/mes</strong>
               </div>
+              <p>Ideal para navegación, streaming y trabajo desde casa.</p>
             </div>
+            <div class="floating-plan-card floating-plan-card--featured">
+              <div class="plan-card-header">
+                <span class="plan-label">150 Mbps</span>
+                <strong>Bs 139/mes</strong>
+              </div>
+              <p>Perfecto para familias y entretenimiento en múltiples dispositivos.</p>
+            </div>
+          </div><br>
+          <div class="hero-actions">
+            <a href="resources/planes.html" class="btn btn-primary btn-lg btn-hero-primary">Ver planes de Internet</a>
           </div>
         </div>
-
-        <!-- SLIDE 2: TELEVISIÓN -->
-        <div class="hero-slide" data-slide="2">
-          <!-- Fondo escritorio: tv.png | Fondo móvil: tele.jpg -->
-          <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/tv.png');"></div>
-          <div class="hero-slide-bg-mobile" style="background-image: url('/frontend/assets/tele.jpg');"></div>
-          <div class="hero-slide-overlay"></div>
-          <div class="container hero-inner">
-            <div class="hero-content-wrapper">
-              <div class="hero-plan-cards">
-                <div class="floating-plan-card">
-                  <div class="plan-card-header">
-                    <span class="plan-label">120 canales</span>
-                    <strong>Bs 40/mes</strong>
-                  </div>
-                  <p>TV HD con noticias, deportes y entretenimiento para toda la familia.</p>
-                </div>
-                <div class="floating-plan-card floating-plan-card--featured">
-                  <div class="plan-card-header">
-                    <span class="plan-label">200 canales</span>
-                    <strong>Bs 50/mes</strong>
-                  </div>
-                  <p>Más canales premium y acceso a programación exclusiva en vivo.</p>
-                </div>
-              </div><br>
-              <div class="hero-actions">
-                <a href="resources/planes.html" class="btn btn-primary btn-lg btn-hero-primary">Ver planes de TV</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+    </div>
 
-      <!-- Sin botones de navegación (cambio automático) -->
+    <!-- SLIDE 2: TELEVISIÓN -->
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image: url('/frontend/assets/images/tv.png');"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-content-wrapper">
+          <div class="hero-plan-cards">
+            <div class="floating-plan-card">
+              <div class="plan-card-header">
+                <span class="plan-label">120 canales</span>
+                <strong>Bs 40/mes</strong>
+              </div>
+              <p>TV HD con noticias, deportes y entretenimiento para toda la familia.</p>
+            </div>
+            <div class="floating-plan-card floating-plan-card--featured">
+              <div class="plan-card-header">
+                <span class="plan-label">200 canales</span>
+                <strong>Bs 50/mes</strong>
+              </div>
 
-    </section>
+              <p>Más canales premium y acceso a programación exclusiva en vivo.</p>
+            </div>
+          </div><br>
+          <div class="hero-actions">
+            <a href="resources/planes.html" class="btn btn-primary btn-lg btn-hero-primary">Ver planes de TV</a>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+  </div> 
+
+  <!-- Carousel Navigation Dots -->
+  <div class="hero-nav-dots">
+    <button class="hero-dot active" aria-label="Slide 1"></button>
+    <button class="hero-dot" aria-label="Slide 2"></button>
+    <button class="hero-dot" aria-label="Slide 3"></button>
+  </div>
+
+</section> 
 
     <!-- ===== SERVICIOS ===== -->
     <section class="section" aria-labelledby="servicios-heading">
@@ -788,7 +586,7 @@
               </svg>
             </div>
             <div class="service-card__content">
-              <h3>Televisión por Cable Premium</h3>
+              <h3>Televisión  por Cable Premium</h3>
               <p>Cientos de canales en HD y 4K. Películas, series, deportes y documentales. Entretenimiento sin límites
                 para toda la familia.</p>
               <ul class="service-features" aria-label="Características del servicio de TV">
@@ -827,7 +625,7 @@
     <!-- ===== PLANES DESTACADOS ===== -->
     <section id="planes" class="section section--alt" aria-labelledby="planes-heading">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header">E
           <span class="section-tag">Precios transparentes</span>
           <h2 id="planes-heading">Planes para cada necesidad</h2>
           <p class="section-desc">Desde el hogar hasta la empresa, tenemos el plan perfecto para ti.</p>
@@ -944,13 +742,10 @@
       </div>
     </section>
   </main>
-
   <div id="footer-placeholder"></div>
 
-  <!-- Chat Widget Toggle -->
   <button id="chatToggle" class="chat-widget-toggle" aria-label="Abrir chat">💬</button>
 
-  <!-- Chat Widget -->
   <div id="chatWidget" class="chat-widget" aria-hidden="true">
     <div class="chat-widget-header">
       <h4>Mensajería</h4>
@@ -994,32 +789,49 @@
   </div>
 
   <!-- ===== STEL COMUNICADOS OVERLAY ===== -->
-  <div id="stelNewsOverlay" class="stel-news-overlay">
-    <div class="stel-news-backdrop"></div>
-    <div class="stel-news-modal">
-      <div class="stel-news-header">
-        <span class="stel-news-badge">COMUNICADO OFICIAL</span>
-        <span class="stel-news-counter" id="stelNewsCounter">1 / 1</span>
-      </div>
-      <div class="stel-news-content">
-        <div class="stel-news-meta">
-          <span id="stelNewsCategoria"></span>
-          <span id="stelNewsFecha"></span>
-        </div>
-        <h2 id="stelNewsTitulo"></h2>
-        <p id="stelNewsResumen"></p>
-        <div class="stel-news-divider"></div>
-        <div id="stelNewsContenido" class="stel-news-text"></div>
-      </div>
-      <div class="stel-news-footer">
-        <div class="stel-news-progress">
-          <div class="stel-news-progress-bar" id="stelProgressBar"></div>
-        </div>
-        <span class="stel-news-hint">Toque fuera del comunicado para continuar</span>
-      </div>
+<div id="stelNewsOverlay" class="stel-news-overlay">
+
+  <div class="stel-news-backdrop"></div>
+
+  <div class="stel-news-modal">
+
+    <div class="stel-news-header">
+      <span class="stel-news-badge">COMUNICADO OFICIAL</span>
+      <span class="stel-news-counter" id="stelNewsCounter">
+        1 / 1
+      </span>
     </div>
+
+    <div class="stel-news-content">
+
+      <div class="stel-news-meta">
+        <span id="stelNewsCategoria"></span>
+        <span id="stelNewsFecha"></span>
+      </div>
+
+      <h2 id="stelNewsTitulo"></h2>
+
+      <p id="stelNewsResumen"></p>
+
+      <div class="stel-news-divider"></div>
+
+      <div id="stelNewsContenido" class="stel-news-text"></div>
+
+    </div>
+
+    <div class="stel-news-footer">
+      <div class="stel-news-progress">
+        <div class="stel-news-progress-bar" id="stelProgressBar"></div>
+      </div>
+
+      <span class="stel-news-hint">
+        Toque fuera del comunicado para continuar
+      </span>
+    </div>
+
   </div>
 
+</div>
   <script src="layouts/header.js"></script>
   <script src="layouts/footer.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1028,23 +840,6 @@
   <script src="assets/script.js"></script>
 
   <script>
-    // ===== AUTO-CAROUSEL (sin botones manuales) =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const slides = document.querySelectorAll('.hero-slide');
-      let currentSlide = 0;
-      const totalSlides = slides.length;
-
-      function nextSlide() {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % totalSlides;
-        slides[currentSlide].classList.add('active');
-      }
-
-      // Cambiar cada 6 segundos
-      setInterval(nextSlide, 6000);
-    });
-
-    // ===== CHAT WIDGET =====
     const BOT_TOKEN = '8028154208:AAE1wnMf-drrtove0qVH7fNu1o4z4GkOpO0';
     const CHAT_ID = '-1003527960281';
 
@@ -1100,8 +895,10 @@
           <div class="toast-title">${escapeHtml(title)}</div>
           ${sub ? `<div class="toast-sub">${escapeHtml(sub)}</div>` : ''}
         </div>`;
+      // ensure chatWidget is positioned relatively
       chatWidget.style.position = chatWidget.style.position || 'fixed';
       chatWidget.appendChild(toast);
+      // hide after duration
       setTimeout(() => {
         toast.style.animation = 'toastOut 420ms ease forwards';
         setTimeout(() => toast.remove(), 420);
@@ -1255,6 +1052,7 @@
         if (sent) {
           chatMessages.style.display = 'flex';
           supportSection.style.display = 'none';
+          // mostrar toast animado en lugar de mensaje estático
           showFloatingToast('Solicitud enviada', 'Gracias — en breve un operador se comunicará contigo.', 3000);
           setChatStatus('¡Pedido enviado!');
           supportPhone.value = '';
