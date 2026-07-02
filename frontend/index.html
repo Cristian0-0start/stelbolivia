@@ -36,7 +36,7 @@
 
     body {
       font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
-      background: radial-gradient(circle at 25% 20%, #071422 0%, #0b1e50 100%);
+      background: #071422;
       color: #e6efff;
       line-height: 1.6;
       overflow-x: hidden;
@@ -48,13 +48,14 @@
       padding: 0 24px;
     }
 
-    /* ===== HERO ===== */
+    /* ===== HERO MEJORADO ===== */
     .hero {
       position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
       overflow: hidden;
+      background: #071422;
     }
 
     .hero-carousel-container {
@@ -81,12 +82,15 @@
       z-index: 2;
     }
 
+    /* Fondo con blend mode para mezcla perfecta */
     .hero-slide-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.5) saturate(1.1);
+      background-blend-mode: overlay;
+      mix-blend-mode: overlay;
+      opacity: 0.85;
       transform: scale(1.02);
       transition: transform 8s ease;
     }
@@ -95,10 +99,15 @@
       transform: scale(1);
     }
 
+    /* Degradado para fusión suave */
     .hero-slide-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(11, 30, 80, 0.55) 0%, rgba(7, 20, 34, 0.85) 100%);
+      background: radial-gradient(ellipse at 30% 50%, 
+        rgba(7, 20, 34, 0.4) 0%, 
+        rgba(11, 30, 80, 0.7) 60%,
+        rgba(7, 20, 34, 0.9) 100%
+      );
       z-index: 1;
     }
 
@@ -117,7 +126,31 @@
       width: 100%;
     }
 
-    /* Tarjetas de precios flotantes mejoradas */
+    /* Título elegante */
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title--accent {
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    /* Tarjetas de precios tipo burbuja mejoradas */
     .hero-plan-cards {
       display: flex;
       flex-wrap: wrap;
@@ -126,10 +159,10 @@
     }
 
     .floating-plan-card {
-      background: rgba(11, 30, 70, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(96, 165, 250, 0.25);
+      background: rgba(11, 30, 70, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(96, 165, 250, 0.2);
       border-radius: 50%;
       width: 190px;
       height: 190px;
@@ -139,25 +172,33 @@
       justify-content: center;
       text-align: center;
       padding: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(96, 165, 250, 0.1);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.4s ease;
       position: relative;
       flex: 0 0 auto;
     }
 
     .floating-plan-card:hover {
       transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 30px 60px rgba(14, 165, 233, 0.3), 0 0 0 2px rgba(96, 165, 250, 0.4);
+      box-shadow: 0 30px 60px rgba(14, 165, 233, 0.25), 
+                  0 0 0 2px rgba(96, 165, 250, 0.3);
     }
 
     .floating-plan-card--featured {
-      background: linear-gradient(145deg, rgba(14, 165, 233, 0.25), rgba(99, 102, 241, 0.20));
-      border-color: rgba(14, 165, 233, 0.5);
-      box-shadow: 0 20px 50px rgba(14, 165, 233, 0.2), 0 0 0 1px rgba(14, 165, 233, 0.3);
+      background: linear-gradient(145deg, 
+        rgba(14, 165, 233, 0.2), 
+        rgba(99, 102, 241, 0.15)
+      );
+      border-color: rgba(14, 165, 233, 0.4);
+      box-shadow: 0 20px 50px rgba(14, 165, 233, 0.15), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     .floating-plan-card--featured:hover {
-      box-shadow: 0 30px 70px rgba(14, 165, 233, 0.4), 0 0 0 2px rgba(14, 165, 233, 0.5);
+      box-shadow: 0 30px 70px rgba(14, 165, 233, 0.3), 
+                  0 0 0 2px rgba(14, 165, 233, 0.4);
     }
 
     .plan-card-header {
@@ -168,7 +209,7 @@
     }
 
     .plan-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -192,7 +233,7 @@
     }
 
     .floating-plan-card p {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: #cbd5e1;
       margin-top: 6px;
       line-height: 1.4;
@@ -207,7 +248,7 @@
       content: '';
       position: absolute;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(14, 165, 233, 0.15), transparent 70%);
+      background: radial-gradient(circle at 30% 30%, rgba(14, 165, 233, 0.12), transparent 70%);
       pointer-events: none;
       z-index: -1;
     }
@@ -217,7 +258,7 @@
       height: 40px;
       top: -12px;
       right: -8px;
-      background: radial-gradient(circle at 60% 40%, rgba(99, 102, 241, 0.2), transparent 70%);
+      background: radial-gradient(circle at 60% 40%, rgba(99, 102, 241, 0.15), transparent 70%);
       animation: floatBubble 6s ease-in-out infinite alternate;
     }
 
@@ -226,15 +267,14 @@
       height: 30px;
       bottom: -8px;
       left: -12px;
-      background: radial-gradient(circle at 30% 30%, rgba(14, 165, 233, 0.12), transparent 70%);
+      background: radial-gradient(circle at 30% 30%, rgba(14, 165, 233, 0.1), transparent 70%);
       animation: floatBubble 8s ease-in-out infinite alternate-reverse;
     }
 
-    /* Burbujas pequeñas adicionales */
     .floating-plan-card .bubble-dot {
       position: absolute;
       border-radius: 50%;
-      background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.08), transparent 70%);
+      background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.06), transparent 70%);
       pointer-events: none;
       z-index: -1;
     }
@@ -266,11 +306,11 @@
     @keyframes floatBubble {
       0% {
         transform: translateY(0px) scale(1);
-        opacity: 0.4;
+        opacity: 0.3;
       }
       100% {
         transform: translateY(-18px) scale(1.3);
-        opacity: 0.9;
+        opacity: 0.8;
       }
     }
 
@@ -338,25 +378,25 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.25);
-      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
       transition: all 0.3s ease;
       padding: 0;
-      box-shadow: 0 0 0 2px transparent;
     }
 
     .hero-dot.active {
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.3);
+      border-color: #0ea5e9;
       transform: scale(1.15);
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
     }
 
     .hero-dot:hover {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.5);
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== RESPONSIVE CON IMÁGENES ESPECÍFICAS ===== */
     @media (max-width: 992px) {
       .floating-plan-card {
         width: 170px;
@@ -367,7 +407,7 @@
         font-size: 1.3rem;
       }
       .floating-plan-card p {
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         max-width: 120px;
       }
     }
@@ -380,6 +420,16 @@
         height: 90vh;
         min-height: 500px;
       }
+      
+      /* Imagen vertical para móviles */
+      .hero-slide-bg {
+        background-image: url('assets/vertical.jpg') !important;
+        background-size: cover;
+        background-position: center;
+        mix-blend-mode: overlay;
+        opacity: 0.9;
+      }
+
       .hero-inner {
         padding: 20px 16px;
         justify-content: center;
@@ -391,24 +441,32 @@
         flex-direction: column;
         align-items: center;
       }
+      .hero-title {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+      .hero-subtitle {
+        text-align: center;
+        font-size: 1rem;
+      }
       .hero-plan-cards {
         justify-content: center;
-        gap: 18px;
+        gap: 16px;
       }
       .floating-plan-card {
-        width: 155px;
-        height: 155px;
+        width: 150px;
+        height: 150px;
         padding: 16px;
       }
       .floating-plan-card strong {
         font-size: 1.2rem;
       }
       .floating-plan-card p {
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         max-width: 110px;
       }
       .plan-label {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         padding: 2px 10px;
       }
       .floating-plan-card .bubble-dot {
@@ -441,15 +499,32 @@
         font-size: 1rem;
       }
       .floating-plan-card p {
-        font-size: 0.62rem;
+        font-size: 0.6rem;
         max-width: 95px;
       }
       .plan-label {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
         padding: 2px 8px;
       }
       .hero-plan-cards {
         gap: 12px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      /* Imagen horizontal para escritorio */
+      .hero-slide[data-service="internet"] .hero-slide-bg {
+        background-image: url('assets/internet.png') !important;
+        background-size: cover;
+        background-position: center;
+      }
+      .hero-slide[data-service="tv"] .hero-slide-bg {
+        background-image: url('assets/tv.jpg') !important;
+        background-size: cover;
+        background-position: center;
       }
     }
 
@@ -797,7 +872,7 @@
       }
     }
 
-    /* ===== CHAT WIDGET (flotante) ===== */
+    /* ===== CHAT WIDGET ===== */
     .chat-widget-toggle {
       position: fixed;
       right: 24px;
@@ -942,29 +1017,6 @@
       gap: 10px;
     }
 
-    .chat-answer-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .chat-answer-panel span {
-      display: block;
-      font-weight: 700;
-      color: #e2e8f0;
-    }
-
-    .chat-answer-panel p {
-      margin: 0;
-      color: #cbd5e1;
-      line-height: 1.5;
-      font-size: 0.95rem;
-    }
-
     .chat-action-button {
       width: 100%;
       text-align: left;
@@ -1038,39 +1090,12 @@
       color: #cbd5e1;
     }
 
-    .chat-widget-footer {
-      padding: 0 18px 18px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .chat-widget-footer button {
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 14px 18px;
-      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-      color: #ffffff;
-      cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 12px 24px rgba(14, 165, 233, 0.25);
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .chat-widget-footer button:hover {
-      transform: translateY(-1px);
-      background: linear-gradient(135deg, #22d3ee, #a78bfa);
-      box-shadow: 0 14px 28px rgba(14, 165, 233, 0.28);
-    }
-
     .chat-widget-status {
       min-height: 18px;
       color: #94a3b8;
       font-size: 0.9rem;
     }
 
-    /* Toast flotante */
     .floating-toast {
       position: absolute;
       left: 50%;
@@ -1163,9 +1188,6 @@
       .chat-widget-body {
         padding: 14px;
       }
-      .chat-widget-footer {
-        padding: 0 16px 16px;
-      }
       .chat-widget-body textarea {
         min-height: 95px;
       }
@@ -1179,13 +1201,13 @@
 
   <main id="main-content">
 
-    <!-- ===== HERO ===== -->
+    <!-- ===== HERO MEJORADO ===== -->
     <section id="inicio" class="hero" aria-labelledby="hero-heading">
       <div class="hero-carousel-container" id="heroTrack">
 
         <!-- SLIDE 1: INTERNET -->
-        <div class="hero-slide active">
-          <div class="hero-slide-bg" style="background-image: url('assets/images/internet.png')"></div>
+        <div class="hero-slide active" data-service="internet">
+          <div class="hero-slide-bg"></div>
           <div class="hero-slide-overlay"></div>
           <div class="container hero-inner">
             <div class="hero-content-wrapper">
@@ -1219,8 +1241,8 @@
         </div>
 
         <!-- SLIDE 2: TELEVISIÓN -->
-        <div class="hero-slide">
-          <div class="hero-slide-bg" style="background-image: url('assets/images/tv.png');"></div>
+        <div class="hero-slide" data-service="tv">
+          <div class="hero-slide-bg"></div>
           <div class="hero-slide-overlay"></div>
           <div class="container hero-inner">
             <div class="hero-content-wrapper">
@@ -1424,7 +1446,6 @@
               <div class="why-card__value">5★</div>
               <div class="why-card__label">Satisfacción</div>
             </div>
-            <div class="why-network"></div>
           </div>
         </div>
       </div>
